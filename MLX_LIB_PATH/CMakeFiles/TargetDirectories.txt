@@ -1,0 +1,7 @@
+/Users/arekoune/Desktop/cub3D/MLX_LIB_PATH/CMakeFiles/mlx42.dir
+/Users/arekoune/Desktop/cub3D/MLX_LIB_PATH/CMakeFiles/edit_cache.dir
+/Users/arekoune/Desktop/cub3D/MLX_LIB_PATH/CMakeFiles/rebuild_cache.dir
+/Users/arekoune/Desktop/cub3D/MLX_LIB_PATH/CMakeFiles/list_install_components.dir
+/Users/arekoune/Desktop/cub3D/MLX_LIB_PATH/CMakeFiles/install.dir
+/Users/arekoune/Desktop/cub3D/MLX_LIB_PATH/CMakeFiles/install/local.dir
+/Users/arekoune/Desktop/cub3D/MLX_LIB_PATH/CMakeFiles/install/strip.dir
