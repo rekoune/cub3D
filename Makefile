@@ -16,7 +16,7 @@ $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) $(MLX_LIB) $(GLFW_LIB) -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c
-	$(CC) $(FLAGS) -I$(MLX_LIB_PATH) -c $< -o $@
+	$(CC) $(FLAGS)  -c $< -o $@
 
 libmlx:
 	@cmake MLX42 -B $(MLX_LIB_PATH) && make -C $(MLX_LIB_PATH) -j4
