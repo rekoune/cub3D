@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:29:34 by arekoune          #+#    #+#             */
-/*   Updated: 2024/10/31 11:04:12 by arekoune         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:06:50 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ t_map	*checking_map(char *map_file)
 	map = get_map_info(map_fd);
 	// hamza here you call the function that checking the map content
 	//do it on the file check_map_content
+	close (map_fd);
 	return (map);
 }
