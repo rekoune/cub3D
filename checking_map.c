@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:29:34 by arekoune          #+#    #+#             */
-/*   Updated: 2024/10/31 11:06:50 by arekoune         ###   ########.fr       */
+/*   Updated: 2024/11/02 11:01:39 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ bool	is_info(char **element, t_map *map)
 		&& n_word == 2)
 		map->directions.north = str_dup(element[1], 0, size);
 	else if (str_comp(element[0], "SO") && map->directions.south == NULL
-		&& n_word == 2)
+			&& n_word == 2)
 		map->directions.south = str_dup(element[1], 0, size);
 	else if (str_comp(element[0], "WE") && map->directions.west == NULL
-		&& n_word == 2)
+			&& n_word == 2)
 		map->directions.west = str_dup(element[1], 0, size);
 	else if (str_comp(element[0], "EA") && map->directions.east == NULL
-		&& n_word == 2)
+			&& n_word == 2)
 		map->directions.east = str_dup(element[1], 0, size);
 	else if ((str_comp(element[0], "F") && map->colors.floor[0] == -1)
-		|| (str_comp(element[0], "C") && map->colors.ceiling[0] == -1))
+			|| (str_comp(element[0], "C") && map->colors.ceiling[0] == -1))
 		get_colors(map, element);
 	else
 		return (false);
@@ -77,7 +77,7 @@ int	set_map_elements(t_map *map, char *line)
 	else if (element[0][0] == '1' && is_last(map))
 	{
 		add_back(&map->map_lst, new_node(str_dup(line, 0, str_len(line,
-						'\n'))));
+							'\n'))));
 		free_2d(element, line);
 		return (1);
 	}
@@ -118,13 +118,12 @@ t_map	*get_map_info(int map_fd)
 
 t_map	*checking_map(char *map_file)
 {
-	int			map_fd;
-	t_map		*map;
+	int		map_fd;
+	t_map	*map;
 
 	map_fd = check_map_file(map_file);
 	map = get_map_info(map_fd);
-	// hamza here you call the function that checking the map content
-	//do it on the file check_map_content
-	close (map_fd);
+	map_validation(getarray(map->map_lst), map_size(map->map_lst));
+	close(map_fd);
 	return (map);
 }

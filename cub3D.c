@@ -7,9 +7,11 @@ void	leaks(void)
 
 int	main(int ac, char **av)
 {
-	t_map	*map;
+	t_map		*map;
 	t_map_lst	*test;
-	int i = 0;
+	int			i;
+
+	i = 0;
 	// atexit(leaks);
 	if (ac != 2)
 		return (printf("ERROR : Invalid arguments\n"), 1);
