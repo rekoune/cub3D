@@ -1,12 +1,12 @@
 CC = cc
 FLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 
-SRC = cub3D.c checking_map.c utils.c get_next_line.c get_next_line_utils.c ft_split.c linked_list.c check_map_utils.c cleaning.c
+SRC = cub3D.c checking_map.c utils.c get_next_line.c get_next_line_utils.c ft_split.c linked_list.c check_map_utils.c cleaning.c check_map_content.c 
 OBJ = $(SRC:.c=.o)
 
 NAME = cub3D
 MLX_LIB_PATH = ./MLX42/build
-GLFW_LIB_PATH = /Users/arekoune/.brew/lib
+GLFW_LIB_PATH = $(shell brew --prefix glfw)/lib
 MLX_LIB = -L$(MLX_LIB_PATH) -lMLX42
 GLFW_LIB = -L$(GLFW_LIB_PATH) -lglfw
 
