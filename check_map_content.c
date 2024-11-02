@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_content.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 07:45:44 by haouky            #+#    #+#             */
-/*   Updated: 2024/11/02 13:09:37 by haouky           ###   ########.fr       */
+/*   Updated: 2024/11/02 19:48:25 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	**getarray(t_map_lst *lst)
 {
 	char		**str;
 	int			i;
-	t_map_lst	*tmp;
 
 	i = 0;
 	str = malloc((ft_lstsize(lst) + 1) * sizeof(char *));
@@ -24,9 +23,7 @@ char	**getarray(t_map_lst *lst)
 		return (0);
 	while (lst)
 	{
-		str[i] = lst->content;
-		i++;
-		tmp = lst;
+		str[i++] = lst->content;
 		lst = lst->next;
 	}
 	str[i] = NULL;

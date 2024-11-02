@@ -32,14 +32,17 @@ typedef struct s_map
 {
 	t_directions		directions;
 	t_colors			colors;
-	t_map_lst			*map_lst;
+	char				**map_content;
 }						t_map;
 
 enum					e_type
 {
-	DIRECTION,
-	COLOR,
-	MAP
+	SO,
+	NO,
+	WE,
+	EA,
+	F,
+	C,
 };
 
 //checking_map.c
@@ -55,6 +58,7 @@ int						str_count(char **str);
 long					ft_atoi(char *str);
 void					free_2d(char **str, char *str2);
 void					free_resources(t_map *map);
+void					free_list(t_map_lst *map);
 
 //ft_split.c
 char					**ft_split(char *s, char c);
@@ -69,6 +73,7 @@ int						check_map_file(char *str);
 bool					is_empty(char *str);
 bool					is_last(t_map *map);
 void					is_last_line(int map_fd);
+enum e_type				get_info_type(char *line, char **info);
 
 //check_map_content.c
 void					map_validation(char **map, int size);
