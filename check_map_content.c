@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 07:45:44 by haouky            #+#    #+#             */
-/*   Updated: 2024/11/02 11:54:51 by haouky           ###   ########.fr       */
+/*   Updated: 2024/11/02 13:09:37 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	map_validation(char **map, int size)
 		{
 			if (((i == 0 || j == 0 || !map[i][j + 1] || i == size - 1)
 				&& map[i][j] == '0'))
-				exit(ft_write("ERROR: Invalid map\n", 1));
+				exit(ft_write("Error: Map is not properly enclosed by walls\n", 1));
 			if (map[i][j] == '0' && (map[i - 1][j] == ' ' || map[i
 					+ 1][j] == ' ' || map[i][j - 1] == ' ' || map[i][j
 					+ 1] == ' '))
-				exit(ft_write("ERROR: Invalid map\n", 1));
+				exit(ft_write("Error: Map is not properly enclosed by walls\n", 1));
 			j++;
 		}
 		i++;
