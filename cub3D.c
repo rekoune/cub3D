@@ -8,15 +8,13 @@ void	leaks(void)
 int	main(int ac, char **av)
 {
 	t_map		*map;
-	t_map_lst	*test;
 	int			i;
 
 	i = 0;
-	// atexit(leaks);
+	atexit(leaks);
 	if (ac != 2)
 		return (printf("ERROR : Invalid arguments\n"), 1);
 	map = checking_map(av[1]);
-	test = map->map_lst;
 	printf("south = %s\n", map->directions.south);
 	printf("north = %s\n", map->directions.north);
 	printf("east = %s\n", map->directions.east);
@@ -28,10 +26,8 @@ int	main(int ac, char **av)
 	while (i < 3)
 		printf("C = %d ", map->colors.ceiling[i++]);
 	printf("\n");
-	while (test)
-	{
-		printf("%s\n", test->content);
-		test = test->next;
-	}
+	i = 0;
+	while(map->map_content[i])
+		printf("%s\n", map->map_content[i++]);
 	free_resources(map);
 }
