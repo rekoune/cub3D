@@ -12,7 +12,7 @@ t_map_lst	*new_node(char *str)
 
 void	add_back(t_map_lst **head, t_map_lst *new_node)
 {
-	t_map_lst *node;
+	t_map_lst	*node;
 
 	node = *head;
 	if (*head == NULL)
@@ -23,4 +23,17 @@ void	add_back(t_map_lst **head, t_map_lst *new_node)
 	while (node->next)
 		node = node->next;
 	node->next = new_node;
+}
+
+int	ft_lstsize(t_map_lst *lst)
+{
+	int i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
