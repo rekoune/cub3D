@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:28:32 by arekoune          #+#    #+#             */
-/*   Updated: 2024/11/02 18:39:24 by arekoune         ###   ########.fr       */
+/*   Updated: 2024/11/03 08:26:04 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_map_file(char *str)
 
 	dot_index = str_len(str, '\0') - 4;
 	if (!str_comp(&str[dot_index], ".cub"))
-		exit(ft_write("ERROR: invalid map extention\n", 1));
+		exit(ft_write("Error: invalid map extention\n", 1));
 	map_fd = open(str, O_RDONLY);
 	if (map_fd == -1)
 	{
@@ -29,16 +29,16 @@ int	check_map_file(char *str)
 	return (map_fd);
 }
 
-bool	is_empty(char *str)
+bool	is_empty(char *line)
 {
 	int	i;
 
 	i = 0;
-	while (str && str[i] && str[i] == ' ')
+	while (line && line[i] && line[i] == ' ')
 		i++;
-	if (str[i] == '\n' || str[i] == '\0')
+	if (line[i] == '\n' || line[i] == '\0')
 	{
-		free(str);
+		free(line);
 		return (true);
 	}
 	return (false);
@@ -63,10 +63,27 @@ void	is_last_line(int map_fd)
 		if (!is_empty(line))
 		{
 			free(line);
-			exit(ft_write("ERROR: Empty line in the map content\n", 1));
+			exit(ft_write("Error: Empty line in the map content\n", 1));
 		}
 		line = get_next_line(map_fd);
 	}
+}
+enum e_type get_identifier(char *identifier)
+{
+	if (str_comp(identifier, "NO"))
+		return(free(identifier), NO);
+	else if (str_comp(identifier, "SO"))
+		return(free(identifier), SO);
+	else if (str_comp(identifier, "WE"))
+		return(free(identifier), WE);
+	else if (str_comp(identifier, "EA"))
+		return(free(identifier), EA);
+	else if (str_comp(identifier, "F"))
+		return(free(identifier), F);
+	else if (str_comp(identifier, "C"))
+		return(free(identifier), C);
+	free(identifier);
+	return(false);
 }
 
 enum e_type get_info_type(char *line, char **info)
@@ -88,25 +105,5 @@ enum e_type get_info_type(char *line, char **info)
 		j++;
 	identifier = str_dup(line, i, len);
 	*info = str_dup(line, j, str_len(&line[j], '\n'));
-	if (str_comp(identifier, "NO"))
-		return(free(identifier), NO);
-	else if (str_comp(identifier, "SO"))
-		return(free(identifier), SO);
-	else if (str_comp(identifier, "WE"))
-		return(free(identifier), WE);
-	else if (str_comp(identifier, "EA"))
-		return(free(identifier), EA);
-	else if (str_comp(identifier, "F"))
-		return(free(identifier), F);
-	else if (str_comp(identifier, "C"))
-		return(free(identifier), C);
-	return(false);
+	return (get_identifier(identifier));
 }
-
-// int main ()
-// {
-// 	char *str;
-	
-// 	enum e_type type = get_info_type("              so                        HONA   HAMADA", &str);
-// 	printf("%s\n", str);
-// }

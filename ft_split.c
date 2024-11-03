@@ -14,7 +14,7 @@ static int	cw(char const *s, char c)
 		if (s[i] == c)
 			n = 1;
 		if(s[0] == c || (s[i] == c && (s[i + 1] == c || s[i + 1] == '\0')))
-			exit(ft_write("ERROR: Invalid Color arguments\n", 1));
+			exit(ft_write("Error: Invalid Color arguments\n", 1));
 		if (s[i] != c && n == 1)
 		{
 			ct++;

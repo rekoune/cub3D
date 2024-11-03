@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:29:34 by arekoune          #+#    #+#             */
-/*   Updated: 2024/11/03 09:29:34 by haouky           ###   ########.fr       */
+/*   Updated: 2024/11/03 09:39:18 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	get_colors(t_map *map, char *info, enum e_type type)
 	rgb = ft_split(info, ',');
 	free(info);
 	if (str_count(rgb) != 3)
-		exit(ft_write("ERROR: Invalid Color arguments\n", 1));
+		exit(ft_write("Error: Invalid Color arguments\n", 1));
 	i = -1;
 	if (type == F)
 		while (rgb[++i])
@@ -75,7 +75,7 @@ int	set_map_elements(t_map *map, char *line, t_map_lst **map_lst)
 	else
 	{
 		free(line);
-		exit(ft_write("ERROR: Invalid map\n", 1));
+		exit(ft_write("Error: Invalid map elements\n", 1));
 	}
 	return (0);
 }
