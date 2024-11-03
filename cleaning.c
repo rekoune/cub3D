@@ -7,7 +7,7 @@ void	free_2d(char **str, char *str2)
 	i = 0;
 	if (str2)
 		free(str2);
-	while (str[i])
+	while (str && str[i])
 		free(str[i++]);
 	free(str);
 }
@@ -18,8 +18,7 @@ void	free_list(t_map_lst *map)
 
 	while (map)
 	{
-		node = map->next;
-		free(map->content);
+		node = map->next; 
 		free(map);
 		map = node;
 	}
@@ -27,7 +26,7 @@ void	free_list(t_map_lst *map)
 
 void	free_resources(t_map *map)
 {
-	free_list(map->map_lst);
+	free_2d(map->map_content, NULL);
 	free(map->directions.east);
 	free(map->directions.west);
 	free(map->directions.north);
