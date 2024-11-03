@@ -33,6 +33,7 @@ typedef struct s_map
 	t_directions		directions;
 	t_colors			colors;
 	char				**map_content;
+	char				player;
 }						t_map;
 
 enum					e_type
@@ -76,8 +77,9 @@ void					is_last_line(int map_fd);
 enum e_type				get_info_type(char *line, char **info);
 
 //check_map_content.c
-void					map_validation(char **map, int size);
+void					map_validation(char **map, int size, char p);
 char					**getarray(t_map_lst *lst);
 int						map_size(t_map_lst *map);
+char  valid_element(char **map);
 
 #endif

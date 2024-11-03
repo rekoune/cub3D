@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:29:34 by arekoune          #+#    #+#             */
-/*   Updated: 2024/11/02 19:43:09 by arekoune         ###   ########.fr       */
+/*   Updated: 2024/11/03 09:29:34 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,8 @@ t_map	*checking_map(char *map_file)
 	map_lst = NULL;
 	map = get_map_info(map_fd, &map_lst);
 	map->map_content = getarray(map_lst);
-	map_validation(map->map_content, map_size(map_lst));
+	map->player = valid_element(map->map_content);
+	map_validation(map->map_content, map_size(map_lst), map->player);
 	free_list(map_lst);
 	close(map_fd);
 	return (map);
