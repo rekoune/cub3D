@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:28:32 by arekoune          #+#    #+#             */
-/*   Updated: 2024/11/03 08:09:34 by arekoune         ###   ########.fr       */
+/*   Updated: 2024/11/03 08:26:04 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,23 @@ void	is_last_line(int map_fd)
 		line = get_next_line(map_fd);
 	}
 }
+enum e_type get_identifier(char *identifier)
+{
+	if (str_comp(identifier, "NO"))
+		return(free(identifier), NO);
+	else if (str_comp(identifier, "SO"))
+		return(free(identifier), SO);
+	else if (str_comp(identifier, "WE"))
+		return(free(identifier), WE);
+	else if (str_comp(identifier, "EA"))
+		return(free(identifier), EA);
+	else if (str_comp(identifier, "F"))
+		return(free(identifier), F);
+	else if (str_comp(identifier, "C"))
+		return(free(identifier), C);
+	free(identifier);
+	return(false);
+}
 
 enum e_type get_info_type(char *line, char **info)
 {
@@ -88,26 +105,5 @@ enum e_type get_info_type(char *line, char **info)
 		j++;
 	identifier = str_dup(line, i, len);
 	*info = str_dup(line, j, str_len(&line[j], '\n'));
-	if (str_comp(identifier, "NO"))
-		return(free(identifier), NO);
-	else if (str_comp(identifier, "SO"))
-		return(free(identifier), SO);
-	else if (str_comp(identifier, "WE"))
-		return(free(identifier), WE);
-	else if (str_comp(identifier, "EA"))
-		return(free(identifier), EA);
-	else if (str_comp(identifier, "F"))
-		return(free(identifier), F);
-	else if (str_comp(identifier, "C"))
-		return(free(identifier), C);
-	free(identifier);
-	return(false);
+	return (get_identifier(identifier));
 }
-
-// int main ()
-// {
-// 	char *str;
-	
-// 	enum e_type type = get_info_type("              so                        HONA   HAMADA", &str);
-// 	printf("%s\n", str);
-// }
