@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 07:45:44 by haouky            #+#    #+#             */
-/*   Updated: 2024/11/03 09:37:41 by haouky           ###   ########.fr       */
+/*   Updated: 2024/11/03 10:53:07 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,13 @@ char  valid_element(char **map)
 	int j;
 
 	i = 0;
-	p = -1;
+	p = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			// printf("mapij =%cp = %d i = %d j = %d\n",map[i][j], p, i ,j);
-			if((map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E'|| map[i][j] == 'S') && p == -1)
+			if((map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E'|| map[i][j] == 'S') && !p)
 				p = map[i][j];
 			else if(map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' ')
 				exit(ft_write("Error: Invalid element\n", 1));
@@ -64,6 +63,8 @@ char  valid_element(char **map)
 		}
 		i++;	
 	}
+	if(!p)
+		exit(ft_write("Error: Invalid element\n", 1));
 	return (p);
 }
 void	map_validation(char **map, int size, char p)
