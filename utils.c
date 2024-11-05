@@ -91,6 +91,8 @@ long	ft_atoi(char *str)
 	nb = 0;
 	while (str[i] == ' ')
 		i++;
+	if(str[i] == '\0')
+		exit(ft_write("Error: Invalid Color argument\n", 1));
 	while (str[i])
 	{
 		if ((str[i] > '9' || str[i] < '0') && str[i] != ' ')
