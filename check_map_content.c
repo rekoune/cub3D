@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 07:45:44 by haouky            #+#    #+#             */
-/*   Updated: 2024/11/03 10:53:07 by haouky           ###   ########.fr       */
+/*   Updated: 2024/11/06 09:28:32 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	**getarray(t_map_lst *lst)
 {
-	char		**str;
-	int			i;
+	char	**str;
+	int		i;
 
 	i = 0;
 	str = malloc((ft_lstsize(lst) + 1) * sizeof(char *));
@@ -42,11 +42,12 @@ int	map_size(t_map_lst *map)
 	}
 	return (i);
 }
-char  valid_element(char **map)
+
+char	valid_element(char **map)
 {
-	char p;
-	int i;
-	int j;
+	char	p;
+	int		i;
+	int		j;
 
 	i = 0;
 	p = 0;
@@ -55,18 +56,20 @@ char  valid_element(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if((map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E'|| map[i][j] == 'S') && !p)
+			if ((map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E'
+					|| map[i][j] == 'S') && !p)
 				p = map[i][j];
-			else if(map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' ')
+			else if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' ')
 				exit(ft_write("Error: Invalid element\n", 1));
-			j++;	
+			j++;
 		}
-		i++;	
+		i++;
 	}
-	if(!p)
+	if (!p)
 		exit(ft_write("Error: Invalid element\n", 1));
 	return (p);
 }
+
 void	map_validation(char **map, int size, char p)
 {
 	int	i;
@@ -80,11 +83,14 @@ void	map_validation(char **map, int size, char p)
 		{
 			if (((j == 0 || !map[i][j + 1] || i == size - 1)
 				&& (map[i][j] == '0' || map[i][j] == p)))
-				exit(ft_write("Error: Map is not properly enclosed by walls\n", 1));
-			if ((map[i][j] == '0' || map[i][j] == p) && (map[i - 1][j] == ' ' || map[i
-					+ 1][j] == ' ' || map[i][j - 1] == ' ' || map[i][j
-					+ 1] == ' '))
-				exit(ft_write("Error: Map is not properly enclosed by walls\n", 1));
+				exit(ft_write("Error: Map is not properly enclosed by walls\n",
+						1));
+			if ((map[i][j] == '0' || map[i][j] == p) && (j >= strr_len(map[i
+						- 1]) || j >= strr_len(map[i + 1]) || map[i
+					- 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j
+					- 1] == ' ' || map[i][j + 1] == ' '))
+				exit(ft_write("Error: Map is not properly enclosed by walls\n",
+						1));
 			j++;
 		}
 		i++;
