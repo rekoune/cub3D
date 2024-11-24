@@ -15,19 +15,6 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (printf("ERROR : Invalid arguments\n"), 1);
 	map = checking_map(av[1]);
-	printf("south = %s\n", map->directions.south);
-	printf("north = %s\n", map->directions.north);
-	printf("east = %s\n", map->directions.east);
-	printf("west = %s\n", map->directions.west);
-	while (i < 3)
-		printf("F = %d ", map->colors.floor[i++]);
-	printf("\n");
-	i = 0;
-	while (i < 3)
-		printf("C = %d ", map->colors.ceiling[i++]);
-	printf("\n");
-	i = 0;
-	while(map->map_content[i])
-		printf("%s\n", map->map_content[i++]);
+	draw_mini_map(map);
 	free_resources(map);
 }

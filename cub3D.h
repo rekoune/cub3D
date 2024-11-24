@@ -8,6 +8,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# define WI_HEIGHT  1000
+# define WI_WIDTH  1500
+# define MINI_HEIGHT  150
+# define MINI_WIDTH  300
+# define TAILE_SIZE 20
+
 typedef struct s_directions
 {
 	char				*north;
@@ -28,10 +34,23 @@ typedef struct s_map_lst
 	struct s_map_lst	*next;
 }						t_map_lst;
 
+typedef struct s_mini_img{
+	mlx_image_t		*wall;
+	mlx_image_t		*flor;
+	mlx_image_t		*player;
+}	t_mini_img;
+
+typedef struct s_player{
+	int	x;
+	int	y;
+}	t_player;
+
 typedef struct s_map
 {
 	t_directions		directions;
 	t_colors			colors;
+	t_mini_img			mini_img;
+	t_player			player2;
 	char				**map_content;
 	char				player;
 }						t_map;
@@ -80,6 +99,9 @@ enum e_type				get_info_type(char *line, char **info);
 void					map_validation(char **map, int size, char p);
 char					**getarray(t_map_lst *lst);
 int						map_size(t_map_lst *map);
-char  valid_element(char **map);
+char 					valid_element(char **map);
+
+//mini_map.c
+void					draw_mini_map(t_map *map);
 
 #endif
