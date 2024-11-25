@@ -7,6 +7,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 
 # define WI_HEIGHT  1000
 # define WI_WIDTH  1500
@@ -51,6 +52,7 @@ typedef struct s_map
 	t_colors			colors;
 	t_mini_img			mini_img;
 	t_player			player2;
+	mlx_t				*mlx;
 	char				**map_content;
 	char				player;
 }						t_map;
@@ -102,6 +104,7 @@ int						map_size(t_map_lst *map);
 char 					valid_element(char **map);
 
 //mini_map.c
-void					draw_mini_map(t_map *map);
+void					draw_mini_map(mlx_t *mlx, t_map *map);
+void					move_imgs_inst(mlx_image_t *img, char dir, int	px_num);
 
 #endif

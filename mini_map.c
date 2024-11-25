@@ -82,16 +82,13 @@ void	draw_elements(mlx_t *mlx, t_map *map)
 		{
 			if (map->map_content[j][i] == '1')
 				mlx_image_to_window(mlx, map->mini_img.wall, i * TAILE_SIZE, j * TAILE_SIZE);
-			else if (map->map_content[j][i] == '0' ||map->map_content[j][i] == 'N')
-			{
+			else if (map->map_content[j][i] != '1' && map->map_content[j][i] != ' ')
 				mlx_image_to_window(mlx, map->mini_img.flor, i * TAILE_SIZE, j * TAILE_SIZE);
-				if(map->map_content[j][i] == 'N')
-					mlx_image_to_window(mlx, map->mini_img.player, i * TAILE_SIZE, j * TAILE_SIZE);
-			}
 			i++;
 		}
 		j++;
 	}
+	mlx_image_to_window(mlx, map->mini_img.player, map->player2.x * TAILE_SIZE, map->player2.y * TAILE_SIZE);
 }
 
 void	move_img_x(t_map *map)
@@ -126,13 +123,8 @@ void	move_img_y(t_map *map)
 		}
 }
 
-void	put_img_on_mini(mlx_t *mlx, t_map *map)
+void	draw_mini_map(mlx_t *mlx, t_map *map)
 {
-	int	y;
-	int x;
-
-	y = 0;
-	x = 0;
 	map->mini_img.flor = mlx_new_image(mlx, TAILE_SIZE, TAILE_SIZE);
 	map->mini_img.wall = mlx_new_image(mlx, TAILE_SIZE, TAILE_SIZE);
 	map->mini_img.player = mlx_new_image(mlx, 5, 5);
@@ -141,20 +133,21 @@ void	put_img_on_mini(mlx_t *mlx, t_map *map)
 	draw_img(map->mini_img.wall, TAILE_SIZE, TAILE_SIZE, create_trgb(0, 0, 0, 255));
 	draw_img(map->mini_img.player, 5, 5, create_trgb(255, 0, 0, 255));
 	find_palayer_cord(&map->player2, map->map_content);
-	
+
 	draw_elements(mlx, map);
+
+	mlx_image_t	*test;
+	test = mlx_new_image(mlx, MINI_WIDTH + 20, TAILE_SIZE);
+	draw_img(test, TAILE_SIZE, MINI_WIDTH + 20, create_trgb(50, 50, 50, 255));
+	mlx_image_to_window(mlx, test, 0 * TAILE_SIZE, MINI_HEIGHT);
+	mlx_image_t	*test2;
+	test2 = mlx_new_image(mlx, TAILE_SIZE, MINI_HEIGHT);
+	draw_img(test2, MINI_HEIGHT, TAILE_SIZE, create_trgb(50, 50, 50, 255));
+	mlx_image_to_window(mlx, test2, MINI_WIDTH, 0);
+
 	if (map->mini_img.player->instances->x != MINI_WIDTH / 2)
 		move_img_x(map);
 	if(map->mini_img.player->instances->y != MINI_HEIGHT / 2)
 		move_img_y(map);
 	
-}
-
-void	draw_mini_map(t_map *map)
-{
-	mlx_t	*mlx;
-
-	mlx = mlx_init(WI_WIDTH, WI_HEIGHT, "cub3D", false);
-	put_img_on_mini(mlx, map);
-	mlx_loop(mlx);
 }
