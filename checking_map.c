@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:29:34 by arekoune          #+#    #+#             */
-/*   Updated: 2024/11/06 09:29:47 by haouky           ###   ########.fr       */
+/*   Updated: 2024/12/01 08:55:32 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,22 @@ t_map	*checking_map(char *map_file)
 	int			map_fd;
 	t_map		*map;
 	t_map_lst	*map_lst;
+	char 	player;
 
 	map_fd = check_map_file(map_file);
 	map_lst = NULL;
 	map = get_map_info(map_fd, &map_lst);
 	map->map_content = getarray(map_lst);
-	map->player = valid_element(map->map_content);
-	map_validation(map->map_content, map_size(map_lst), map->player);
+	player = valid_element(map->map_content);
+	map_validation(map->map_content, map_size(map_lst), player);
+	if(player == 'N')
+		map->player2.angel = 270;
+	else if(player == 'S')
+		map->player2.angel = 90;
+	if(player == 'E')
+		map->player2.angel = 0;
+	if(player == 'W')
+		map->player2.angel = 180;
 	free_list(map_lst);
 	close(map_fd);
 	return (map);
