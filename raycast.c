@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2024/12/11 11:15:40 by haouky           ###   ########.fr       */
+/*   Updated: 2024/12/11 11:29:08 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,18 @@ void v_hit(int *hitp, int *der, t_player player, double angel)
 }
 int valid_P(int *hitp, char **map, int *size)
 {
+    int s;
+    
+    s = hitp[0];
     if(hitp[0] < 0 || hitp[1] < 0 || (hitp[0] / TAILE_SIZE) > size[0] - 1|| (hitp[1] / TAILE_SIZE) > size[1])
     {
         hitp[0] = -1;
     }
     if(hitp[0] == -1 || map[(hitp[0] / TAILE_SIZE)][(hitp[1] / TAILE_SIZE)] == '1')
+    {
+        hitp[0] = s;
         return (0);
+    }
     return (1);
 }
 
@@ -92,13 +98,13 @@ void caster(t_map *map)
     int xy[2];
     
     hitpoint(map , map->player2.angel, hitph, hitpv);
-    printf("HH : y = %d | x = %d\n",hitph[0] , hitph[1] );
-    printf("VV  : y = %d | x = %d\n",hitpv[0] , hitpv[1] );
     player[0] = map->mini_img.player->instances->y;
     player[1] = map->mini_img.player->instances->x;
     xy[0] = player[0] + (hitpv[0] - map->player2.y);
     xy[1] = player[1] + (hitpv[1] - map->player2.x);
-    printf("x%d, y %d\n", xy[1], xy[0]);
-    // printf("***player y = %d x = %d\n", player[0] , player[1] ); 75 150
     draw_line(map->mini_img.cover,player, xy,create_trgb(255,0,0,255));
+    printf("x%d, y %d\n", xy[1], xy[0]);
+    printf("HH : y = %d | x = %d\n",hitph[0] , hitph[1] );
+    printf("VV  : y = %d | x = %d\n",hitpv[0] , hitpv[1] );
+    // printf("***player y = %d x = %d\n", player[0] , player[1] ); 75 150
 }
