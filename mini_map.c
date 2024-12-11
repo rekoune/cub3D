@@ -29,7 +29,7 @@ void	find_palayer_cord(t_player *player, char **map)
 		i = 0;
 		while(map[j][i])
 		{
-			if(map[j][i] == 'N')
+			if(map[j][i] == 'N' || map[j][i] == 'S' || map[j][i] == 'W' || map[j][i] == 'E')
 			{
 				player->x = i;
 				player->y = j;
