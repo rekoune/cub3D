@@ -14,9 +14,9 @@
 # define MINI_HEIGHT  150
 # define MINI_WIDTH  300
 # define TAILE_SIZE 20
-# define M_S 5
-# define DG 1
-
+# define PLAYER_SIZE 5
+# define M_S 3
+# define DG 3
 typedef struct s_directions
 {
 	char				*north;
@@ -41,12 +41,15 @@ typedef struct s_mini_img{
 	mlx_image_t		*wall;
 	mlx_image_t		*flor;
 	mlx_image_t		*player;
+	mlx_image_t		*cover;
+	
 }	t_mini_img;
 
 typedef struct s_player{
 	double	x;
 	double	y;
-	int angel;
+	int		angel;
+	double	next_p_cord[2];
 }	t_player;
 
 typedef struct s_map
@@ -108,5 +111,6 @@ char 					valid_element(char **map);
 //mini_map.c
 void					draw_mini_map(mlx_t *mlx, t_map *map);
 void					move_imgs_inst(mlx_image_t *img, char dir, int	px_num);
+int						create_trgb(int r, int g, int b, int a);
 
 #endif
