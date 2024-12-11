@@ -58,41 +58,26 @@ void	move_player(void *arg)
 
 	map = arg;
 	if(mlx_is_key_down(map->mlx, MLX_KEY_DOWN))
-	{
 		move_p(map, -1);
-		// map->mini_img.player->instances->y++;
-		// move_imgs_inst(map->mini_img.wall, 'u', 3);
-		// move_imgs_inst(map->mini_img.flor, 'u', 3);
-	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_UP))
-	{
 		move_p(map, 1);
-		// map->mini_img.player->instances->y--;
-		// move_imgs_inst(map->mini_img.wall, 'd', 3);
-		// move_imgs_inst(map->mini_img.flor, 'd', 3);
-	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 	{
-		// map->mini_img.player->instances->x++;
-		// move_imgs_inst(map->mini_img.wall, 'l', 3);
-		// move_imgs_inst(map->mini_img.flor, 'l', 3);
 		map->player2.angel -= DG;
-		printf("angel %d\n", map->player2.angel);
+		printf("angel %f\n", map->player2.angel);
 		if(map->player2.angel < 0)
 			map->player2.angel += 360;
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 	{
-		// map->mini_img.player->instances->x--;
-		// move_imgs_inst(map->mini_img.wall, 'r', 3);
-		// move_imgs_inst(map->mini_img.flor, 'r', 3);
 		map->player2.angel += DG;
-		printf("angel %d\n", map->player2.angel);
+		printf("angel %f\n", map->player2.angel);
 		if(map->player2.angel > 360)
 			map->player2.angel -= 360;
 	}
 	if(mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		exit(0);
+	caster(map); 
 }
 
 int	main(int ac, char **av)
@@ -107,6 +92,7 @@ int	main(int ac, char **av)
 	draw_mini_map(map->mlx, map);
 	map->player2.x *= 20;
 	map->player2.y *= 20;
+	map_max_sz(map->map_content, map->map_max_size);
 	mlx_loop_hook(map->mlx, &move_player, map);
 	mlx_loop(map->mlx);
 	free_resources(map);
