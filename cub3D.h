@@ -16,7 +16,7 @@
 # define TAILE_SIZE 20
 # define PLAYER_SIZE 5
 # define M_S 3
-# define DG 3
+# define DG 1
 typedef struct s_directions
 {
 	char				*north;
@@ -60,6 +60,7 @@ typedef struct s_map
 	t_player			player2;
 	mlx_t				*mlx;
 	char				**map_content;
+	int map_max_size[2];
 }						t_map;
 
 enum					e_type
@@ -87,6 +88,10 @@ void					free_2d(char **str, char *str2);
 void					free_resources(t_map *map);
 void					free_list(t_map_lst *map);
 
+//utils2.c
+void map_max_sz(char **map,int *size);
+void	draw_line(mlx_image_t *img, int *start, int *end, int color);
+
 //ft_split.c
 char					**ft_split(char *s, char c);
 
@@ -113,4 +118,6 @@ void					draw_mini_map(mlx_t *mlx, t_map *map);
 void					move_imgs_inst(mlx_image_t *img, char dir, int	px_num);
 int						create_trgb(int r, int g, int b, int a);
 
+//raycast
+void caster(t_map *map);
 #endif

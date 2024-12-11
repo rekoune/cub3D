@@ -7,14 +7,14 @@ void	leaks(void)
 
 void	draw_line(mlx_image_t *img, int *start, int *end, int color)
 {
-	int dx = end[0] - start[0];
-	int dy = end[1] - start[1];
+	int dy = end[0] - start[0];
+	int dx = end[1] - start[1];
 	int steps = 0;;
 	float	x_inc = 0;
 	float	y_inc = 0;
 	int i = 0;
-	float x = start[0];
-	float y = start[1];
+	float y = start[0];
+	float x = start[1];
 
 	if (abs(dx) > abs(dy))
 		steps = abs(dx);
@@ -116,27 +116,22 @@ void	move_player(void *arg)
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 	{
 		map->player2.angel -= DG;
-		// printf("angel %d\n", map->player2.angel);
 		if(map->player2.angel < 0)
 			map->player2.angel += 360;
+		printf("angel %d\n", map->player2.angel);
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 	{
 		map->player2.angel += DG;
-		// printf("angel %d\n", map->player2.angel);
 		if(map->player2.angel > 360)
 			map->player2.angel -= 360;
+		printf("angel %d\n", map->player2.angel);
 	}
-	// draw_line(map->mini_img.cover, map->mini_img.player->instances->x, map->mini_img.player->instances->y, 
-	// 			map->mini_img.player->instances->x + map->player2.next_p_cord[0] * 9, 
-	// 			map->mini_img.player->instances->y + map->player2.next_p_cord[1] * 9, create_trgb(0, 0, 0, 0));
-	map->player2.next_p_cord[0] = cos(map->player2.angel * (M_PI / 180)) * M_S ;
-	map->player2.next_p_cord[1] = sin(map->player2.angel * (M_PI / 180)) * M_S ;
-	// draw_line(map->mini_img.cover, map->mini_img.player->instances->x, map->mini_img.player->instances->y, 
-	// 			map->mini_img.player->instances->x + map->player2.next_p_cord[0] * 9, 
-	// 			map->mini_img.player->instances->y + map->player2.next_p_cord[1] * 9, create_trgb(255, 0, 0, 255));
+	// map->player2.next_p_cord[0] = cos(map->player2.angel * (M_PI / 180)) * M_S ;
+	// map->player2.next_p_cord[1] = sin(map->player2.angel * (M_PI / 180)) * M_S ;
 	if(mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		exit(0);
+	caster(map); 
 }
 
 int	main(int ac, char **av)
