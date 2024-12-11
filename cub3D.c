@@ -31,6 +31,26 @@ void	draw_line(mlx_image_t *img, int *start, int *end, int color)
 	}
 }
 
+double	distance(int *start, int *end, int *end2)
+{
+	double	distance;
+	double	distance2;
+	int		dx;
+	int		dx2;
+	int		dy;
+	int		dy2;
+
+	dy = end[0] - start[0];
+	dy2 = end2[0] - start[0];
+	dx = end[1] - start[1];
+	dx2 = end2[1] - start[1];
+	distance = sqrt(pow(dx, 2) + pow(dy, 2));
+	distance2 = sqrt(pow(dx2, 2) + pow(dy2, 2));
+	if(distance2 < distance)
+		return (distance2);
+	return (distance);
+}
+
 void mv_img(mlx_image_t *img,int y , int x)
 {
 	size_t i;
