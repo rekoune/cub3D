@@ -15,6 +15,8 @@
 # define MINI_WIDTH  300
 # define TAILE_SIZE 20
 # define PLAYER_SIZE 5
+# define WALL_HEIGHT 80
+# define REC_WITH 3
 # define M_S 3
 # define DG 1
 typedef struct s_directions
@@ -60,6 +62,7 @@ typedef struct s_map
 	t_player			player2;
 	mlx_t				*mlx;
 	char				**map_content;
+	mlx_image_t			*win_img;
 	int map_max_size[2];
 }						t_map;
 
@@ -117,7 +120,9 @@ char 					valid_element(char **map);
 void					draw_mini_map(mlx_t *mlx, t_map *map);
 void					move_imgs_inst(mlx_image_t *img, char dir, int	px_num);
 int						create_trgb(int r, int g, int b, int a);
-
+double					distance(int *start, int *end);
+void					draw_rectangle(mlx_image_t *img, int *start, int height ,int color);
+void					draw_3D(mlx_image_t *img, double dis_to_wall);
 //raycast
-void caster(t_map *map);
+void 					caster(t_map *map);
 #endif

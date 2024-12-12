@@ -31,23 +31,33 @@ void	draw_line(mlx_image_t *img, int *start, int *end, int color)
 	}
 }
 
-double	distance(int *start, int *end, int *end2)
+void	draw_rectangle(mlx_image_t *img, int *start, int height ,int color)
+{
+	int	j;
+	int	i;
+
+	j = 0;
+	while(j < height && j < WI_HEIGHT)
+	{
+		i = 0;
+		while(i < REC_WITH && i < WI_WIDTH)
+		{
+			mlx_put_pixel(img, start[1] + i, start[0] + j, color);
+			i++;
+		}
+		j++;
+	}
+}
+
+double	distance(int *start, int *end)
 {
 	double	distance;
-	double	distance2;
 	int		dx;
-	int		dx2;
 	int		dy;
-	int		dy2;
 
 	dy = end[0] - start[0];
-	dy2 = end2[0] - start[0];
 	dx = end[1] - start[1];
-	dx2 = end2[1] - start[1];
 	distance = sqrt(pow(dx, 2) + pow(dy, 2));
-	distance2 = sqrt(pow(dx2, 2) + pow(dy2, 2));
-	if(distance2 < distance)
-		return (distance2);
 	return (distance);
 }
 
@@ -129,6 +139,10 @@ void	move_player(void *arg)
 	}
 	// map->player2.next_p_cord[0] = cos(map->player2.angel * (M_PI / 180)) * M_S ;
 	// map->player2.next_p_cord[1] = sin(map->player2.angel * (M_PI / 180)) * M_S ;
+	int p[2];
+	p[0] = 500;
+	p[1] = 400;
+	draw_rectangle(map->win_img, p, 40, create_trgb(0, 0, 255, 255));
 	if(mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		exit(0);
 	caster(map); 

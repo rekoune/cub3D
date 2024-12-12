@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2024/12/11 11:15:40 by haouky           ###   ########.fr       */
+/*   Updated: 2024/12/11 12:19:55 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,11 @@ void caster(t_map *map)
     printf("x%d, y %d\n", xy[1], xy[0]);
     // printf("***player y = %d x = %d\n", player[0] , player[1] ); 75 150
     draw_line(map->mini_img.cover,player, xy,create_trgb(255,0,0,255));
+    double dis;
+    
+    if (distance(player, hitph) < distance(player, hitpv))
+        dis = distance(player, hitph);
+    else 
+        dis = distance(player, hitpv);
+    draw_3D(map->win_img, dis);
 }

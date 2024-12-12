@@ -2,7 +2,7 @@ CC = cc
 FLAGS = -Wall -Werror -Wextra 
 SANITAZE = #-g -fsanitize=address
 
-SRC = cub3D.c utils2.c raycast.c checking_map.c utils.c get_next_line.c get_next_line_utils.c ft_split.c linked_list.c check_map_utils.c cleaning.c check_map_content.c mini_map.c
+SRC = cub3D.c utils2.c raycast.c checking_map.c utils.c get_next_line.c get_next_line_utils.c ft_split.c linked_list.c check_map_utils.c cleaning.c check_map_content.c mini_map.c draw_3D.c
 OBJ = $(SRC:.c=.o)
 
 NAME = cub3D
