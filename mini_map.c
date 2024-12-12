@@ -31,8 +31,8 @@ void	find_palayer_cord(t_player *player, char **map)
 		{
 			if(map[j][i] == 'N' || map[j][i] == 'S' || map[j][i] == 'W' || map[j][i] == 'E')
 			{
-				player->x = i;
-				player->y = j;
+				player->cord[1] = i;
+				player->cord[0] = j;
 				return;
 			}
 			i++;
@@ -88,7 +88,7 @@ void	draw_elements(mlx_t *mlx, t_map *map)
 		}
 		j++;
 	}
-	mlx_image_to_window(mlx, map->mini_img.player, map->player2.x * TAILE_SIZE, map->player2.y * TAILE_SIZE);
+	mlx_image_to_window(mlx, map->mini_img.player, map->player.cord[1] * TAILE_SIZE, map->player.cord[0] * TAILE_SIZE);
 }
 
 void	move_img_x(t_map *map)
@@ -135,7 +135,7 @@ void	draw_mini_map(mlx_t *mlx, t_map *map)
 	draw_img(map->mini_img.flor, TAILE_SIZE, TAILE_SIZE, create_trgb(255, 255, 255, 255));
 	draw_img(map->mini_img.wall, TAILE_SIZE, TAILE_SIZE, create_trgb(0, 0, 0, 255));
 	draw_img(map->mini_img.player, PLAYER_SIZE, PLAYER_SIZE, create_trgb(255, 0, 0, 255));
-	find_palayer_cord(&map->player2, map->map_content);
+	find_palayer_cord(&map->player, map->map_content);
 
 	draw_elements(mlx, map);
 	mlx_image_to_window(mlx, map->mini_img.cover, 0, 0);
