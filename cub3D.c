@@ -5,7 +5,7 @@ void	leaks(void)
 	system("leaks -q cub3D");
 }
 
-void	draw_line(mlx_image_t *img, int *start, int *end, int color)
+void	draw_line(mlx_image_t *img, double *start, double *end, int color)
 {
 	int dy = end[0] - start[0];
 	int dx = end[1] - start[1];
@@ -31,11 +31,11 @@ void	draw_line(mlx_image_t *img, int *start, int *end, int color)
 	}
 }
 
-double	distance(int *start, int *end)
+double	distance(double *start, double *end)
 {
 	double	distance;
-	int		dx;
-	int		dy;
+	double		dx;
+	double		dy;
 
 	dy = end[0] - start[0];
 	dx = end[1] - start[1];
@@ -110,14 +110,14 @@ void	move_player(void *arg)
 		map->player.angel -= DG;
 		if(map->player.angel < 0)
 			map->player.angel += 360;
-		printf("angel %d\n", map->player.angel);
+		printf("angel %f\n", map->player.angel);
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 	{
 		map->player.angel += DG;
 		if(map->player.angel > 360)
 			map->player.angel -= 360;
-		printf("angel %d\n", map->player.angel);
+		printf("angel %f\n", map->player.angel);
 	}
 	// map->player.next_p_cord[0] = cos(map->player.angel * (M_PI / 180)) * M_S ;
 	// map->player.next_p_cord[1] = sin(map->player.angel * (M_PI / 180)) * M_S ;
@@ -138,6 +138,7 @@ int	main(int ac, char **av)
 	draw_mini_map(map->mlx, map);
 	map->player.cord[1] *= TAILE_SIZE;
 	map->player.cord[0] *= TAILE_SIZE;
+	map_max_sz(map->map_content,map->map_max_size);
 	mlx_loop_hook(map->mlx, &move_player, map);
 	mlx_loop(map->mlx);
 	free_resources(map);

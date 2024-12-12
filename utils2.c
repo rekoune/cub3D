@@ -6,13 +6,13 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:13:37 by haouky            #+#    #+#             */
-/*   Updated: 2024/12/10 12:19:28 by haouky           ###   ########.fr       */
+/*   Updated: 2024/12/12 11:49:06 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void map_max_sz(char **map,int *size)
+void map_max_sz(char **map,double *size)
 {
     int y;
     int tp;

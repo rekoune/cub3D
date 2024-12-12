@@ -47,7 +47,7 @@ typedef struct s_mini_img{
 
 typedef struct s_player{
 	double	cord[2];
-	int		angel;
+	double		angel;
 	double	next_p_cord[2];
 }	t_player;
 
@@ -59,7 +59,7 @@ typedef struct s_map
 	t_player			player;
 	mlx_t				*mlx;
 	char				**map_content;
-	int map_max_size[2];
+	double				map_max_size[2];
 }						t_map;
 
 enum					e_type
@@ -88,9 +88,9 @@ void					free_resources(t_map *map);
 void					free_list(t_map_lst *map);
 
 //utils2.c
-void map_max_sz(char **map,int *size);
-void	draw_line(mlx_image_t *img, int *start, int *end, int color);
-double	distance(int *start, int *end);
+void map_max_sz(char **map,double *size);
+void	draw_line(mlx_image_t *img, double *start, double *end, int color);
+double	distance(double *start, double *end);
 //ft_split.c
 char					**ft_split(char *s, char c);
 
