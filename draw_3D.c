@@ -4,7 +4,7 @@ void	draw_3D(mlx_image_t *img, double dis_to_wall)
 {
 	double	wall_heigth;
 	double	dest;
-	int start[2];
+	double start[2];
 	int 	i = 0;
 	//dest : the distance of player to projection plane
 	dest = (WI_WIDTH / 2) / tan(30 * M_PI / 180);
@@ -12,11 +12,12 @@ void	draw_3D(mlx_image_t *img, double dis_to_wall)
 	printf("dest = %f, wall hieght %f\n", dest	, wall_heigth);
 	start[0] = (WI_HEIGHT / 2) - (wall_heigth / 2); 
 	start[1] = 0;
-	while(i < WI_WIDTH)
+	while(i * REC_WITH < WI_HEIGHT)
 	{
+		printf("hona i = %d, wall height == %f, dest == %f, dest to wall %f \n", i * REC_WITH, wall_heigth, dest, dis_to_wall);
 		start[0] = i * REC_WITH;
 		draw_rectangle(img, start, wall_heigth, create_trgb(0, 0, 255, 255));
-		// start[1] += REC_WITH;
+		start[1] += REC_WITH;
 		i++;
 	}
 

@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2024/12/11 12:19:55 by arekoune         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:46:31 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ void setder(double angel, int *der)
 void h_hit(int *hitp, int *der, t_player player, double angel)
 {
     if(der[0] == -1)
-        hitp[0] = (player.y / TAILE_SIZE) * TAILE_SIZE - 1;
+        hitp[0] = (player.cord[0] / TAILE_SIZE) * TAILE_SIZE - 1;
     else if(der[0] == 1)
-         hitp[0] = (player.y / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE;
-    hitp[1] = ((hitp[0] - player.y) / tan(angel)) + player.x;
+         hitp[0] = (player.cord[0] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE;
+    hitp[1] = ((hitp[0] - player.cord[0]) / tan(angel)) + player.cord[1];
 }
 
 void v_hit(int *hitp, int *der, t_player player, double angel)
 {
     if(der[1] == -1)
-        hitp[1] = (player.x / TAILE_SIZE) * TAILE_SIZE - 1;
+        hitp[1] = (player.cord[1] / TAILE_SIZE) * TAILE_SIZE - 1;
     else if(der[1] == 1)
-         hitp[1] = (player.x / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE;
-    hitp[0] = player.y + (player.x - hitp[1]) * tan(angel);
+         hitp[1] = (player.cord[1] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE;
+    hitp[0] = player.cord[0] + (player.cord[1] - hitp[1]) * tan(angel);
 }
 int valid_P(int *hitp, char **map, int *size)
 {
@@ -48,7 +48,9 @@ int valid_P(int *hitp, char **map, int *size)
         hitp[0] = -1;
     }
     if(hitp[0] == -1 || map[(hitp[0] / TAILE_SIZE)][(hitp[1] / TAILE_SIZE)] == '1')
+    {
         return (0);
+    }
     return (1);
 }
 
@@ -62,8 +64,8 @@ void hitpoint(t_map *map,double angel,int *hitph,int  *hitpv)
     // printf("angel %f, der[0] = %d , der[1] = %d \n",angel, der[0], der[1]);
     
     angel = angel * (M_PI / 180);
-    // printf("p.y %f p.x %f\n",map->player2.y, map->player2.x);
-    v_hit(hitpv, der, map->player2, angel);
+    // printf("p.y %f p.x %f\n",map->player.cord[0], map->player.cord[1]);
+    v_hit(hitpv, der, map->player, angel);
     // printf("Fv : y = %d | x = %d\n",hitpv[0], hitpv[1]);
     yx = (TAILE_SIZE * der[1]) * tan(angel);
     while(valid_P(hitpv, map->map_content, map->map_max_size))
@@ -73,7 +75,7 @@ void hitpoint(t_map *map,double angel,int *hitph,int  *hitpv)
     }
     // printf(" V : y = %d | x = %d\n",hitpv[0], hitpv[1]);
     // printf("A2|========================================|\n");
-    h_hit(hitph, der, map->player2, angel);
+    h_hit(hitph, der, map->player, angel);
     yx = (TAILE_SIZE * der[0]) / tan(angel);
     // printf("FH : y = %d | x = %d | yx = %d\n",hitph[0], hitph[1], yx);
     while(valid_P(hitph, map->map_content, map->map_max_size))
@@ -91,19 +93,20 @@ void caster(t_map *map)
     int player[2];
     int xy[2];
     
-    hitpoint(map , map->player2.angel, hitph, hitpv);
-    printf("HH : y = %d | x = %d\n",hitph[0] , hitph[1] );
-    printf("VV  : y = %d | x = %d\n",hitpv[0] , hitpv[1] );
+    hitpoint(map , map->player.angel, hitph, hitpv);
     player[0] = map->mini_img.player->instances->y;
     player[1] = map->mini_img.player->instances->x;
-    xy[0] = player[0] + (hitpv[0] - map->player2.y);
-    xy[1] = player[1] + (hitpv[1] - map->player2.x);
+    xy[0] = player[0] + (hitpv[0] - map->player.cord[0]);
+    xy[1] = player[1] + (hitpv[1] - map->player.cord[1]);
+    draw_line(map->mini_img.cover,player, xy,create_trgb(255,0,0,255));
     printf("x%d, y %d\n", xy[1], xy[0]);
+    printf("HH : y = %d | x = %d\n",hitph[0] , hitph[1] );
+    printf("VV  : y = %d | x = %d\n",hitpv[0] , hitpv[1] );
     // printf("***player y = %d x = %d\n", player[0] , player[1] ); 75 150
     draw_line(map->mini_img.cover,player, xy,create_trgb(255,0,0,255));
     double dis;
     
-    if (distance(player, hitph) < distance(player, hitpv))
+    if (hitph[0] != -1 && (hitpv[0] == -1 || distance(player, hitph) < distance(player, hitpv)))
         dis = distance(player, hitph);
     else 
         dis = distance(player, hitpv);

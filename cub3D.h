@@ -48,8 +48,7 @@ typedef struct s_mini_img{
 }	t_mini_img;
 
 typedef struct s_player{
-	double	x;
-	double	y;
+	double	cord[2];
 	int		angel;
 	double	next_p_cord[2];
 }	t_player;
@@ -59,7 +58,7 @@ typedef struct s_map
 	t_directions		directions;
 	t_colors			colors;
 	t_mini_img			mini_img;
-	t_player			player2;
+	t_player			player;
 	mlx_t				*mlx;
 	char				**map_content;
 	mlx_image_t			*win_img;
@@ -94,7 +93,7 @@ void					free_list(t_map_lst *map);
 //utils2.c
 void map_max_sz(char **map,int *size);
 void	draw_line(mlx_image_t *img, int *start, int *end, int color);
-
+double	distance(int *start, int *end);
 //ft_split.c
 char					**ft_split(char *s, char c);
 
@@ -121,7 +120,7 @@ void					draw_mini_map(mlx_t *mlx, t_map *map);
 void					move_imgs_inst(mlx_image_t *img, char dir, int	px_num);
 int						create_trgb(int r, int g, int b, int a);
 double					distance(int *start, int *end);
-void					draw_rectangle(mlx_image_t *img, int *start, int height ,int color);
+void					draw_rectangle(mlx_image_t *img, double *start, double height ,int color);
 void					draw_3D(mlx_image_t *img, double dis_to_wall);
 //raycast
 void 					caster(t_map *map);
