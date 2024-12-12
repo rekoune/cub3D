@@ -31,23 +31,15 @@ void	draw_line(mlx_image_t *img, int *start, int *end, int color)
 	}
 }
 
-double	distance(int *start, int *end, int *end2)
+double	distance(int *start, int *end)
 {
 	double	distance;
-	double	distance2;
 	int		dx;
-	int		dx2;
 	int		dy;
-	int		dy2;
 
 	dy = end[0] - start[0];
-	dy2 = end2[0] - start[0];
 	dx = end[1] - start[1];
-	dx2 = end2[1] - start[1];
 	distance = sqrt(pow(dx, 2) + pow(dy, 2));
-	distance2 = sqrt(pow(dx2, 2) + pow(dy2, 2));
-	if(distance2 < distance)
-		return (distance2);
 	return (distance);
 }
 
@@ -70,10 +62,10 @@ void mv_img(mlx_image_t *img,int y , int x)
 
 int check_wall(t_map *map , double *op, int sig)
 {
-	if(map->map_content[(int)(map->player2.y + (op[1] * sig)) / 20 ][(int)(map->player2.x + (op[0] * sig)) / 20 ] == '1' 
-		|| map->map_content[(int)(map->player2.y + 5 + (op[1] * sig)) / 20 ][(int)(map->player2.x + 5 + (op[0] * sig)) / 20 ] == '1'
-		|| map->map_content[(int)(map->player2.y + 5 + (op[1] * sig)) / 20 ][(int)(map->player2.x + (op[0] * sig)) / 20 ] == '1'
-		|| map->map_content[(int)(map->player2.y  + (op[1] * sig)) / 20 ][(int)(map->player2.x + 5 + (op[0] * sig)) / 20 ] == '1')
+	if(map->map_content[(int)(map->player.cord[0] + (op[1] * sig)) / 20 ][(int)(map->player.cord[1] + (op[0] * sig)) / 20 ] == '1' 
+		|| map->map_content[(int)(map->player.cord[0] + 5 + (op[1] * sig)) / 20 ][(int)(map->player.cord[1] + 5 + (op[0] * sig)) / 20 ] == '1'
+		|| map->map_content[(int)(map->player.cord[0] + 5 + (op[1] * sig)) / 20 ][(int)(map->player.cord[1] + (op[0] * sig)) / 20 ] == '1'
+		|| map->map_content[(int)(map->player.cord[0]  + (op[1] * sig)) / 20 ][(int)(map->player.cord[1] + 5 + (op[0] * sig)) / 20 ] == '1')
 		return (0);
 	return (1);
 }
@@ -81,20 +73,20 @@ void move_p(t_map *map, int sig)
 {
 	double radians;
 
-	radians = map->player2.angel * (M_PI / 180);
+	radians = map->player.angel * (M_PI / 180);
 	// printf("rad %f\n", radians);
-	map->player2.next_p_cord[0] = cos(radians) * M_S ;
-	map->player2.next_p_cord[1] = sin(radians) * M_S ;
-	// printf("cosx %f\n",map->player2.next_p_cord[0]);
-	// printf("siny %f\n",map->player2.next_p_cord[1]);
-	if(check_wall(map, map->player2.next_p_cord, sig))
+	map->player.next_p_cord[0] = cos(radians) * M_S ;
+	map->player.next_p_cord[1] = sin(radians) * M_S ;
+	// printf("cosx %f\n",map->player.next_p_cord[0]);
+	// printf("siny %f\n",map->player.next_p_cord[1]);
+	if(check_wall(map, map->player.next_p_cord, sig))
 	{
-		map->player2.x += (int)(map->player2.next_p_cord[0]) * sig;
-		map->player2.y += (int)(map->player2.next_p_cord[1]) * sig;
-		// printf("x = %f\n",map->player2.x);
-		// printf("y = %f\n",map->player2.y);
-		mv_img(map->mini_img.flor, (int)(map->player2.next_p_cord[1]) * sig, (int)(map->player2.next_p_cord[0]) * sig);
-		mv_img(map->mini_img.wall, (int)(map->player2.next_p_cord[1]) * sig, (int)(map->player2.next_p_cord[0]) * sig);
+		map->player.cord[1] += (int)(map->player.next_p_cord[0]) * sig;
+		map->player.cord[0] += (int)(map->player.next_p_cord[1]) * sig;
+		// printf("x = %f\n",map->player.cord[1]);
+		// printf("y = %f\n",map->player.cord[0]);
+		mv_img(map->mini_img.flor, (int)(map->player.next_p_cord[1]) * sig, (int)(map->player.next_p_cord[0]) * sig);
+		mv_img(map->mini_img.wall, (int)(map->player.next_p_cord[1]) * sig, (int)(map->player.next_p_cord[0]) * sig);
 	}
 }
 
@@ -115,20 +107,20 @@ void	move_player(void *arg)
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 	{
-		map->player2.angel -= DG;
-		if(map->player2.angel < 0)
-			map->player2.angel += 360;
-		printf("angel %d\n", map->player2.angel);
+		map->player.angel -= DG;
+		if(map->player.angel < 0)
+			map->player.angel += 360;
+		printf("angel %d\n", map->player.angel);
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 	{
-		map->player2.angel += DG;
-		if(map->player2.angel > 360)
-			map->player2.angel -= 360;
-		printf("angel %d\n", map->player2.angel);
+		map->player.angel += DG;
+		if(map->player.angel > 360)
+			map->player.angel -= 360;
+		printf("angel %d\n", map->player.angel);
 	}
-	// map->player2.next_p_cord[0] = cos(map->player2.angel * (M_PI / 180)) * M_S ;
-	// map->player2.next_p_cord[1] = sin(map->player2.angel * (M_PI / 180)) * M_S ;
+	// map->player.next_p_cord[0] = cos(map->player.angel * (M_PI / 180)) * M_S ;
+	// map->player.next_p_cord[1] = sin(map->player.angel * (M_PI / 180)) * M_S ;
 	if(mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		exit(0);
 	caster(map); 
@@ -144,8 +136,8 @@ int	main(int ac, char **av)
 	map = checking_map(av[1]);
 	map->mlx = mlx_init(WI_WIDTH, WI_HEIGHT, "cub3D", false);
 	draw_mini_map(map->mlx, map);
-	map->player2.x *= TAILE_SIZE;
-	map->player2.y *= TAILE_SIZE;
+	map->player.cord[1] *= TAILE_SIZE;
+	map->player.cord[0] *= TAILE_SIZE;
 	mlx_loop_hook(map->mlx, &move_player, map);
 	mlx_loop(map->mlx);
 	free_resources(map);
