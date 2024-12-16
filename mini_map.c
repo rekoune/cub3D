@@ -125,13 +125,13 @@ void	move_img_y(t_map *map)
 
 void	draw_mini_map(mlx_t *mlx, t_map *map)
 {
-	map->mini_img.flor = mlx_new_image(mlx, TAILE_SIZE, TAILE_SIZE);
-	map->mini_img.wall = mlx_new_image(mlx, TAILE_SIZE, TAILE_SIZE);
+	map->mini_img.flor = mlx_new_image(mlx, TAILE_SIZE - 1, TAILE_SIZE - 1);
+	map->mini_img.wall = mlx_new_image(mlx, TAILE_SIZE - 1, TAILE_SIZE - 1);
 	map->mini_img.player = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
 	map->mini_img.cover = mlx_new_image(mlx, MINI_WIDTH, MINI_HEIGHT);
 
-	draw_img(map->mini_img.flor, TAILE_SIZE, TAILE_SIZE, create_trgb(255, 255, 255, 255));
-	draw_img(map->mini_img.wall, TAILE_SIZE, TAILE_SIZE, create_trgb(0, 0, 0, 255));
+	draw_img(map->mini_img.flor, TAILE_SIZE - 1, TAILE_SIZE - 1, create_trgb(255, 255, 255, 255));
+	draw_img(map->mini_img.wall, TAILE_SIZE - 1, TAILE_SIZE - 1, create_trgb(0, 0, 0, 255));
 	draw_img(map->mini_img.player, PLAYER_SIZE, PLAYER_SIZE, create_trgb(255, 0, 0, 255));
 	find_palayer_cord(&map->player, map->map_content);
 
