@@ -55,17 +55,17 @@ void mv_img(mlx_image_t *img,int y , int x)
 		if(img->instances[i].x >= MINI_WIDTH || img->instances[i].y >= MINI_HEIGHT)
 				img->instances[i].enabled = 0;
 		else
-			img->instances[i].enabled = 1;
+			img->instances[i].enabled = 10;
 		i++;
 	}
 }
 
 int check_wall(t_map *map , double *op, int sig)
 {
-	if(map->map_content[(int)(map->player.cord[0] + (op[1] * sig)) / 20 ][(int)(map->player.cord[1] + (op[0] * sig)) / 20 ] == '1' 
-		|| map->map_content[(int)(map->player.cord[0] + 5 + (op[1] * sig)) / 20 ][(int)(map->player.cord[1] + 5 + (op[0] * sig)) / 20 ] == '1'
-		|| map->map_content[(int)(map->player.cord[0] + 5 + (op[1] * sig)) / 20 ][(int)(map->player.cord[1] + (op[0] * sig)) / 20 ] == '1'
-		|| map->map_content[(int)(map->player.cord[0]  + (op[1] * sig)) / 20 ][(int)(map->player.cord[1] + 5 + (op[0] * sig)) / 20 ] == '1')
+	if(map->map_content[(int)(map->player.cord[0] + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (op[0] * sig)) / TAILE_SIZE ] == '1' 
+		|| map->map_content[(int)(map->player.cord[0] + PLAYER_SIZE + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + PLAYER_SIZE + (op[0] * sig)) / TAILE_SIZE ] == '1'
+		|| map->map_content[(int)(map->player.cord[0] + PLAYER_SIZE + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (op[0] * sig)) / TAILE_SIZE ] == '1'
+		|| map->map_content[(int)(map->player.cord[0]  + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + PLAYER_SIZE + (op[0] * sig)) / TAILE_SIZE ] == '1')
 		return (0);
 	return (1);
 }
@@ -110,15 +110,14 @@ void	move_player(void *arg)
 		map->player.angel -= DG;
 		if(map->player.angel < 0)
 			map->player.angel += 360;
-		printf("angel %f\n", map->player.angel);
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 	{
 		map->player.angel += DG;
 		if(map->player.angel > 360)
 			map->player.angel -= 360;
-		printf("angel %f\n", map->player.angel);
 	}
+	// printf("angel %f\n", map->player.angel);
 	// map->player.next_p_cord[0] = cos(map->player.angel * (M_PI / 180)) * M_S ;
 	// map->player.next_p_cord[1] = sin(map->player.angel * (M_PI / 180)) * M_S ;
 	if(mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
@@ -140,6 +139,7 @@ int	main(int ac, char **av)
 	map->player.cord[0] *= TAILE_SIZE;
 	map_max_sz(map->map_content,map->map_max_size);
 	mlx_loop_hook(map->mlx, &move_player, map);
+	// mlx_key_hook(map->mlx,my_ftkey,map);
 	mlx_loop(map->mlx);
 	free_resources(map);
 }
