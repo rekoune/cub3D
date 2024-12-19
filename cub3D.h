@@ -116,7 +116,9 @@ char 					valid_element(char **map);
 void					draw_mini_map(mlx_t *mlx, t_map *map);
 void					move_imgs_inst(mlx_image_t *img, char dir, int	px_num);
 int						create_trgb(int r, int g, int b, int a);
+void draw_img(mlx_image_t *img, int height, int width, int	color);
 
 //raycast
 void caster(t_map *map);
+double normalize_angel(double angel);
 #endif
