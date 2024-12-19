@@ -69,11 +69,11 @@ int check_wall(t_map *map , double *op, int sig)
 		return (0);
 	return (1);
 }
-void move_p(t_map *map, int sig)
+void move_p(t_map *map, int sig,double angel)
 {
 	double radians;
 
-	radians = map->player.angel * (M_PI / 180);
+	radians = angel * (M_PI / 180);
 	// printf("rad %f\n", radians);
 	map->player.next_p_cord[0] = cos(radians) * M_S ;
 	map->player.next_p_cord[1] = sin(radians) * M_S ;
@@ -97,13 +97,21 @@ void	move_player(void *arg)
 	t_map *map;
 
 	map = arg;
-	if(mlx_is_key_down(map->mlx, MLX_KEY_DOWN))
+	if(mlx_is_key_down(map->mlx, MLX_KEY_DOWN) || mlx_is_key_down(map->mlx, MLX_KEY_S))
 	{
-		move_p(map, -1);
+		move_p(map, -1,map->player.angel);
 	}
-	else if(mlx_is_key_down(map->mlx, MLX_KEY_UP))
+	else if(mlx_is_key_down(map->mlx, MLX_KEY_UP) || mlx_is_key_down(map->mlx, MLX_KEY_W))
 	{
-		move_p(map, 1);
+		move_p(map, 1,map->player.angel);
+	}
+	else if(mlx_is_key_down(map->mlx, MLX_KEY_D))
+	{
+		move_p(map, 1,normalize_angel(map->player.angel + 90));
+	}
+	else if(mlx_is_key_down(map->mlx, MLX_KEY_A))
+	{
+		move_p(map, 1,normalize_angel(map->player.angel - 90));
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 	{
@@ -115,10 +123,7 @@ void	move_player(void *arg)
 		map->player.angel = normalize_angel(map->player.angel);
 		map->player.angel += DG;
 	}
-	// printf("angel %f\n", map->player.angel);
-	// map->player.next_p_cord[0] = cos(map->player.angel * (M_PI / 180)) * M_S ;
-	// map->player.next_p_cord[1] = sin(map->player.angel * (M_PI / 180)) * M_S ;
-	if(mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
+	else if(mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		exit(0);
 	caster(map); 
 }
