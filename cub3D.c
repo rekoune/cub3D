@@ -81,12 +81,12 @@ void move_p(t_map *map, int sig)
 	// printf("siny %f\n",map->player.next_p_cord[1]);
 	if(check_wall(map, map->player.next_p_cord, sig))
 	{
-		map->player.cord[1] += (int)(map->player.next_p_cord[0]) * sig;
-		map->player.cord[0] += (int)(map->player.next_p_cord[1]) * sig;
+		map->player.cord[1] += round(map->player.next_p_cord[0]) * sig;
+		map->player.cord[0] += round(map->player.next_p_cord[1]) * sig;
 		// printf("x = %f\n",map->player.cord[1]);
 		// printf("y = %f\n",map->player.cord[0]);
-		mv_img(map->mini_img.flor, (int)(map->player.next_p_cord[1]) * sig, (int)(map->player.next_p_cord[0]) * sig);
-		mv_img(map->mini_img.wall, (int)(map->player.next_p_cord[1]) * sig, (int)(map->player.next_p_cord[0]) * sig);
+		mv_img(map->mini_img.flor, round(map->player.next_p_cord[1]) * sig, round(map->player.next_p_cord[0]) * sig);
+		mv_img(map->mini_img.wall, round(map->player.next_p_cord[1]) * sig, round(map->player.next_p_cord[0]) * sig);
 	}
 }
 
@@ -108,14 +108,12 @@ void	move_player(void *arg)
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 	{
 		map->player.angel -= DG;
-		if(map->player.angel < 0)
-			map->player.angel += 360;
+		map->player.angel = normalize_angel(map->player.angel);
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 	{
+		map->player.angel = normalize_angel(map->player.angel);
 		map->player.angel += DG;
-		if(map->player.angel > 360)
-			map->player.angel -= 360;
 	}
 	// printf("angel %f\n", map->player.angel);
 	// map->player.next_p_cord[0] = cos(map->player.angel * (M_PI / 180)) * M_S ;
