@@ -15,8 +15,9 @@
 # define MINI_WIDTH  300
 # define TAILE_SIZE 20
 # define PLAYER_SIZE 5
-# define WALL_HEIGHT 80
-# define REC_WITH 3
+# define WALL_HEIGHT 32
+# define REC_WITH 5
+# define RES ((60.0 / 1500.0) * REC_WITH)
 # define M_S 3
 # define DG 1
 typedef struct s_directions
@@ -49,7 +50,7 @@ typedef struct s_mini_img{
 
 typedef struct s_player{
 	double	cord[2];
-	int		angel;
+	double		angel;
 	double	next_p_cord[2];
 }	t_player;
 
@@ -92,8 +93,8 @@ void					free_list(t_map_lst *map);
 
 //utils2.c
 void map_max_sz(char **map,int *size);
-void	draw_line(mlx_image_t *img, int *start, int *end, int color);
-double	distance(int *start, int *end);
+void	draw_line(mlx_image_t *img, double *start, double *end, int color);
+double	distance(double *start, double *end);
 //ft_split.c
 char					**ft_split(char *s, char c);
 
@@ -119,9 +120,10 @@ char 					valid_element(char **map);
 void					draw_mini_map(mlx_t *mlx, t_map *map);
 void					move_imgs_inst(mlx_image_t *img, char dir, int	px_num);
 int						create_trgb(int r, int g, int b, int a);
-double					distance(int *start, int *end);
+double					distance(double *start, double *end);
 void					draw_rectangle(mlx_image_t *img, double *start, double height ,int color);
-void					draw_3D(mlx_image_t *img, double dis_to_wall);
+void					draw_3D(mlx_image_t *img, double dis_to_wall, int color);
+void 					draw_img(mlx_image_t *img, int height, int width, int	color);
 //raycast
 void 					caster(t_map *map);
 #endif
