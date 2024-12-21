@@ -98,21 +98,13 @@ void	move_player(void *arg)
 
 	map = arg;
 	if(mlx_is_key_down(map->mlx, MLX_KEY_DOWN) || mlx_is_key_down(map->mlx, MLX_KEY_S))
-	{
 		move_p(map, -1,map->player.angel);
-	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_UP) || mlx_is_key_down(map->mlx, MLX_KEY_W))
-	{
 		move_p(map, 1,map->player.angel);
-	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_D))
-	{
 		move_p(map, 1,normalize_angel(map->player.angel + 90));
-	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_A))
-	{
 		move_p(map, 1,normalize_angel(map->player.angel - 90));
-	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 	{
 		map->player.angel -= DG;
