@@ -129,7 +129,9 @@ void	draw_mini_map(mlx_t *mlx, t_map *map)
 	map->mini_img.wall = mlx_new_image(mlx, TAILE_SIZE - 1, TAILE_SIZE - 1);
 	map->mini_img.player = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
 	map->mini_img.cover = mlx_new_image(mlx, MINI_WIDTH, MINI_HEIGHT);
+	map->win_img = mlx_new_image(mlx, WI_WIDTH, WI_HEIGHT);
 
+	mlx_image_to_window(mlx, map->win_img, 0, 0);
 	draw_img(map->mini_img.flor, TAILE_SIZE - 1, TAILE_SIZE - 1, create_trgb(255, 255, 255, 255));
 	draw_img(map->mini_img.wall, TAILE_SIZE - 1, TAILE_SIZE - 1, create_trgb(0, 0, 0, 255));
 	draw_img(map->mini_img.player, PLAYER_SIZE, PLAYER_SIZE, create_trgb(255, 0, 0, 255));
