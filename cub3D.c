@@ -31,6 +31,24 @@ void	draw_line(mlx_image_t *img, double *start, double *end, int color)
 	}
 }
 
+void	draw_rectangle(mlx_image_t *img, double *start, double height ,int color)
+{
+	int	j;
+	int	i;
+
+	j = 0;
+	while( j < height && j + start[0] < WI_HEIGHT)
+	{
+		i = 0;
+		while(i < REC_WITH && start[1] + i < WI_WIDTH)
+		{
+			mlx_put_pixel(img, start[1] + i, start[0] + j, color);
+			i++;
+		}
+		j++;
+	}
+}
+
 double	distance(double *start, double *end)
 {
 	double	distance;
@@ -88,6 +106,7 @@ void move_p(t_map *map, int sig,double angel)
 		mv_img(map->mini_img.flor, round(map->player.next_p_cord[1]) * sig, round(map->player.next_p_cord[0]) * sig);
 		mv_img(map->mini_img.wall, round(map->player.next_p_cord[1]) * sig, round(map->player.next_p_cord[0]) * sig);
 	}
+	caster(map);
 }
 
 
@@ -109,15 +128,17 @@ void	move_player(void *arg)
 	{
 		map->player.angel -= DG;
 		map->player.angel = normalize_angel(map->player.angel);
+		caster(map);
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 	{
 		map->player.angel = normalize_angel(map->player.angel);
 		map->player.angel += DG;
+		caster(map);
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		exit(0);
-	caster(map); 
+	 
 }
 
 int	main(int ac, char **av)
@@ -132,7 +153,7 @@ int	main(int ac, char **av)
 	draw_mini_map(map->mlx, map);
 	map->player.cord[1] *= TAILE_SIZE;
 	map->player.cord[0] *= TAILE_SIZE;
-	map_max_sz(map->map_content,map->map_max_size);
+	map_max_sz(map->map_content, map->map_max_size);
 	mlx_loop_hook(map->mlx, &move_player, map);
 	// mlx_key_hook(map->mlx,my_ftkey,map);
 	mlx_loop(map->mlx);
