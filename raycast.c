@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2024/12/17 13:22:16 by arekoune         ###   ########.fr       */
+/*   Updated: 2024/12/21 08:10:27 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,42 @@ void set_derction(double angel, int *der)
         der[1] = 1;
 }
 
+double normalize_angel(double angel)
+{
+    if(angel < 0)
+			angel += 360;
+    if(angel >= 360)
+			angel -= 360;
+    return (angel);
+}
+
 void horizontal_hit(double *hitp, int *der, t_player player, double angel)
 {
     if(der[0] == -1)
-        hitp[0] = (int)(player.cord[0] / TAILE_SIZE) * TAILE_SIZE - 0.0001;
+        hitp[0] = floor(player.cord[0] / TAILE_SIZE) * TAILE_SIZE - 0.0001;
     else if(der[0] == 1)
-         hitp[0] = (int)(player.cord[0] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE;
-    hitp[1] = ((hitp[0] - player.cord[0]) / tan(angel)) + player.cord[1];
+         hitp[0] = floor(player.cord[0] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE + 0.0001;
+    if(der[1] == 1)
+        hitp[1] = player.cord[1] + fabs(((hitp[0] - player.cord[0]) / tan(angel)));
+    else
+        hitp[1] = player.cord[1] - fabs(((hitp[0] - player.cord[0]) / tan(angel)));
 }
 
 void victical_hit(double *hitp, int *der, t_player player, double angel)
 {
     if(der[1] == -1)
-        hitp[1] = (int)(player.cord[1] / TAILE_SIZE) * TAILE_SIZE - 0.0001;
+        hitp[1] = floor(player.cord[1] / TAILE_SIZE) * TAILE_SIZE - 0.0001;
     else if(der[1] == 1)
-         hitp[1] = (int)(player.cord[1] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE;
-    hitp[0] = player.cord[0] + (player.cord[1] - hitp[1]) * tan(angel);
+         hitp[1] = floor(player.cord[1] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE + 0.0001;
+    if(der[0] == 1)
+        hitp[0] = player.cord[0] + fabs((player.cord[1] - hitp[1]) * tan(angel));
+    else
+        hitp[0] = player.cord[0] - fabs((player.cord[1] - hitp[1]) * tan(angel));
 }
 int valid_Point(double *hitp, char **map, int *size)
 {   
-    // printf("size[0] = %d size[1] = %d |hitp[0] = %f hitp[1] = %f\n",size[0], size[1],hitp[0]/ TAILE_SIZE, hitp[1]/ TAILE_SIZE);
-    if(isinf(hitp[0]) || isinf(hitp[1]) || hitp[0] < 0 || hitp[1] < 0 || (hitp[0] / TAILE_SIZE) > (size[0] - 1)|| (int)(hitp[1] / TAILE_SIZE) > (size[1]))
+    printf("size[0] = %d size[1] = %d |hitp[0] = %f hitp[1] = %f\n",size[0], size[1],hitp[0]/ TAILE_SIZE, hitp[1]/ TAILE_SIZE);
+    if(isinf(hitp[0]) || isinf(hitp[1]) || hitp[0] < 0 || hitp[1] < 0 || (hitp[0] / TAILE_SIZE) > (size[0])|| (int)(hitp[1] / TAILE_SIZE) > (size[1]))
     {
         hitp[0] = -1;
     }
@@ -61,44 +76,44 @@ double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
     double yx;
 
     set_derction(angel, der);
-    // printf("V1|========================================|\n");
-    // printf("angel %f, der[0] = %f , der[1] = %f \n",angel, der[0], der[1]);
-    
-    angel *= (M_PI / 180);
-    // printf("p.y %f p.x %f\n",map->player.cord[0], map->player.cord[1]);
-    victical_hit(hitpv, der, map->player, angel);
-    // printf("Fv : y = %f | x = %f\n",hitpv[0], hitpv[1]);
+    printf("V1|========================================|\n");
+    angel *= (M_PI / 180); 
+    victical_hit(hitpv, der, map->player, angel); 
     yx = (TAILE_SIZE * der[1]) * tan(angel);
-    while(valid_Point(hitpv, map->map_content, map->map_max_size))
+    while(valid_Point(hitpv, map->map_content, map->map_max_size)) 
     {
-       hitpv[0]  += yx;  
-       hitpv[1] += (TAILE_SIZE * der[1]);
+        if(der[0] == 1)
+            hitpv[0]  += fabs(yx);
+        else
+            hitpv[0]  -= fabs(yx);  
+        hitpv[1] += (TAILE_SIZE * der[1]);
     }
-    // printf(" V : y = %f | x = %f\n",hitpv[0], hitpv[1]);
-    // printf("H2|========================================|\n");
-    horizontal_hit(hitph, der, map->player, angel);
+    printf("H2|========================================|\n");
+    horizontal_hit(hitph, der, map->player, angel); 
     yx = (TAILE_SIZE * der[0]) / tan(angel);
-    // printf("FH : y = %f | x = %f | yx = %f\n",hitph[0], hitph[1], yx);
-    while(valid_Point(hitph, map->map_content, map->map_max_size))
+    while(valid_Point(hitph, map->map_content, map->map_max_size)) 
     {
        hitph[0] += (TAILE_SIZE * der[0]);
-       hitph[1]  += yx;
+        if(der[1] == 1)
+            hitph[1]  += fabs(yx);
+        else
+            hitph[1]  -= fabs(yx);
     }
-    // printf(" H : y = %f | x = %f\n",hitph[0], hitph[1]);
-    // printf("A3|========================================|\n");
-    // printf("dir[0]  = %d der[1] = %d \n",der[0], der[1]);
-    // printf("angel %f\n", map->player.angel);
-    if(hitpv[0] != -1 && (hitph[0] == -1 || distance(map->player.cord, hitph) > distance(map->player.cord, hitpv)))
+    printf("A3|========================================|\n");
+    printf("dir[0]  = %d der[1] = %d \n",der[0], der[1]);
+    printf("angel %f\n", map->player.angel);
+    if(hitpv[0] != -1 && (hitph[0] == -1 || distance(hitph, map->player.cord) > distance(hitpv,map->player.cord)))
         return (hitpv);
     else
         return (hitph);
 }
+
 void caster(t_map *map)
 {
     double hitph[2];
     double hitpv[2];
-    static double player[2] = {0,0};
-    static double xy[2] = {0,0};
+    double player[2];
+    double xy[2];
     double *hitp;
     double i = -30;
         draw_img(map->win_img, WI_HEIGHT, WI_WIDTH, create_trgb(0,0,0,0));
@@ -111,8 +126,6 @@ void caster(t_map *map)
         player[1] = map->mini_img.player->instances->x;
         xy[0] = player[0] + (hitp[0] - map->player.cord[0]);
         xy[1] = player[1] + (hitp[1] - map->player.cord[1]);
-        xy[0] = (xy[0] / TAILE_SIZE) * TAILE_SIZE;
-        xy[1] = (xy[1] / TAILE_SIZE) * TAILE_SIZE;
         draw_line(map->mini_img.cover,player, xy,create_trgb(255,0,0,255));
         // printf("p_x = %f, p_y = %f, hit_x = %f, hit_y = %f, distance = %f\n", map->player.cord[1], map->player.cord[0], hitp[1], hitp[0], distance(map->player.cord, hitp));
         draw_3D(map->win_img, distance(map->player.cord, hitp), create_trgb(255,0,0,255));
