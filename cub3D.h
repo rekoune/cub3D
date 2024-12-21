@@ -10,14 +10,15 @@
 # include <math.h>
 
 # define WI_HEIGHT  1000
-# define WI_WIDTH  1500
+# define WI_WIDTH  1500.0
 # define MINI_HEIGHT  150
 # define MINI_WIDTH  300
 # define TAILE_SIZE 20
 # define PLAYER_SIZE 5
 # define WALL_HEIGHT 32
-# define REC_WITH 5
-# define RES ((60.0 / 1500.0) * REC_WITH)
+# define PLAYER_VIEW 60.0
+# define REC_WITH 25
+# define RES ((PLAYER_VIEW / WI_WIDTH) * REC_WITH)
 # define M_S 3
 # define DG 1
 typedef struct s_directions
