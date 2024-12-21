@@ -5,7 +5,7 @@ void	leaks(void)
 	system("leaks -q cub3D");
 }
 
-void	draw_line(mlx_image_t *img, int *start, int *end, int color)
+void	draw_line(mlx_image_t *img, double *start, double *end, int color)
 {
 	int dy = end[0] - start[0];
 	int dx = end[1] - start[1];
@@ -37,24 +37,27 @@ void	draw_rectangle(mlx_image_t *img, double *start, double height ,int color)
 	int	i;
 
 	j = 0;
-	printf("x == %f, y = %f, height = %f\n", start[1], start[0], height);
-	while( start[0] + j < height &&  start[0] + j < WI_HEIGHT)
+	while( j < height && j + start[0] < WI_HEIGHT)
 	{
 		i = 0;
 		while(i < REC_WITH && start[1] + i < WI_WIDTH)
 		{
+			//    printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> i == %f, j == %f, height = %f\n", start[1] + i, start[0] + j, height);
 			mlx_put_pixel(img, start[1] + i, start[0] + j, color);
+   				//  printf("============================================\n");
 			i++;
 		}
+		// printf("j == %d\n", j);
 		j++;
 	}
+	// printf("x == %f, y = %f, height = %f\n", start[1], start[0], height);
 }
 
-double	distance(int *start, int *end)
+double	distance(double *start, double *end)
 {
 	double	distance;
-	int		dx;
-	int		dy;
+	double		dx;
+	double		dy;
 
 	dy = end[0] - start[0];
 	dx = end[1] - start[1];
@@ -74,17 +77,17 @@ void mv_img(mlx_image_t *img,int y , int x)
 		if(img->instances[i].x >= MINI_WIDTH || img->instances[i].y >= MINI_HEIGHT)
 				img->instances[i].enabled = 0;
 		else
-			img->instances[i].enabled = 1;
+			img->instances[i].enabled = 10;
 		i++;
 	}
 }
 
 int check_wall(t_map *map , double *op, int sig)
 {
-	if(map->map_content[(int)(map->player.cord[0] + (op[1] * sig)) / 20 ][(int)(map->player.cord[1] + (op[0] * sig)) / 20 ] == '1' 
-		|| map->map_content[(int)(map->player.cord[0] + 5 + (op[1] * sig)) / 20 ][(int)(map->player.cord[1] + 5 + (op[0] * sig)) / 20 ] == '1'
-		|| map->map_content[(int)(map->player.cord[0] + 5 + (op[1] * sig)) / 20 ][(int)(map->player.cord[1] + (op[0] * sig)) / 20 ] == '1'
-		|| map->map_content[(int)(map->player.cord[0]  + (op[1] * sig)) / 20 ][(int)(map->player.cord[1] + 5 + (op[0] * sig)) / 20 ] == '1')
+	if(map->map_content[(int)(map->player.cord[0] + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (op[0] * sig)) / TAILE_SIZE ] == '1' 
+		|| map->map_content[(int)(map->player.cord[0] + PLAYER_SIZE + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + PLAYER_SIZE + (op[0] * sig)) / TAILE_SIZE ] == '1'
+		|| map->map_content[(int)(map->player.cord[0] + PLAYER_SIZE + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (op[0] * sig)) / TAILE_SIZE ] == '1'
+		|| map->map_content[(int)(map->player.cord[0]  + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + PLAYER_SIZE + (op[0] * sig)) / TAILE_SIZE ] == '1')
 		return (0);
 	return (1);
 }
@@ -119,30 +122,33 @@ void	move_player(void *arg)
 	if(mlx_is_key_down(map->mlx, MLX_KEY_DOWN))
 	{
 		move_p(map, -1);
+		caster(map);
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_UP))
 	{
 		move_p(map, 1);
+		caster(map);
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 	{
 		map->player.angel -= DG;
 		if(map->player.angel < 0)
 			map->player.angel += 360;
-		printf("angel %d\n", map->player.angel);
+			caster(map);
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 	{
 		map->player.angel += DG;
 		if(map->player.angel > 360)
 			map->player.angel -= 360;
-		printf("angel %d\n", map->player.angel);
+			caster(map);
 	}
-	// map->player2.next_p_cord[0] = cos(map->player2.angel * (M_PI / 180)) * M_S ;
-	// map->player2.next_p_cord[1] = sin(map->player2.angel * (M_PI / 180)) * M_S ;
+	// printf("angel %f\n", map->player.angel);
+	// map->player.next_p_cord[0] = cos(map->player.angel * (M_PI / 180)) * M_S ;
+	// map->player.next_p_cord[1] = sin(map->player.angel * (M_PI / 180)) * M_S ;
 	if(mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		exit(0);
-	caster(map); 
+	 
 }
 
 int	main(int ac, char **av)
@@ -159,6 +165,7 @@ int	main(int ac, char **av)
 	map->player.cord[0] *= TAILE_SIZE;
 	map_max_sz(map->map_content, map->map_max_size);
 	mlx_loop_hook(map->mlx, &move_player, map);
+	// mlx_key_hook(map->mlx,my_ftkey,map);
 	mlx_loop(map->mlx);
 	free_resources(map);
 }
