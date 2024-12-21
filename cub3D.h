@@ -125,5 +125,6 @@ void					draw_rectangle(mlx_image_t *img, double *start, double height ,int colo
 void					draw_3D(mlx_image_t *img, double dis_to_wall, int color);
 void 					draw_img(mlx_image_t *img, int height, int width, int	color);
 //raycast
-void 					caster(t_map *map);
+void caster(t_map *map);
+double normalize_angel(double angel);
 #endif
