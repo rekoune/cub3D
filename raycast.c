@@ -6,32 +6,11 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2024/12/21 12:02:55 by haouky           ###   ########.fr       */
+/*   Updated: 2024/12/22 10:09:08 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void set_derction(double angel, int *der)
-{
-    if(angel > 180 && angel < 360)
-       der[0] = -1;
-    else
-        der[0] = 1;
-    if(angel > 90 && angel < 270)
-        der[1] = -1;
-    else
-        der[1] = 1;
-}
-
-double normalize_angel(double angel)
-{
-    if(angel < 0)
-			angel += 360;
-    if(angel >= 360)
-			angel -= 360;
-    return (angel);
-}
 
 void horizontal_hit(double *hitp, int *der, t_player player, double angel)
 {
@@ -55,19 +34,6 @@ void victical_hit(double *hitp, int *der, t_player player, double angel)
         hitp[0] = player.cord[0] + fabs((player.cord[1] - hitp[1]) * tan(angel));
     else
         hitp[0] = player.cord[0] - fabs((player.cord[1] - hitp[1]) * tan(angel));
-}
-int valid_Point(double *hitp, char **map, int *size)
-{   
-    printf("size[0] = %d size[1] = %d |hitp[0] = %f hitp[1] = %f\n",size[0], size[1],hitp[0]/ TAILE_SIZE, hitp[1]/ TAILE_SIZE);
-    if(isinf(hitp[0]) || isinf(hitp[1]) ||  (int)hitp[0] < 0 || (int)hitp[1] < 0 || (int)(hitp[0] / TAILE_SIZE) >= (size[0])|| (int)(hitp[1] / TAILE_SIZE) > (size[1]))
-    {
-        hitp[0] = -1;
-    }
-    if(hitp[0] == -1 || map[(int)(hitp[0] / TAILE_SIZE)][(int)(hitp[1] / TAILE_SIZE)] == '1')
-    {
-        return (0);
-    }
-    return (1);
 }
 
 double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
@@ -101,14 +67,24 @@ double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
     else
         return (hitph);
 }
-
+void raycaster(t_map *map,double angleshift, double *hitph, double *hitpv)
+{
+    double player[2];
+    double xy[2];
+    double *hitp;
+    
+    hitp = hitpoint(map , normalize_angel(map->player.angel + angleshift), hitph, hitpv);
+    player[0] = map->mini_img.player->instances->y;
+    player[1] = map->mini_img.player->instances->x;
+    xy[0] = player[0] + (hitp[0] - map->player.cord[0]);
+    xy[1] = player[1] + (hitp[1] - map->player.cord[1]);
+    draw_line(map->mini_img.cover,player, xy,create_trgb(255,0,0,255));
+    draw_3D(map->win_img, distance(map->player.cord, hitp), create_trgb(255,0,0,255),angleshift);
+}
 void caster(t_map *map)
 {
     double hitph[2];
     double hitpv[2];
-    double player[2];
-    double xy[2];
-    double *hitp;
     double i;
     
     i = (PLAYER_VIEW / 2) * -1;
@@ -116,13 +92,7 @@ void caster(t_map *map)
     draw_img(map->mini_img.cover, MINI_HEIGHT, MINI_WIDTH, create_trgb(0,0,0,0));
     while (i < (PLAYER_VIEW / 2))
     {    
-        hitp = hitpoint(map , normalize_angel(map->player.angel + i), hitph, hitpv);
-        player[0] = map->mini_img.player->instances->y;
-        player[1] = map->mini_img.player->instances->x;
-        xy[0] = player[0] + (hitp[0] - map->player.cord[0]);
-        xy[1] = player[1] + (hitp[1] - map->player.cord[1]);
-        draw_line(map->mini_img.cover,player, xy,create_trgb(255,0,0,255));
-        draw_3D(map->win_img, distance(map->player.cord, hitp), create_trgb(255,0,0,255));
+        raycaster(map, i, hitph, hitpv);
         i += RES;
     }
 }

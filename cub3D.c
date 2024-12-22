@@ -105,8 +105,8 @@ void move_p(t_map *map, int sig,double angel)
 		// printf("y = %f\n",map->player.cord[0]);
 		mv_img(map->mini_img.flor, round(map->player.next_p_cord[1]) * sig, round(map->player.next_p_cord[0]) * sig);
 		mv_img(map->mini_img.wall, round(map->player.next_p_cord[1]) * sig, round(map->player.next_p_cord[0]) * sig);
+		caster(map);
 	}
-	caster(map);
 }
 
 
@@ -154,6 +154,7 @@ int	main(int ac, char **av)
 	map->player.cord[1] *= TAILE_SIZE;
 	map->player.cord[0] *= TAILE_SIZE;
 	map_max_sz(map->map_content, map->map_max_size);
+	caster(map);
 	mlx_loop_hook(map->mlx, &move_player, map);
 	// mlx_key_hook(map->mlx,my_ftkey,map);
 	mlx_loop(map->mlx);
