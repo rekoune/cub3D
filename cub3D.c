@@ -42,7 +42,8 @@ void	draw_rectangle(mlx_image_t *img, double *start, double height ,int color)
 		i = 0;
 		while(i < REC_WITH && start[1] + i < WI_WIDTH)
 		{
-			mlx_put_pixel(img, start[1] + i, start[0] + j, color);
+			if (j + start[0] > MINI_HEIGHT || i + start[1] > MINI_WIDTH)
+				mlx_put_pixel(img, start[1] + i, start[0] + j, color);
 			i++;
 		}
 		j++;
