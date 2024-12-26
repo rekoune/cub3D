@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2024/12/22 10:09:08 by haouky           ###   ########.fr       */
+/*   Updated: 2024/12/24 11:20:05 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void horizontal_hit(double *hitp, int *der, t_player player, double angel)
 {
     if(der[0] == -1)
-        hitp[0] = floor(player.cord[0] / TAILE_SIZE) * TAILE_SIZE - 0.0001;
+        hitp[0] = floor(player.cord[0] / TAILE_SIZE) * TAILE_SIZE - 0.000001;
     else if(der[0] == 1)
-         hitp[0] = floor(player.cord[0] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE + 0.0001;
+         hitp[0] = floor(player.cord[0] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE;
     if(der[1] == 1)
         hitp[1] = player.cord[1] + fabs(((hitp[0] - player.cord[0]) / tan(angel)));
     else
@@ -27,9 +27,9 @@ void horizontal_hit(double *hitp, int *der, t_player player, double angel)
 void victical_hit(double *hitp, int *der, t_player player, double angel)
 {
     if(der[1] == -1)
-        hitp[1] = floor(player.cord[1] / TAILE_SIZE) * TAILE_SIZE - 0.0001;
+        hitp[1] = floor(player.cord[1] / TAILE_SIZE) * TAILE_SIZE - 0.000001;
     else if(der[1] == 1)
-         hitp[1] = floor(player.cord[1] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE + 0.0001;
+         hitp[1] = floor(player.cord[1] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE;
     if(der[0] == 1)
         hitp[0] = player.cord[0] + fabs((player.cord[1] - hitp[1]) * tan(angel));
     else
@@ -42,7 +42,7 @@ double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
     double yx;
 
     set_derction(angel, der);
-    printf("V1|========================================|\n");
+    // printf("V1|========================================|\n");
     angel *= (M_PI / 180); 
     victical_hit(hitpv, der, map->player, angel); 
     yx = (TAILE_SIZE * der[1]) * tan(angel);
@@ -51,7 +51,7 @@ double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
         hitpv[0]  += fabs(yx) * der[0];
         hitpv[1] += (TAILE_SIZE * der[1]);
     }
-    printf("H2|========================================|\n");
+    // printf("H2|========================================|\n");
     horizontal_hit(hitph, der, map->player, angel); 
     yx = (TAILE_SIZE * der[0]) / tan(angel);
     while(valid_Point(hitph, map->map_content, map->map_max_size)) 
@@ -59,9 +59,9 @@ double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
         hitph[0] += (TAILE_SIZE * der[0]);
         hitph[1]  += fabs(yx) * der[1];
     }
-    printf("A3|========================================|\n");
-    printf("dir[0]  = %d der[1] = %d \n",der[0], der[1]);
-    printf("angel %f\n", map->player.angel);
+    // printf("A3|=========/===============================|\n");
+    // printf("dir[0]  = %d der[1] = %d \n",der[0], der[1]);
+    // printf("angel %f\n", map->player.angel);
     if(hitpv[0] != -1 && (hitph[0] == -1 || distance(hitph, map->player.cord) > distance(hitpv,map->player.cord)))
         return (hitpv);
     else
