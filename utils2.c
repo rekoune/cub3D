@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:13:37 by haouky            #+#    #+#             */
-/*   Updated: 2024/12/22 08:49:07 by haouky           ###   ########.fr       */
+/*   Updated: 2024/12/24 10:02:56 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void set_derction(double angel, int *der)
 
 int valid_Point(double *hitp, char **map, int *size)
 {   
-    printf("size[0] = %d size[1] = %d |hitp[0] = %f hitp[1] = %f\n",size[0], size[1],hitp[0]/ TAILE_SIZE, hitp[1]/ TAILE_SIZE);
+    // printf("size[0] = %d size[1] = %d |hitp[0] = %f hitp[1] = %f\n",size[0], size[1],hitp[0]/ TAILE_SIZE, hitp[1]/ TAILE_SIZE);
     if(isinf(hitp[0]) || isinf(hitp[1]) ||  (int)hitp[0] < 0 || (int)hitp[1] < 0 || (int)(hitp[0] / TAILE_SIZE) >= (size[0])|| (int)(hitp[1] / TAILE_SIZE) > (size[1]))
     {
         hitp[0] = -1;
