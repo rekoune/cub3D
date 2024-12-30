@@ -42,7 +42,8 @@ void	draw_rectangle(mlx_image_t *img, double *start, double height ,int color)
 		i = 0;
 		while(i < REC_WITH && start[1] + i < WI_WIDTH)
 		{
-			mlx_put_pixel(img, start[1] + i, start[0] + j, color);
+			if (j + start[0] > MINI_HEIGHT || i + start[1] > MINI_WIDTH)
+				mlx_put_pixel(img, start[1] + i, start[0] + j, color);
 			i++;
 		}
 		j++;
@@ -80,10 +81,10 @@ void mv_img(mlx_image_t *img,int y , int x)
 
 int check_wall(t_map *map , double *op, int sig)
 {
-	if(map->map_content[(int)(map->player.cord[0] + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (op[0] * sig)) / TAILE_SIZE ] == '1'
-		|| map->map_content[(int)(map->player.cord[0] + PLAYER_SIZE + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + PLAYER_SIZE + (op[0] * sig)) / TAILE_SIZE ] == '1'
-		|| map->map_content[(int)(map->player.cord[0] + PLAYER_SIZE + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (op[0] * sig)) / TAILE_SIZE ] == '1'
-		|| map->map_content[(int)(map->player.cord[0]  + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + PLAYER_SIZE + (op[0] * sig)) / TAILE_SIZE ] == '1')
+	if(map->map_content[(int)(map->player.cord[0] + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1'
+		|| map->map_content[(int)(map->player.cord[0] + (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (op[0] * sig)) / TAILE_SIZE ] == '1'
+		|| map->map_content[(int)(map->player.cord[0] - (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (op[0] * sig)) / TAILE_SIZE ] == '1'
+		|| map->map_content[(int)(map->player.cord[0]  + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] - (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1')
 		return (0);
 	return (1);
 }
@@ -123,7 +124,7 @@ void	move_player(void *arg)
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_D))
 		move_p(map, 1,normalize_angel(map->player.angel + 90));
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_A))
-		move_p(map, 1,normalize_angel(map->player.angel - 90));
+		move_p(map, 1,normalize_angel(map->player.angel - 90))  ;
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 	{
 		map->player.angel -= DG;
@@ -151,8 +152,8 @@ int	main(int ac, char **av)
 	map = checking_map(av[1]);
 	map->mlx = mlx_init(WI_WIDTH, WI_HEIGHT, "cub3D", false);
 	draw_mini_map(map->mlx, map);
-	map->player.cord[1] = map->player.cord[1] * TAILE_SIZE + (TAILE_SIZE / 2) ;
-	map->player.cord[0] = map->player.cord[0] * TAILE_SIZE + (TAILE_SIZE / 2);
+	map->player.cord[1] = map->player.cord[1] * TAILE_SIZE + (TAILE_SIZE / 2) + (PLAYER_SIZE / 2);
+	map->player.cord[0] = map->player.cord[0] * TAILE_SIZE + (TAILE_SIZE / 2) + (PLAYER_SIZE / 2);
 	map_max_sz(map->map_content, map->map_max_size);
 	caster(map);
 	mlx_loop_hook(map->mlx, &move_player, map);

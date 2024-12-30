@@ -17,6 +17,20 @@ void draw_img(mlx_image_t *img, int height, int width, int	color)
 		j++;
 	}
 }
+void draw_background(mlx_image_t *img, double *height_width, double *start, int color)
+{
+	while(start[0] < height_width[0])
+	{
+		start[1] = 0;
+		while(start[1] < height_width[1])
+		{
+			if (start[0] > MINI_HEIGHT || start[1] > MINI_WIDTH)
+				mlx_put_pixel(img, start[1], start[0], color);
+			start[1]++;
+		}
+		start[0]++;
+	}
+}
 
 void	find_palayer_cord(t_player *player, char **map)
 {
@@ -129,28 +143,40 @@ void	draw_mini_map(mlx_t *mlx, t_map *map)
 	map->mini_img.wall = mlx_new_image(mlx, TAILE_SIZE , TAILE_SIZE );
 	map->mini_img.player = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
 	map->mini_img.cover = mlx_new_image(mlx, MINI_WIDTH, MINI_HEIGHT);
-	map->win_img = mlx_new_image(mlx, WI_WIDTH, WI_HEIGHT);
+	map->win_img.win_img = mlx_new_image(mlx, WI_WIDTH, WI_HEIGHT);
+	map->mini_img.buttom = mlx_new_image(mlx, MINI_WIDTH + TAILE_SIZE, TAILE_SIZE);
+	map->mini_img.right = mlx_new_image(mlx, TAILE_SIZE, MINI_HEIGHT + TAILE_SIZE);
+	map->win_img.background = mlx_new_image(mlx, WI_WIDTH, WI_HEIGHT);
 
-	mlx_image_to_window(mlx, map->win_img, 0, 0);
+	double start[2];
+	start[0] = 0;
+	start[1] = 0;
+	double height[2];
+	height[0] = WI_HEIGHT / 2;
+	height[1] = WI_WIDTH;
+	draw_background(map->win_img.background, height, start, create_trgb(map->colors.ceiling[0], 
+				map->colors.ceiling[1], map->colors.ceiling[2], 255));
+	start[1] =  WI_HEIGHT / 2;
+	height[0] = WI_HEIGHT;
+	draw_background(map->win_img.background, height, start, create_trgb(map->colors.floor[0], 
+				map->colors.floor[1], map->colors.floor[2], 255));
 	draw_img(map->mini_img.flor, TAILE_SIZE, TAILE_SIZE, create_trgb(255, 255, 255, 255));
-	draw_img(map->mini_img.wall, TAILE_SIZE, TAILE_SIZE , create_trgb(0, 0, 0, 255));
+	draw_img(map->mini_img.wall, TAILE_SIZE, TAILE_SIZE, create_trgb(0, 0, 0, 255));
 	draw_img(map->mini_img.player, PLAYER_SIZE, PLAYER_SIZE, create_trgb(0, 0, 255, 255));
+	draw_img(map->mini_img.buttom, TAILE_SIZE, MINI_WIDTH + TAILE_SIZE,create_trgb(map->colors.ceiling[0], 
+				map->colors.ceiling[1], map->colors.ceiling[2], 255));
+	draw_img(map->mini_img.right, MINI_HEIGHT, TAILE_SIZE, create_trgb(map->colors.ceiling[0], 
+				map->colors.ceiling[1], map->colors.ceiling[2], 255));
 	find_palayer_cord(&map->player, map->map_content);
-
+	mlx_image_to_window(mlx, map->win_img.background, 0, 0);
 	draw_elements(mlx, map);
 	mlx_image_to_window(mlx, map->mini_img.cover, 0, 0);
-
-	mlx_image_t	*test;
-	test = mlx_new_image(mlx, MINI_WIDTH + 20, TAILE_SIZE);
-	draw_img(test, TAILE_SIZE, MINI_WIDTH + 20, create_trgb(50, 50, 50, 255));
-	mlx_image_to_window(mlx, test, 0 * TAILE_SIZE, MINI_HEIGHT);
-	mlx_image_t	*test2;
-	test2 = mlx_new_image(mlx, TAILE_SIZE, MINI_HEIGHT);
-	draw_img(test2, MINI_HEIGHT, TAILE_SIZE, create_trgb(50, 50, 50, 255));
-	mlx_image_to_window(mlx, test2, MINI_WIDTH, 0);
-
+	mlx_image_to_window(mlx, map->mini_img.buttom, 0, MINI_HEIGHT);
+	mlx_image_to_window(mlx, map->mini_img.right, MINI_WIDTH, 0);
+	mlx_image_to_window(mlx, map->win_img.win_img, 0, 0);
 	if (map->mini_img.player->instances->x != MINI_WIDTH / 2)
 		move_img_x(map);
 	if(map->mini_img.player->instances->y != MINI_HEIGHT / 2)
 		move_img_y(map);
 }
+
