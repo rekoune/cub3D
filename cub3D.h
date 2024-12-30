@@ -17,7 +17,7 @@
 # define PLAYER_SIZE 4
 # define WALL_HEIGHT 25
 # define PLAYER_VIEW 60.0
-# define REC_WITH 1
+# define REC_WITH 2
 # define RES ((PLAYER_VIEW / WI_WIDTH) * REC_WITH)
 # define M_S 4
 # define DG 3
@@ -46,8 +46,15 @@ typedef struct s_mini_img{
 	mlx_image_t		*flor;
 	mlx_image_t		*player;
 	mlx_image_t		*cover;
-	
+	mlx_image_t		*right;
+	mlx_image_t		*buttom;
 }	t_mini_img;
+
+typedef struct s_win_img
+{
+	mlx_image_t			*win_img;
+	mlx_image_t			*background;
+}t_win_img;
 
 typedef struct s_player{
 	double	cord[2];
@@ -62,9 +69,10 @@ typedef struct s_map
 	t_mini_img			mini_img;
 	t_player			player;
 	mlx_t				*mlx;
+	t_win_img			win_img;
 	char				**map_content;
-	mlx_image_t			*win_img;
 	int map_max_size[2];
+	int	color_test;
 }						t_map;
 
 enum					e_type
@@ -126,8 +134,9 @@ void					move_imgs_inst(mlx_image_t *img, char dir, int	px_num);
 int						create_trgb(int r, int g, int b, int a);
 double					distance(double *start, double *end);
 void					draw_rectangle(mlx_image_t *img, double *start, double height ,int color);
-void					draw_3D(mlx_image_t *img, double dis_to_wall, int color, double p);
+void					draw_3D(t_map *map, double dis_to_wall, int color, double p);
 void 					draw_img(mlx_image_t *img, int height, int width, int	color);
+void 					draw_background(mlx_image_t *img, double *height_width, double *start, int	color);
 //raycast
 void caster(t_map *map);
 #endif
