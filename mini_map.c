@@ -137,17 +137,24 @@ void	move_img_y(t_map *map)
 		}
 }
 
-void	draw_mini_map(mlx_t *mlx, t_map *map)
+void initial_images(t_map *map)
 {
-	map->mini_img.flor = mlx_new_image(mlx, TAILE_SIZE , TAILE_SIZE );
-	map->mini_img.wall = mlx_new_image(mlx, TAILE_SIZE , TAILE_SIZE );
-	map->mini_img.player = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
-	map->mini_img.cover = mlx_new_image(mlx, MINI_WIDTH, MINI_HEIGHT);
-	map->win_img.win_img = mlx_new_image(mlx, WI_WIDTH, WI_HEIGHT);
-	map->mini_img.buttom = mlx_new_image(mlx, MINI_WIDTH + TAILE_SIZE, TAILE_SIZE);
-	map->mini_img.right = mlx_new_image(mlx, TAILE_SIZE, MINI_HEIGHT + TAILE_SIZE);
-	map->win_img.background = mlx_new_image(mlx, WI_WIDTH, WI_HEIGHT);
+	map->mini_img.flor = mlx_new_image(map->mlx, TAILE_SIZE , TAILE_SIZE );
+	map->mini_img.wall = mlx_new_image(map->mlx, TAILE_SIZE , TAILE_SIZE );
+	map->mini_img.player = mlx_new_image(map->mlx, PLAYER_SIZE, PLAYER_SIZE);
+	map->mini_img.cover = mlx_new_image(map->mlx, MINI_WIDTH, MINI_HEIGHT);
+	map->win_img.win_img = mlx_new_image(map->mlx, WI_WIDTH, WI_HEIGHT);
+	map->mini_img.buttom = mlx_new_image(map->mlx, MINI_WIDTH + TAILE_SIZE, TAILE_SIZE);
+	map->mini_img.right = mlx_new_image(map->mlx, TAILE_SIZE, MINI_HEIGHT + TAILE_SIZE);
+	map->win_img.background = mlx_new_image(map->mlx, WI_WIDTH, WI_HEIGHT);
+	map->win_img.north = get_image(map->mlx, map->directions.north);	
+	map->win_img.east = get_image(map->mlx, map->directions.east);	
+	map->win_img.west = get_image(map->mlx, map->directions.west);	
+	map->win_img.south = get_image(map->mlx, map->directions.south);	
+}
 
+void drawing_images(t_map *map)
+{
 	double start[2];
 	start[0] = 0;
 	start[1] = 0;
@@ -167,6 +174,14 @@ void	draw_mini_map(mlx_t *mlx, t_map *map)
 				map->colors.ceiling[1], map->colors.ceiling[2], 255));
 	draw_img(map->mini_img.right, MINI_HEIGHT, TAILE_SIZE, create_trgb(map->colors.ceiling[0], 
 				map->colors.ceiling[1], map->colors.ceiling[2], 255));
+}
+
+void	draw_mini_map(mlx_t *mlx, t_map *map)
+{
+	
+
+	initial_images(map);
+	drawing_images(map);
 	find_palayer_cord(&map->player, map->map_content);
 	mlx_image_to_window(mlx, map->win_img.background, 0, 0);
 	draw_elements(mlx, map);

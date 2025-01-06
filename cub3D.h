@@ -54,6 +54,10 @@ typedef struct s_win_img
 {
 	mlx_image_t			*win_img;
 	mlx_image_t			*background;
+	mlx_image_t			*north;
+	mlx_image_t			*south;
+	mlx_image_t			*west;
+	mlx_image_t			*east;
 }t_win_img;
 
 typedef struct s_player{
@@ -138,5 +142,7 @@ void					draw_3D(t_map *map, double dis_to_wall, int color, double p);
 void 					draw_img(mlx_image_t *img, int height, int width, int	color);
 void 					draw_background(mlx_image_t *img, double *height_width, double *start, int	color);
 //raycast
-void caster(t_map *map);
+void					caster(t_map *map);
+mlx_image_t 			*get_image(mlx_t *mlx, char *path);
+
 #endif

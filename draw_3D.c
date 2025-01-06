@@ -1,5 +1,20 @@
     #include "cub3D.h"
 
+mlx_image_t *get_image(mlx_t *mlx, char *path)
+{
+	mlx_texture_t *texture;
+	mlx_image_t *img;
+
+	texture = mlx_load_png(path);
+	if (!texture)
+		exit(1);
+	img = mlx_texture_to_image(mlx, texture);
+	if (!img)
+		exit(1);
+	mlx_delete_texture(texture);
+	return (img);
+}
+
 void	draw_3D(t_map *map, double dis_to_wall, int color, double p)
 {
 	double	wall_heigth;
@@ -19,5 +34,6 @@ void	draw_3D(t_map *map, double dis_to_wall, int color, double p)
 		start[0] = 0;
 	start[1] = i;
 	i += REC_WITH;
+
 	draw_rectangle(map->win_img.win_img, start, wall_heigth, color);
 }

@@ -26,6 +26,6 @@ clean:
 	rm -rf $(OBJ)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(MLX_LIB_PATH)
 
 re: fclean all
