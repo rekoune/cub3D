@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2024/12/30 09:55:19 by haouky           ###   ########.fr       */
+/*   Updated: 2025/01/02 09:46:24 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,25 @@
 void horizontal_hit(double *hitp, int *der, t_player player, double angel)
 {
     if(der[0] == -1)
-        hitp[0] = floor(player.cord[0] / TAILE_SIZE) * TAILE_SIZE - 0.0001;
+        hitp[0] = floor(player.cord[0] / TAILE_SIZE) * TAILE_SIZE - 0.00000001;
     else if(der[0] == 1)
-         hitp[0] = floor(player.cord[0] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE + 0.0001;
+         hitp[0] = floor(player.cord[0] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE + 0.00000001;
     if(der[1] == 1)
-        hitp[1] = player.cord[1] + fabs(((hitp[0] - player.cord[0]) / tan(angel)));
+        hitp[1] = player.cord[1] + fabs(((hitp[0] - player.cord[0]) / tan(angel))) - 0.00000001;
     else
-        hitp[1] = player.cord[1] - fabs(((hitp[0] - player.cord[0]) / tan(angel)));
+        hitp[1] = player.cord[1] - fabs(((hitp[0] - player.cord[0]) / tan(angel))) + 0.00000001;
 }
 
 void victical_hit(double *hitp, int *der, t_player player, double angel)
 {
     if(der[1] == -1)
-        hitp[1] = floor(player.cord[1] / TAILE_SIZE) * TAILE_SIZE - 0.0001;
+        hitp[1] = floor(player.cord[1] / TAILE_SIZE) * TAILE_SIZE - 0.00000001;
     else if(der[1] == 1)
-         hitp[1] = floor(player.cord[1] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE + 0.0001;
+         hitp[1] = floor(player.cord[1] / TAILE_SIZE) * TAILE_SIZE + TAILE_SIZE + 0.00000001;
     if(der[0] == 1)
-        hitp[0] = player.cord[0] + fabs((player.cord[1] - hitp[1]) * tan(angel));
+        hitp[0] = player.cord[0] + fabs((player.cord[1] - hitp[1]) * tan(angel)) - 0.00000001;
     else
-        hitp[0] = player.cord[0] - fabs((player.cord[1] - hitp[1]) * tan(angel));
+        hitp[0] = player.cord[0] - fabs((player.cord[1] - hitp[1]) * tan(angel)) + 0.00000001;
 }
 
 double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
@@ -95,7 +95,7 @@ void caster(t_map *map)
     i = (PLAYER_VIEW / 2) * -1;
     draw_img(map->win_img.win_img, WI_HEIGHT, WI_WIDTH, create_trgb(0,0,0,0));
     draw_img(map->mini_img.cover, MINI_HEIGHT, MINI_WIDTH, create_trgb(0,0,0,0));
-    while (i < (PLAYER_VIEW / 2))
+    while (i <= (PLAYER_VIEW / 2))
     {    
         raycaster(map, i, hitph, hitpv);
         i += RES;
