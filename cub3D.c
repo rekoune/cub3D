@@ -81,10 +81,10 @@ void mv_img(mlx_image_t *img,int y , int x)
 
 int check_wall(t_map *map , double *op, int sig)
 {
-	if(map->map_content[(int)(map->player.cord[0] + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1'
-		|| map->map_content[(int)(map->player.cord[0] + (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (op[0] * sig)) / TAILE_SIZE ] == '1'
-		|| map->map_content[(int)(map->player.cord[0] - (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (op[0] * sig)) / TAILE_SIZE ] == '1'
-		|| map->map_content[(int)(map->player.cord[0]  + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] - (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1')
+	if(map->map_content[(int)(map->player.cord[0] - (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1'
+		|| map->map_content[(int)(map->player.cord[0] + (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1'
+		|| map->map_content[(int)(map->player.cord[0] - (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] - (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1'
+		|| map->map_content[(int)(map->player.cord[0] + (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] - (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1')
 		return (0);
 	return (1);
 }
@@ -106,17 +106,26 @@ void move_p(t_map *map, int sig,double angel)
 		// printf("y = %f\n",map->player.cord[0]);
 		mv_img(map->mini_img.flor, round(map->player.next_p_cord[1]) * sig, round(map->player.next_p_cord[0]) * sig);
 		mv_img(map->mini_img.wall, round(map->player.next_p_cord[1]) * sig, round(map->player.next_p_cord[0]) * sig);
-		caster(map);
 	}
 }
 
+void mouse_mv(t_map *map)
+{
+    int x;
+	int y;
 
+	mlx_get_mouse_pos(map->mlx, &x, &y);
+	map->player.angel += (x - (WI_WIDTH / 2)) * DG * M_SEN;
+	map->player.angel = normalize_angel(map->player.angel);
+	mlx_set_mouse_pos(map->mlx, (WI_WIDTH / 2), (WI_HEIGHT / 2));
+}
 
 void	move_player(void *arg)
 {
 	t_map *map;
 
 	map = arg;
+	mouse_mv(map);
 	if(mlx_is_key_down(map->mlx, MLX_KEY_DOWN) || mlx_is_key_down(map->mlx, MLX_KEY_S))
 		move_p(map, -1,map->player.angel);
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_UP) || mlx_is_key_down(map->mlx, MLX_KEY_W))
@@ -129,17 +138,15 @@ void	move_player(void *arg)
 	{
 		map->player.angel -= DG;
 		map->player.angel = normalize_angel(map->player.angel);
-		caster(map);
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 	{
-		map->player.angel = normalize_angel(map->player.angel);
 		map->player.angel += DG;
-		caster(map);
+		map->player.angel = normalize_angel(map->player.angel);
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		exit(0);
-	 
+	caster(map);
 }
 
 int	main(int ac, char **av)
@@ -155,9 +162,10 @@ int	main(int ac, char **av)
 	map->player.cord[1] = map->player.cord[1] * TAILE_SIZE + (TAILE_SIZE / 2) + (PLAYER_SIZE / 2);
 	map->player.cord[0] = map->player.cord[0] * TAILE_SIZE + (TAILE_SIZE / 2) + (PLAYER_SIZE / 2);
 	map_max_sz(map->map_content, map->map_max_size);
+	mlx_set_mouse_pos(map->mlx, (WI_WIDTH / 2), (WI_HEIGHT / 2));
+	mlx_set_cursor_mode(map->mlx, MLX_MOUSE_DISABLED);
 	caster(map);
 	mlx_loop_hook(map->mlx, &move_player, map);
-	// mlx_key_hook(map->mlx,my_ftkey,map);
 	mlx_loop(map->mlx);
 	free_resources(map);
 }

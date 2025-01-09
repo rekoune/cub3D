@@ -11,16 +11,17 @@
 
 # define WI_HEIGHT  1000
 # define WI_WIDTH  1500.0
-# define MINI_HEIGHT  150
-# define MINI_WIDTH  300
+# define MINI_HEIGHT  200
+# define MINI_WIDTH  400
 # define TAILE_SIZE 20
 # define PLAYER_SIZE 4
 # define WALL_HEIGHT 25
 # define PLAYER_VIEW 60.0
-# define REC_WITH 2
+# define REC_WITH 1
 # define RES ((PLAYER_VIEW / WI_WIDTH) * REC_WITH)
-# define M_S 4
-# define DG 3
+# define M_S 4 
+# define DG 2
+# define M_SEN 0.05
 typedef struct s_directions
 {
 	char				*north;
