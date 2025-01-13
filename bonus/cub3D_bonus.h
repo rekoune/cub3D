@@ -1,8 +1,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "MLX42/include/MLX42/MLX42.h"
-# include "get_next_line.h"
+# include "../MLX42/include/MLX42/MLX42.h"
+# include "get_next_line_bonus.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -15,7 +15,7 @@
 # define MINI_WIDTH  400
 # define TAILE_SIZE 20
 # define PLAYER_SIZE 4
-# define WALL_HEIGHT 25
+# define WALL_HEIGHT 32
 # define PLAYER_VIEW 60.0
 # define REC_WITH 1
 # define RES ((PLAYER_VIEW / WI_WIDTH) * REC_WITH)
@@ -59,6 +59,10 @@ typedef struct s_win_img
 	mlx_image_t			*south;
 	mlx_image_t			*west;
 	mlx_image_t			*east;
+	int					**px_north;
+	int					**px_south;
+	int					**px_west;
+	int					**px_east;
 }t_win_img;
 
 typedef struct s_player{
@@ -66,6 +70,13 @@ typedef struct s_player{
 	double		angel;
 	double	next_p_cord[2];
 }	t_player;
+
+typedef struct s_ray{
+	 double	hit_x;
+	 double	hit_y;
+	 int	dir;
+	 char	hit_line;
+}t_ray;
 
 typedef struct s_map
 {
@@ -75,6 +86,7 @@ typedef struct s_map
 	t_player			player;
 	mlx_t				*mlx;
 	t_win_img			win_img;
+	t_ray				ray;
 	char				**map_content;
 	int map_max_size[2];
 	int	color_test;
@@ -106,12 +118,12 @@ void					free_resources(t_map *map);
 void					free_list(t_map_lst *map);
 
 //utils2.c
-void map_max_sz(char **map,int *size);
-void	draw_line(mlx_image_t *img, double *start, double *end, int color);
-double	distance(double *start, double *end);
-double normalize_angel(double angel);
-void set_derction(double angel, int *der);
-int valid_Point(double *hitp, char **map, int *size);
+void					map_max_sz(char **map,int *size);
+void					draw_line(mlx_image_t *img, double *start, double *end, int color);
+double					distance(double *start, double *end);
+double					normalize_angel(double angel);
+void					set_derction(double angel, int *der);
+int						valid_Point(double *hitp, char **map, int *size);
 //ft_split.c
 char					**ft_split(char *s, char c);
 
@@ -144,6 +156,7 @@ void 					draw_img(mlx_image_t *img, int height, int width, int	color);
 void 					draw_background(mlx_image_t *img, double *height_width, double *start, int	color);
 //raycast
 void					caster(t_map *map);
-mlx_image_t 			*get_image(mlx_t *mlx, char *path);
+mlx_image_t 			*get_image(t_map *map, mlx_t *mlx, char *path);
+int						**get_2d_pixels(mlx_image_t *img);
 
 #endif
