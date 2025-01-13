@@ -64,11 +64,17 @@ double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
     // printf("angel %f\n", map->player.angel);
     if(hitpv[0] != -1 && (hitph[0] == -1 || distance(hitph, map->player.cord) > distance(hitpv,map->player.cord)))
     {
+        //dir[0] >0 north, else sout
         map->color_test = create_trgb(245, 222, 179, 255);
+        map->ray.hit_line = 'v';
+        map->ray.dir = der[0];
         return (hitpv);
     }
     else{
+        //dir[1] >0 char9 east, else janob west
         map->color_test = create_trgb(169, 169, 169, 255);
+        map->ray.hit_line = 'h';
+        map->ray.dir = der[1];
         return (hitph);
     }
 }
@@ -79,6 +85,8 @@ void raycaster(t_map *map,double angleshift, double *hitph, double *hitpv)
     double *hitp;
     
     hitp = hitpoint(map , normalize_angel(map->player.angel + angleshift), hitph, hitpv);
+    map->ray.hit_x = hitp[1];
+    map->ray.hit_y = hitp[0];
     player[0] = map->mini_img.player->instances->y + (PLAYER_SIZE / 2);
     player[1] = map->mini_img.player->instances->x + (PLAYER_SIZE / 2);
     xy[0] = player[0] + (hitp[0] - map->player.cord[0]);
@@ -86,6 +94,7 @@ void raycaster(t_map *map,double angleshift, double *hitph, double *hitpv)
     draw_line(map->mini_img.cover,player, xy,create_trgb(255,0,0,255));
     draw_3D(map, distance(map->player.cord, hitp), map->color_test,angleshift);
 }
+
 void caster(t_map *map)
 {
     double hitph[2];

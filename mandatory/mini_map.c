@@ -147,10 +147,14 @@ void initial_images(t_map *map)
 	map->mini_img.buttom = mlx_new_image(map->mlx, MINI_WIDTH + TAILE_SIZE, TAILE_SIZE);
 	map->mini_img.right = mlx_new_image(map->mlx, TAILE_SIZE, MINI_HEIGHT + TAILE_SIZE);
 	map->win_img.background = mlx_new_image(map->mlx, WI_WIDTH, WI_HEIGHT);
-	map->win_img.north = get_image(map->mlx, map->directions.north);	
-	map->win_img.east = get_image(map->mlx, map->directions.east);	
-	map->win_img.west = get_image(map->mlx, map->directions.west);	
-	map->win_img.south = get_image(map->mlx, map->directions.south);	
+	map->win_img.north = get_image(map, map->mlx, map->directions.north);	
+	map->win_img.east = get_image(map, map->mlx, map->directions.east);	
+	map->win_img.west = get_image(map, map->mlx, map->directions.west);	
+	map->win_img.south = get_image(map, map->mlx, map->directions.south);
+	map->win_img.px_north = get_2d_pixels(map->win_img.north);	
+	map->win_img.px_east = get_2d_pixels(map->win_img.east);	
+	map->win_img.px_south = get_2d_pixels(map->win_img.south);	
+	map->win_img.px_west = get_2d_pixels(map->win_img.west);	
 }
 
 void drawing_images(t_map *map)

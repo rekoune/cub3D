@@ -61,6 +61,10 @@ int	set_map_elements(t_map *map, char *line, t_map_lst **map_lst)
 	int	i;
 
 	i = 0;
+	map->win_img.px_north = NULL;
+	map->win_img.px_south = NULL;
+	map->win_img.px_east = NULL;
+	map->win_img.px_west = NULL;
 	while(line[i] && line[i] == ' ')
 		i++;
 	if (is_info(line, map))
