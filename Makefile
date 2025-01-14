@@ -9,7 +9,7 @@ OBJ = $(SRC:.c=.o)
 BOBJ = $(BOSRC:.c=.o)
 
 NAME = cub3D
-BNAME = cub3D
+BNAME = cub3D_bonus
 
 MLX_LIB_PATH = ./MLX42/build
 GLFW_LIB_PATH = $(shell brew --prefix glfw)/lib

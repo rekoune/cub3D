@@ -117,7 +117,7 @@ void texturing(t_map *map, double *top_buttom, double wall_height, double ray_an
 			break;
 		}
 		image_y = i / wall_height * img->height;
-		if (top_buttom[0] >= 0 && (i + top_buttom[0] > MINI_HEIGHT || top_buttom[1] > MINI_WIDTH)){
+		if (top_buttom[0] >= 0 ){
 
 			// printf("hona pixel == %d\n", img_pixels[image_y][image_x]);
 			mlx_put_pixel(map->win_img.win_img, top_buttom[1], top_buttom[0] + i, img_pixels[image_y][image_x]);
