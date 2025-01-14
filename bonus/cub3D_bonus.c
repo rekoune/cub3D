@@ -156,6 +156,7 @@ int	main(int ac, char **av)
 	atexit(leaks);
 	if (ac != 2)
 		return (printf("ERROR : Invalid arguments\n"), 1);
+	printf("i am in bonus\n");
 	map = checking_map(av[1]);
 	map->mlx = mlx_init(WI_WIDTH, WI_HEIGHT, "cub3D", false);
 	draw_mini_map(map->mlx, map);

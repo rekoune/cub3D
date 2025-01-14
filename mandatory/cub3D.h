@@ -11,11 +11,11 @@
 
 # define WI_HEIGHT  1000
 # define WI_WIDTH  1500.0
-# define MINI_HEIGHT  200
-# define MINI_WIDTH  400
+// # define MINI_HEIGHT  200
+// # define MINI_WIDTH  400
 # define TAILE_SIZE 20
 # define PLAYER_SIZE 4
-# define WALL_HEIGHT 32
+# define WALL_HEIGHT 25
 # define PLAYER_VIEW 60.0
 # define REC_WITH 1
 # define RES ((PLAYER_VIEW / WI_WIDTH) * REC_WITH)
@@ -42,14 +42,14 @@ typedef struct s_map_lst
 	struct s_map_lst	*next;
 }						t_map_lst;
 
-typedef struct s_mini_img{
-	mlx_image_t		*wall;
-	mlx_image_t		*flor;
-	mlx_image_t		*player;
-	mlx_image_t		*cover;
-	mlx_image_t		*right;
-	mlx_image_t		*buttom;
-}	t_mini_img;
+// typedef struct s_mini_img{
+// 	mlx_image_t		*wall;
+// 	mlx_image_t		*flor;
+// 	mlx_image_t		*player;
+// 	mlx_image_t		*cover;
+// 	mlx_image_t		*right;
+// 	mlx_image_t		*buttom;
+// }	t_mini_img;
 
 typedef struct s_win_img
 {
@@ -82,7 +82,7 @@ typedef struct s_map
 {
 	t_directions		directions;
 	t_colors			colors;
-	t_mini_img			mini_img;
+	// t_mini_img			mini_img;
 	t_player			player;
 	mlx_t				*mlx;
 	t_win_img			win_img;

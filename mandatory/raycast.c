@@ -80,18 +80,18 @@ double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
 }
 void raycaster(t_map *map,double angleshift, double *hitph, double *hitpv)
 {
-    double player[2];
-    double xy[2];
+    // double player[2];
+    // double xy[2];
     double *hitp;
     
     hitp = hitpoint(map , normalize_angel(map->player.angel + angleshift), hitph, hitpv);
     map->ray.hit_x = hitp[1];
     map->ray.hit_y = hitp[0];
-    player[0] = map->mini_img.player->instances->y + (PLAYER_SIZE / 2);
-    player[1] = map->mini_img.player->instances->x + (PLAYER_SIZE / 2);
-    xy[0] = player[0] + (hitp[0] - map->player.cord[0]);
-    xy[1] = player[1] + (hitp[1] - map->player.cord[1]);
-    draw_line(map->mini_img.cover,player, xy,create_trgb(255,0,0,255));
+    // player[0] = map->mini_img.player->instances->y + (PLAYER_SIZE / 2);
+    // player[1] = map->mini_img.player->instances->x + (PLAYER_SIZE / 2);
+    // xy[0] = player[0] + (hitp[0] - map->player.cord[0]);
+    // xy[1] = player[1] + (hitp[1] - map->player.cord[1]);
+    // draw_line(map->mini_img.cover,player, xy,create_trgb(255,0,0,255));
     draw_3D(map, distance(map->player.cord, hitp), map->color_test,angleshift);
 }
 
@@ -103,7 +103,7 @@ void caster(t_map *map)
     
     i = (PLAYER_VIEW / 2) * -1;
     draw_img(map->win_img.win_img, WI_HEIGHT, WI_WIDTH, create_trgb(0,0,0,0));
-    draw_img(map->mini_img.cover, MINI_HEIGHT, MINI_WIDTH, create_trgb(0,0,0,0));
+    // draw_img(map->mini_img.cover, MINI_HEIGHT, MINI_WIDTH, create_trgb(0,0,0,0));
     while (i <= (PLAYER_VIEW / 2))
     {    
         raycaster(map, i, hitph, hitpv);
