@@ -161,6 +161,7 @@ int	main(int ac, char **av)
 	map_max_sz(map->map_content, map->map_max_size);
 	mlx_set_cursor_mode(map->mlx, MLX_MOUSE_DISABLED);
 	caster(map);
+	mlx_get_mouse_pos(map->mlx, &map->player.mouse, &ac);
 	mlx_loop_hook(map->mlx, &move_player, map); 
 	mlx_loop(map->mlx);
 	printf("her\n");
