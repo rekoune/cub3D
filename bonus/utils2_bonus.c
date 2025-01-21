@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:13:37 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/20 11:58:16 by haouky           ###   ########.fr       */
+/*   Updated: 2025/01/21 14:06:39 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void set_derction(double angel, int *der)
         der[1] = 1;
 }
 
-int valid_Point(double *hitp, char **map, int *size)
+int valid_point(double *hitp, char **map, int *size)
 {   
     if(isinf(hitp[0]) || isinf(hitp[1]) ||  (int)hitp[0] < 0 || (int)hitp[1] < 0 || (int)(hitp[0] / TAILE_SIZE) >= (size[0])|| (int)(hitp[1] / TAILE_SIZE) > (size[1]))
         hitp[0] = -1;
