@@ -49,6 +49,7 @@ typedef struct s_mini_img{
 	mlx_image_t		*cover;
 	mlx_image_t		*right;
 	mlx_image_t		*buttom;
+	mlx_image_t		*door;
 }	t_mini_img;
 
 typedef struct s_win_img
@@ -69,6 +70,7 @@ typedef struct s_player{
 	double	cord[2];
 	double		angel;
 	double	next_p_cord[2];
+	int  mouse;
 }	t_player;
 
 typedef struct s_ray{
