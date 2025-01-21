@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
+/*   raycast_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/02 09:46:24 by haouky           ###   ########.fr       */
+/*   Updated: 2025/01/20 11:55:06 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
     double yx;
 
     set_derction(angel, der);
-    // printf("V1|========================================|\n");
     angel *= (M_PI / 180); 
     victical_hit(hitpv, der, map->player, angel); 
     yx = (TAILE_SIZE * der[1]) * tan(angel);
@@ -51,7 +50,6 @@ double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
         hitpv[0]  += fabs(yx) * der[0];
         hitpv[1] += (TAILE_SIZE * der[1]);
     }
-    // printf("H2|========================================|\n");
     horizontal_hit(hitph, der, map->player, angel); 
     yx = (TAILE_SIZE * der[0]) / tan(angel);
     while(valid_Point(hitph, map->map_content, map->map_max_size)) 
@@ -59,22 +57,14 @@ double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
         hitph[0] += (TAILE_SIZE * der[0]);
         hitph[1]  += fabs(yx) * der[1];
     }
-    // printf("A3|=========/===============================|\n");
-    // printf("dir[0]  = %d der[1] = %d \n",der[0], der[1]);
-    // printf("angel %f\n", map->player.angel);
     if(hitpv[0] != -1 && (hitph[0] == -1 || distance(hitph, map->player.cord) > distance(hitpv,map->player.cord)))
     {
-        //dir[0] >0 north, else sout
-        map->color_test = create_trgb(245, 222, 179, 255);
         map->ray.hit_line = 'v';
-        map->ray.dir = der[0];
         return (hitpv);
     }
-    else{
-        //dir[1] >0 char9 east, else janob west
-        map->color_test = create_trgb(169, 169, 169, 255);
+    else
+    {
         map->ray.hit_line = 'h';
-        map->ray.dir = der[1];
         return (hitph);
     }
 }
@@ -97,8 +87,8 @@ void raycaster(t_map *map,double angleshift, double *hitph, double *hitpv)
 
 void caster(t_map *map)
 {
-    double hitph[2];
-    double hitpv[2];
+    double hitph[4];
+    double hitpv[4];
     double i;
     
     i = (PLAYER_VIEW / 2) * -1;

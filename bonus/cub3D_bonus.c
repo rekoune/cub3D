@@ -2,7 +2,7 @@
 
 void	leaks(void)
 {
-	system("leaks -q cub3D");
+	system("leaks -q cub3D_bonus");
 }
 
 void	draw_line(mlx_image_t *img, double *start, double *end, int color)
@@ -93,19 +93,15 @@ void move_p(t_map *map, int sig,double angel)
 	double radians;
 
 	radians = angel * (M_PI / 180);
-	// printf("rad %f\n", radians);
 	map->player.next_p_cord[0] = cos(radians) * M_S ;
 	map->player.next_p_cord[1] = sin(radians) * M_S ;
-	// printf("cosx %f\n",map->player.next_p_cord[0]);
-	// printf("siny %f\n",map->player.next_p_cord[1]);
 	if(check_wall(map, map->player.next_p_cord, sig))
 	{
 		map->player.cord[1] += round(map->player.next_p_cord[0]) * sig;
 		map->player.cord[0] += round(map->player.next_p_cord[1]) * sig;
-		// printf("x = %f\n",map->player.cord[1]);
-		// printf("y = %f\n",map->player.cord[0]);
 		mv_img(map->mini_img.flor, round(map->player.next_p_cord[1]) * sig, round(map->player.next_p_cord[0]) * sig);
 		mv_img(map->mini_img.wall, round(map->player.next_p_cord[1]) * sig, round(map->player.next_p_cord[0]) * sig);
+		mv_img(map->mini_img.door, round(map->player.next_p_cord[1]) * sig, round(map->player.next_p_cord[0]) * sig);
 	}
 }
 
@@ -113,11 +109,11 @@ void mouse_mv(t_map *map)
 {
     int x;
 	int y;
-
 	mlx_get_mouse_pos(map->mlx, &x, &y);
-	map->player.angel += (x - (WI_WIDTH / 2)) * DG * M_SEN;
+	map->player.angel += (x - map->player.mouse) * DG * M_SEN;
 	map->player.angel = normalize_angel(map->player.angel);
-	mlx_set_mouse_pos(map->mlx, (WI_WIDTH / 2), (WI_HEIGHT / 2));
+	map->player.mouse = x;
+	// mlx_set_mouse_pos(map->mlx, (WI_WIDTH / 2), (WI_HEIGHT / 2));
 }
 
 void	move_player(void *arg)
@@ -163,10 +159,11 @@ int	main(int ac, char **av)
 	map->player.cord[1] = map->player.cord[1] * TAILE_SIZE + (TAILE_SIZE / 2) + (PLAYER_SIZE / 2);
 	map->player.cord[0] = map->player.cord[0] * TAILE_SIZE + (TAILE_SIZE / 2) + (PLAYER_SIZE / 2);
 	map_max_sz(map->map_content, map->map_max_size);
-	mlx_set_mouse_pos(map->mlx, (WI_WIDTH / 2), (WI_HEIGHT / 2));
 	mlx_set_cursor_mode(map->mlx, MLX_MOUSE_DISABLED);
 	caster(map);
-	mlx_loop_hook(map->mlx, &move_player, map);
+	mlx_loop_hook(map->mlx, &move_player, map); 
 	mlx_loop(map->mlx);
+	printf("her\n");
+	mlx_set_mouse_pos(map->mlx, (WI_WIDTH / 2), (WI_HEIGHT / 2));
 	free_resources(map);
 }
