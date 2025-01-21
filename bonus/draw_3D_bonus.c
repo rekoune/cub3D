@@ -108,35 +108,37 @@ void texturing(t_map *map, double *top_buttom, double wall_height, double ray_an
 	mlx_image_t *img;
 	int	i;
 
-	i = 0;
+	i = (wall_height - WI_HEIGHT) / 2;
+	if (i < 0)
+		i = 0;                                                                                                                              
 	img = get_dir_img(map, &img_pixels, ray_angle);
 	image_x = get_x_image(map->ray ) * img->width;
 	while(i < wall_height)
 	{
-		if (top_buttom[0] + i > WI_HEIGHT){
+		if (top_buttom[0] > WI_HEIGHT){
 			break;
 		}
 		image_y = i / wall_height * img->height;
-		if (top_buttom[0] >= 0 && (i + top_buttom[0] > MINI_HEIGHT || top_buttom[1] > MINI_WIDTH)){
-
-			// printf("hona pixel == %d\n", img_pixels[image_y][image_x]);
-			mlx_put_pixel(map->win_img.win_img, top_buttom[1], top_buttom[0] + i, img_pixels[image_y][image_x]);
+		if (top_buttom[0] >= 0 && (top_buttom[0] > MINI_HEIGHT || top_buttom[1] > MINI_WIDTH)){
+			mlx_put_pixel(map->win_img.win_img, top_buttom[1], top_buttom[0], img_pixels[image_y][image_x]);
 		}
 		i++;
+		top_buttom[0]++;
 	}
 }
 
-void	draw_3D(t_map *map, double dis_to_wall, int color, double p)
+void	draw_3D(t_map *map, double dis_to_wall, int color, double ray_angle)
 {
 	double	wall_heigth;
 	double	dest;
 	double start[2];
 	static double 	i;
-	if (p == (PLAYER_VIEW / 2) * -1)
+
+	if (ray_angle == (PLAYER_VIEW / 2) * -1)
 		i = 0;
 	dest = (double)(WI_WIDTH / 2) / tan((PLAYER_VIEW / 2) * M_PI / 180);
 	// printf("dis to wall origin == %f, wall height == %f\n", dis_to_wall, wall_heigth);
-	dis_to_wall *= cos(p * (M_PI / 180));
+	dis_to_wall *= cos(ray_angle * (M_PI / 180));
 	wall_heigth = (WALL_HEIGHT / dis_to_wall) * dest;
 	// printf("dis to wall new one == %f, wall height == %f\n", dis_to_wall, wall_heigth);
 	// printf("p == %f\n", p);
@@ -145,8 +147,7 @@ void	draw_3D(t_map *map, double dis_to_wall, int color, double p)
 		start[0] = 0;
 	start[1] = i;
 	i += REC_WITH;
-
-	texturing(map, start, wall_heigth, p);
+	texturing(map, start, wall_heigth, ray_angle);
 	(void) color;
 	// draw_rectangle(map->win_img.win_img, start, wall_heigth, color);
 }

@@ -2,7 +2,7 @@
 
 void	leaks(void)
 {
-	system("leaks -q cub3D");
+	system("leaks -q cub3D_bonus");
 }
 
 void	draw_line(mlx_image_t *img, double *start, double *end, int color)
@@ -125,11 +125,15 @@ void	move_player(void *arg)
 	t_map *map;
 
 	map = arg;
-	mouse_mv(map);
+	// mouse_mv(map);
 	if(mlx_is_key_down(map->mlx, MLX_KEY_DOWN) || mlx_is_key_down(map->mlx, MLX_KEY_S))
 		move_p(map, -1,map->player.angel);
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_UP) || mlx_is_key_down(map->mlx, MLX_KEY_W))
+	{
+		if (map->animation.timer == 0 || map->animation.flag == WALKING)
+			map->animation.flag = RUNNING;
 		move_p(map, 1,map->player.angel);
+	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_D))
 		move_p(map, 1,normalize_angel(map->player.angel + 90));
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_A))
@@ -146,6 +150,37 @@ void	move_player(void *arg)
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		exit(0);
+	else if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT_CONTROL))
+	{
+		if (map->animation.choot_num != 0 && (map->animation.flag == WALKING || map->animation.flag == RUNNING))
+		{
+
+			map->animation.flag = SHOTTING;
+			draw_amo(map, map->animation.choot_num);
+		}
+	}
+	else if (mlx_is_key_down(map->mlx, MLX_KEY_R))
+	{
+			map->animation.flag = RELOADING;
+			map->animation.choot_num = 8;
+			draw_amo(map, map->animation.choot_num);
+	}
+	else if (map->animation.choot_num == 0)
+	{
+			map->animation.flag = RELOADING;
+			map->animation.choot_num = 8;
+			draw_amo(map, map->animation.choot_num);
+	}
+	if (map->animation.timer == 0)
+	{
+		if (map->animation.flag == SHOTTING)
+		{
+			map->animation.choot_num--;
+			draw_amo(map, map->animation.choot_num);
+		}
+		map->animation.flag = WALKING;
+	}
+	animation(map);
 	caster(map);
 }
 
@@ -153,19 +188,18 @@ int	main(int ac, char **av)
 {
 	t_map		*map;
 
-	atexit(leaks);
+	// atexit(leaks);
 	if (ac != 2)
 		return (printf("ERROR : Invalid arguments\n"), 1);
-	printf("i am in bonus\n");
 	map = checking_map(av[1]);
 	map->mlx = mlx_init(WI_WIDTH, WI_HEIGHT, "cub3D", false);
 	draw_mini_map(map->mlx, map);
 	map->player.cord[1] = map->player.cord[1] * TAILE_SIZE + (TAILE_SIZE / 2) + (PLAYER_SIZE / 2);
 	map->player.cord[0] = map->player.cord[0] * TAILE_SIZE + (TAILE_SIZE / 2) + (PLAYER_SIZE / 2);
 	map_max_sz(map->map_content, map->map_max_size);
-	mlx_set_mouse_pos(map->mlx, (WI_WIDTH / 2), (WI_HEIGHT / 2));
-	mlx_set_cursor_mode(map->mlx, MLX_MOUSE_DISABLED);
-	caster(map);
+	// mlx_set_mouse_pos(map->mlx, (WI_WIDTH / 2), (WI_HEIGHT / 2));
+	// mlx_set_cursor_mode(map->mlx, MLX_MOUSE_DISABLED);
+	// caster(map);
 	mlx_loop_hook(map->mlx, &move_player, map);
 	mlx_loop(map->mlx);
 	free_resources(map);
