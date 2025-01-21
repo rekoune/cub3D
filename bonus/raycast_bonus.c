@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/20 11:55:06 by haouky           ###   ########.fr       */
+/*   Updated: 2025/01/21 14:06:39 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
     angel *= (M_PI / 180); 
     victical_hit(hitpv, der, map->player, angel); 
     yx = (TAILE_SIZE * der[1]) * tan(angel);
-    while(valid_Point(hitpv, map->map_content, map->map_max_size)) 
+    while(valid_point(hitpv, map->map_content, map->map_max_size)) 
     {
         hitpv[0]  += fabs(yx) * der[0];
         hitpv[1] += (TAILE_SIZE * der[1]);
     }
     horizontal_hit(hitph, der, map->player, angel); 
     yx = (TAILE_SIZE * der[0]) / tan(angel);
-    while(valid_Point(hitph, map->map_content, map->map_max_size)) 
+    while(valid_point(hitph, map->map_content, map->map_max_size)) 
     {
         hitph[0] += (TAILE_SIZE * der[0]);
         hitph[1]  += fabs(yx) * der[1];

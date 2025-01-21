@@ -1,18 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/21 13:40:10 by haouky            #+#    #+#             */
+/*   Updated: 2025/01/21 14:01:52 by haouky           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
-
-bool	str_comp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	if (!s1 || !s2)
-		return (false);
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	if (s1[i] != s2[i])
-		return (false);
-	return (true);
-}
 
 int	str_len(char *str, char c)
 {
@@ -51,27 +49,6 @@ char	*str_dup(char *str, int start, int size)
 	return (dup_str);
 }
 
-char	*str_join(char *s1, char *s2)
-{
-	char	*str;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	str = malloc((str_len(s1, '\0') + str_len(s2, '\0') + 1) * sizeof(char));
-	while (s1 && s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2 && s2[j])
-		str[i++] = s2[j++];
-	str[i] = '\0';
-	free(s1);
-	return (str);
-}
-
 int	str_count(char **str)
 {
 	int	i;
@@ -91,7 +68,7 @@ long	ft_atoi(char *str)
 	nb = 0;
 	while (str[i] == ' ')
 		i++;
-	if(str[i] == '\0')
+	if (str[i] == '\0')
 		exit(ft_write("Error: Invalid Color argument\n", 1));
 	while (str[i])
 	{
@@ -99,12 +76,11 @@ long	ft_atoi(char *str)
 			exit(ft_write("Error: Invalid Color argument\n", 1));
 		nb = nb * 10;
 		nb = nb + (str[i++] - 48);
-		if(str[i] == ' ')
-		{	
-			while(str[i] == ' ')
-				i++;
-			if(str[i] != '\0')
+		while (str[i] == ' ')
+		{
+			if (str[i + 1] != '\0' && str[i + 1] != ' ')
 				exit(ft_write("Error: Invalid Color argument\n", 1));
+			i++;
 		}
 	}
 	if (nb > 255)
