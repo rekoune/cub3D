@@ -96,6 +96,8 @@ void	draw_elements(mlx_t *mlx, t_map *map)
 		{
 			if (map->map_content[j][i] == '1')
 				mlx_image_to_window(mlx, map->mini_img.wall, i * TAILE_SIZE, j * TAILE_SIZE);
+			else if(map->map_content[j][i] == 'D')
+				mlx_image_to_window(mlx, map->mini_img.door, (i * TAILE_SIZE) + 2, (j * TAILE_SIZE) + 2);
 			else if (map->map_content[j][i] != '1' && map->map_content[j][i] != ' ')
 				mlx_image_to_window(mlx, map->mini_img.flor, i * TAILE_SIZE, j * TAILE_SIZE);
 			i++;
@@ -111,12 +113,14 @@ void	move_img_x(t_map *map)
 		{
 			move_imgs_inst(map->mini_img.flor, 'l', map->mini_img.player->instances->x - (MINI_WIDTH / 2));
 			move_imgs_inst(map->mini_img.wall, 'l', map->mini_img.player->instances->x - (MINI_WIDTH / 2));
+			move_imgs_inst(map->mini_img.door, 'l', map->mini_img.player->instances->x - (MINI_WIDTH / 2));
 			map->mini_img.player->instances->x -= map->mini_img.player->instances->x - (MINI_WIDTH / 2);
 		}
 		else
 		{
 			move_imgs_inst(map->mini_img.flor, 'r', (MINI_WIDTH / 2) - map->mini_img.player->instances->x);
 			move_imgs_inst(map->mini_img.wall, 'r', (MINI_WIDTH / 2) - map->mini_img.player->instances->x);
+			move_imgs_inst(map->mini_img.door, 'r', (MINI_WIDTH / 2) - map->mini_img.player->instances->x);
 			map->mini_img.player->instances->x += (MINI_WIDTH / 2) - map->mini_img.player->instances->x;
 		}
 }
@@ -127,12 +131,14 @@ void	move_img_y(t_map *map)
 		{
 			move_imgs_inst(map->mini_img.flor, 'u', map->mini_img.player->instances->y - (MINI_HEIGHT / 2));
 			move_imgs_inst(map->mini_img.wall, 'u', map->mini_img.player->instances->y - (MINI_HEIGHT / 2));
+			move_imgs_inst(map->mini_img.door, 'u', map->mini_img.player->instances->y - (MINI_HEIGHT / 2));
 			map->mini_img.player->instances->y -= map->mini_img.player->instances->y - (MINI_HEIGHT / 2);
 		}
 		else
 		{
 			move_imgs_inst(map->mini_img.flor, 'd', (MINI_HEIGHT / 2) - map->mini_img.player->instances->y);
 			move_imgs_inst(map->mini_img.wall, 'd', (MINI_HEIGHT / 2) - map->mini_img.player->instances->y);
+			move_imgs_inst(map->mini_img.door, 'd', (MINI_HEIGHT / 2) - map->mini_img.player->instances->y);
 			map->mini_img.player->instances->y += (MINI_HEIGHT / 2) - map->mini_img.player->instances->y;
 		}
 }
@@ -141,6 +147,7 @@ void initial_images(t_map *map)
 {
 	map->mini_img.flor = mlx_new_image(map->mlx, TAILE_SIZE , TAILE_SIZE );
 	map->mini_img.wall = mlx_new_image(map->mlx, TAILE_SIZE , TAILE_SIZE );
+	map->mini_img.door = mlx_new_image(map->mlx, TAILE_SIZE - 4, TAILE_SIZE - 4);
 	map->mini_img.player = mlx_new_image(map->mlx, PLAYER_SIZE, PLAYER_SIZE);
 	map->mini_img.cover = mlx_new_image(map->mlx, MINI_WIDTH, MINI_HEIGHT);
 	map->win_img.win_img = mlx_new_image(map->mlx, WI_WIDTH, WI_HEIGHT);
@@ -176,6 +183,7 @@ void drawing_images(t_map *map)
 	draw_background(map->win_img.background, height, start, create_trgb(map->colors.floor[0], 
 				map->colors.floor[1], map->colors.floor[2], 255));
 	draw_img(map->mini_img.flor, TAILE_SIZE, TAILE_SIZE, create_trgb(255, 255, 255, 255));
+	draw_img(map->mini_img.door, TAILE_SIZE - 4, TAILE_SIZE - 4, create_trgb(139, 69, 19, 255));
 	draw_img(map->mini_img.wall, TAILE_SIZE, TAILE_SIZE, create_trgb(0, 0, 0, 255));
 	draw_img(map->mini_img.player, PLAYER_SIZE, PLAYER_SIZE, create_trgb(0, 0, 255, 255));
 	draw_img(map->mini_img.buttom, TAILE_SIZE, MINI_WIDTH + TAILE_SIZE,create_trgb(map->colors.ceiling[0], 

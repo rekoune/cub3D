@@ -54,6 +54,7 @@ typedef struct s_mini_img{
 	mlx_image_t		*cover;
 	mlx_image_t		*right;
 	mlx_image_t		*buttom;
+	mlx_image_t		*door;
 }	t_mini_img;
 
 typedef struct s_win_img
@@ -74,6 +75,7 @@ typedef struct s_player{
 	double	cord[2];
 	double		angel;
 	double	next_p_cord[2];
+	int  mouse;
 }	t_player;
 
 typedef struct s_ray{
@@ -140,7 +142,7 @@ void					draw_line(mlx_image_t *img, double *start, double *end, int color);
 double					distance(double *start, double *end);
 double					normalize_angel(double angel);
 void					set_derction(double angel, int *der);
-int						valid_Point(double *hitp, char **map, int *size);
+int						valid_point(double *hitp, char **map, int *size);
 //ft_split.c
 char					**ft_split(char *s, char c);
 

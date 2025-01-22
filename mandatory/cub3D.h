@@ -1,27 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/21 14:08:39 by haouky            #+#    #+#             */
+/*   Updated: 2025/01/21 14:19:43 by haouky           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "get_next_line.h"
 # include <fcntl.h>
+# include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <math.h>
 
-# define WI_HEIGHT  1000
-# define WI_WIDTH  1500.0
-// # define MINI_HEIGHT  200
-// # define MINI_WIDTH  400
+# define WI_HEIGHT 1000
+# define WI_WIDTH 1500.0
 # define TAILE_SIZE 20
 # define PLAYER_SIZE 4
 # define WALL_HEIGHT 25
 # define PLAYER_VIEW 60.0
 # define REC_WITH 1
 # define RES ((PLAYER_VIEW / WI_WIDTH) * REC_WITH)
-# define M_S 4 
+// # define RES REC_WITH
+# define M_S 4
 # define DG 2
 # define M_SEN 0.05
+
 typedef struct s_directions
 {
 	char				*north;
@@ -42,15 +54,6 @@ typedef struct s_map_lst
 	struct s_map_lst	*next;
 }						t_map_lst;
 
-// typedef struct s_mini_img{
-// 	mlx_image_t		*wall;
-// 	mlx_image_t		*flor;
-// 	mlx_image_t		*player;
-// 	mlx_image_t		*cover;
-// 	mlx_image_t		*right;
-// 	mlx_image_t		*buttom;
-// }	t_mini_img;
-
 typedef struct s_win_img
 {
 	mlx_image_t			*win_img;
@@ -63,33 +66,34 @@ typedef struct s_win_img
 	int					**px_south;
 	int					**px_west;
 	int					**px_east;
-}t_win_img;
+}						t_win_img;
 
-typedef struct s_player{
-	double	cord[2];
-	double		angel;
-	double	next_p_cord[2];
-}	t_player;
+typedef struct s_player
+{
+	double				cord[2];
+	double				angel;
+	double				next_p_cord[2];
+}						t_player;
 
-typedef struct s_ray{
-	 double	hit_x;
-	 double	hit_y;
-	 int	dir;
-	 char	hit_line;
-}t_ray;
+typedef struct s_ray
+{
+	double				hit_x;
+	double				hit_y;
+	int					dir;
+	char				hit_line;
+}						t_ray;
 
 typedef struct s_map
 {
 	t_directions		directions;
 	t_colors			colors;
-	// t_mini_img			mini_img;
 	t_player			player;
 	mlx_t				*mlx;
 	t_win_img			win_img;
 	t_ray				ray;
 	char				**map_content;
-	int map_max_size[2];
-	int	color_test;
+	int					map_max_size[2];
+	int					color_test;
 }						t_map;
 
 enum					e_type
@@ -105,6 +109,9 @@ enum					e_type
 //checking_map.c
 t_map					*checking_map(char *map_file);
 
+// move_p.c
+void					move_player(void *arg);
+
 //utils.c
 bool					str_comp(char *s1, char *s2);
 int						str_len(char *str, char c);
@@ -117,13 +124,17 @@ void					free_2d(char **str, char *str2);
 void					free_resources(t_map *map);
 void					free_list(t_map_lst *map);
 
+//utils3.c
+double					*get_point(double *hitph, double *hitpv, t_map *map);
+
 //utils2.c
-void					map_max_sz(char **map,int *size);
-void					draw_line(mlx_image_t *img, double *start, double *end, int color);
+void					map_max_sz(char **map, int *size);
+void					draw_line(mlx_image_t *img, double *start, double *end,
+							int color);
 double					distance(double *start, double *end);
 double					normalize_angel(double angel);
 void					set_derction(double angel, int *der);
-int						valid_Point(double *hitp, char **map, int *size);
+int						valid_point(double *hitp, char **map, int *size);
 //ft_split.c
 char					**ft_split(char *s, char c);
 
@@ -138,25 +149,30 @@ bool					is_empty(char *str);
 bool					is_last(t_map *map);
 void					is_last_line(int map_fd);
 enum e_type				get_info_type(char *line, char **info);
+enum e_type				get_identifier(char *identifier);
 
 //check_map_content.c
 void					map_validation(char **map, int size, char p);
 char					**getarray(t_map_lst *lst);
 int						map_size(t_map_lst *map);
-char 					valid_element(char **map);
+char					valid_element(char **map);
 
 //mini_map.c
 void					draw_mini_map(mlx_t *mlx, t_map *map);
-void					move_imgs_inst(mlx_image_t *img, char dir, int	px_num);
+void					move_imgs_inst(mlx_image_t *img, char dir, int px_num);
 int						create_trgb(int r, int g, int b, int a);
 double					distance(double *start, double *end);
-void					draw_rectangle(mlx_image_t *img, double *start, double height ,int color);
-void					draw_3D(t_map *map, double dis_to_wall, int color, double p);
-void 					draw_img(mlx_image_t *img, int height, int width, int	color);
-void 					draw_background(mlx_image_t *img, double *height_width, double *start, int	color);
+void					draw_rectangle(mlx_image_t *img, double *start,
+							double height, int color);
+void					draw_3d(t_map *map, double dis_to_wall, int color,
+							double p);
+void					draw_img(mlx_image_t *img, int height, int width,
+							int color);
+void					draw_background(mlx_image_t *img, double *height_width,
+							double *start, int color);
 //raycast
 void					caster(t_map *map);
-mlx_image_t 			*get_image(t_map *map, mlx_t *mlx, char *path);
+mlx_image_t				*get_image(t_map *map, mlx_t *mlx, char *path);
 int						**get_2d_pixels(mlx_image_t *img);
 
 #endif
