@@ -23,7 +23,7 @@
 # define DG 2
 # define M_SEN 0.05
 
-# define WALKING 0
+# define STANDING 0
 # define RUNNING 1
 # define SHOTTING 2
 # define RELOADING 3
@@ -86,14 +86,14 @@ typedef struct s_ray{
 }t_ray;
 
 typedef struct s_animation{
-	mlx_image_t		**walking;
+	mlx_image_t		**standing;
 	mlx_image_t		**running;
-	mlx_image_t		**chooting;
+	mlx_image_t		**shotting;
 	mlx_image_t		**reloading;
 	mlx_image_t		*amo_img;
-	int				flag; // 0 for walking, 1 for running, 2 for chooting, 3 for RELOADING;
+	int				flag; // 0 for standing, 1 for running, 2 for shotting, 3 for RELOADING;
 	int				timer;
-	int				choot_num;
+	int				shott_num;
 }t_animation;
 
 typedef struct s_map

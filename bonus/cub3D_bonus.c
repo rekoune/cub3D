@@ -127,7 +127,7 @@ void	move_player(void *arg)
 		move_p(map, -1,map->player.angel);
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_UP) || mlx_is_key_down(map->mlx, MLX_KEY_W))
 	{
-		if (map->animation.timer == 0 || map->animation.flag == WALKING)
+		if (map->animation.timer == 0 || map->animation.flag == STANDING)
 			map->animation.flag = RUNNING;
 		move_p(map, 1,map->player.angel);
 	}
@@ -149,33 +149,33 @@ void	move_player(void *arg)
 		exit(0);
 	else if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT_CONTROL) || mlx_is_key_down(map->mlx, MLX_KEY_LEFT_CONTROL))
 	{
-		if (map->animation.choot_num != 0 && (map->animation.flag == WALKING || map->animation.flag == RUNNING))
+		if (map->animation.shott_num != 0 && (map->animation.flag == STANDING || map->animation.flag == RUNNING))
 		{
 
 			map->animation.flag = SHOTTING;
-			draw_amo(map, map->animation.choot_num);
+			draw_amo(map, map->animation.shott_num);
 		}
 	}
 	else if (mlx_is_key_down(map->mlx, MLX_KEY_R))
 	{
 			map->animation.flag = RELOADING;
-			map->animation.choot_num = 8;
-			draw_amo(map, map->animation.choot_num);
+			map->animation.shott_num = 8;
+			draw_amo(map, map->animation.shott_num);
 	}
-	else if (map->animation.choot_num == 0)
+	else if (map->animation.shott_num == 0)
 	{
 			map->animation.flag = RELOADING;
-			map->animation.choot_num = 8;
-			draw_amo(map, map->animation.choot_num);
+			map->animation.shott_num = 8;
+			draw_amo(map, map->animation.shott_num);
 	}
 	if (map->animation.timer == 0)
 	{
 		if (map->animation.flag == SHOTTING)
 		{
-			map->animation.choot_num--;
-			draw_amo(map, map->animation.choot_num);
+			map->animation.shott_num--;
+			draw_amo(map, map->animation.shott_num);
 		}
-		map->animation.flag = WALKING;
+		map->animation.flag = STANDING;
 	}
 	animation(map);
 	caster(map);

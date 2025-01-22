@@ -57,10 +57,10 @@ mlx_image_t **get_textures(t_map *map, char *path, int  size)
 }
 
 void animation_init(t_map *map){
-    map->animation.chooting = get_textures(map, "bonus/animation_textures/shotting/", 9); 
+    map->animation.shotting = get_textures(map, "bonus/animation_textures/shotting/", 9); 
     map->animation.reloading = get_textures(map, "bonus/animation_textures/reloading/", 24);
     map->animation.running = get_textures(map, "bonus/animation_textures/running/", 5); 
-    map->animation.walking = get_textures(map, "bonus/animation_textures/walking/", 17);
+    map->animation.standing = get_textures(map, "bonus/animation_textures/standing/", 17);
 }
 
 void add_images(mlx_t *mlx, mlx_image_t **imgs)
@@ -78,10 +78,10 @@ void add_images(mlx_t *mlx, mlx_image_t **imgs)
 
 void    add_animation_img(t_map *map)
 {
-    add_images(map->mlx, map->animation.chooting);
+    add_images(map->mlx, map->animation.shotting);
     add_images(map->mlx, map->animation.reloading);
     add_images(map->mlx, map->animation.running);
-    add_images(map->mlx, map->animation.walking);
+    add_images(map->mlx, map->animation.standing);
 }
 
 void disable_images(mlx_image_t **images)
@@ -95,10 +95,10 @@ void disable_images(mlx_image_t **images)
 
 void    disable_all_images(t_map *map)
 {
-    disable_images(map->animation.chooting);
+    disable_images(map->animation.shotting);
     disable_images(map->animation.reloading);
     disable_images(map->animation.running);
-    disable_images(map->animation.walking);
+    disable_images(map->animation.standing);
 }
 
 void    animate_it(t_map *map , mlx_image_t **images, int timer, int num_frames, int frame_time)
@@ -138,12 +138,12 @@ void animation(t_map *map)
         old_flag = map->animation.flag;
         map->animation.timer = 0;
     }
-    if (map->animation.flag == WALKING)
-        animate_it(map, map->animation.walking, map->animation.timer, num_frames = 17, frame_time);
+    if (map->animation.flag == STANDING)
+        animate_it(map, map->animation.standing, map->animation.timer, num_frames = 17, frame_time);
     else if (map->animation.flag == RUNNING)
         animate_it(map, map->animation.running, map->animation.timer, num_frames = 5, 4);
     else if (map->animation.flag == SHOTTING)
-        animate_it(map, map->animation.chooting, map->animation.timer, num_frames = 9, frame_time);
+        animate_it(map, map->animation.shotting, map->animation.timer, num_frames = 9, frame_time);
     else if (map->animation.flag == RELOADING)
         animate_it(map, map->animation.reloading, map->animation.timer, num_frames = 24, frame_time);
 

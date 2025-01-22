@@ -162,7 +162,7 @@ void initial_images(t_map *map)
 	map->win_img.px_east = get_2d_pixels(map->win_img.east);	
 	map->win_img.px_south = get_2d_pixels(map->win_img.south);	
 	map->win_img.px_west = get_2d_pixels(map->win_img.west);
-	map->animation.choot_num = 8;
+	map->animation.shott_num = 8;
 	map->animation.flag = 0;
 	map->animation.timer = 0;	
 	map->animation.amo_img = NULL;
