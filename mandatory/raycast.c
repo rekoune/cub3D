@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/21 14:21:48 by haouky           ###   ########.fr       */
+/*   Updated: 2025/01/22 09:56:05 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,15 @@ void	caster(t_map *map)
 	double	hitph[2];
 	double	hitpv[2];
 	double	i;
+	double	px_2_px;
 
+	px_2_px = (PLAYER_VIEW / WI_WIDTH) * REC_WITH;
 	i = (PLAYER_VIEW / 2) * -1;
 	draw_img(map->win_img.win_img, WI_HEIGHT, WI_WIDTH, create_trgb(0, 0, 0,
 			0));
 	while (i <= (PLAYER_VIEW / 2))
 	{
 		raycaster(map, i, hitph, hitpv);
-		i += RES;
+		i += px_2_px;
 	}
 }
