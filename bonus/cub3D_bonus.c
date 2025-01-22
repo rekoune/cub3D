@@ -147,7 +147,9 @@ void	move_player(void *arg)
 	}
 	else if(mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		exit(0);
-	else if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT_CONTROL) || mlx_is_key_down(map->mlx, MLX_KEY_LEFT_CONTROL))
+	else if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT_CONTROL) || 
+			mlx_is_key_down(map->mlx, MLX_KEY_LEFT_CONTROL) || 
+			mlx_is_mouse_down(map->mlx, MLX_MOUSE_BUTTON_LEFT))
 	{
 		if (map->animation.shott_num != 0 && (map->animation.flag == STANDING || map->animation.flag == RUNNING))
 		{

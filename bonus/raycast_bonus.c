@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/21 14:06:39 by haouky           ###   ########.fr       */
+/*   Updated: 2025/01/22 13:06:11 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void raycaster(t_map *map,double angleshift, double *hitph, double *hitpv)
     hitp = hitpoint(map , normalize_angel(map->player.angel + angleshift), hitph, hitpv);
     map->ray.hit_x = hitp[1];
     map->ray.hit_y = hitp[0];
+    map->ray.hit_x_dor = hitp[3];
+    map->ray.hit_y_dor = hitp[2];
     player[0] = map->mini_img.player->instances->y + (PLAYER_SIZE / 2);
     player[1] = map->mini_img.player->instances->x + (PLAYER_SIZE / 2);
     xy[0] = player[0] + (hitp[0] - map->player.cord[0]);
