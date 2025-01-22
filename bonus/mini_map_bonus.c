@@ -161,7 +161,11 @@ void initial_images(t_map *map)
 	map->win_img.px_north = get_2d_pixels(map->win_img.north);	
 	map->win_img.px_east = get_2d_pixels(map->win_img.east);	
 	map->win_img.px_south = get_2d_pixels(map->win_img.south);	
-	map->win_img.px_west = get_2d_pixels(map->win_img.west);	
+	map->win_img.px_west = get_2d_pixels(map->win_img.west);
+	map->animation.shott_num = 8;
+	map->animation.flag = 0;
+	map->animation.timer = 0;	
+	map->animation.amo_img = NULL;
 }
 
 void drawing_images(t_map *map)
@@ -193,6 +197,7 @@ void	draw_mini_map(mlx_t *mlx, t_map *map)
 	
 
 	initial_images(map);
+	animation_init(map);
 	drawing_images(map);
 	find_palayer_cord(&map->player, map->map_content);
 	mlx_image_to_window(mlx, map->win_img.background, 0, 0);
@@ -201,6 +206,9 @@ void	draw_mini_map(mlx_t *mlx, t_map *map)
 	mlx_image_to_window(mlx, map->mini_img.buttom, 0, MINI_HEIGHT);
 	mlx_image_to_window(mlx, map->mini_img.right, MINI_WIDTH, 0);
 	mlx_image_to_window(mlx, map->win_img.win_img, 0, 0);
+	add_animation_img(map);
+	mlx_put_string(map->mlx, "AMO :", WI_WIDTH - 120, 10);
+	map->animation.amo_img = mlx_put_string(map->mlx, "8", WI_WIDTH - 50, 10);
 	if (map->mini_img.player->instances->x != MINI_WIDTH / 2)
 		move_img_x(map);
 	if(map->mini_img.player->instances->y != MINI_HEIGHT / 2)

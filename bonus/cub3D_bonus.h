@@ -22,6 +22,11 @@
 # define M_S 4 
 # define DG 2
 # define M_SEN 0.05
+
+# define STANDING 0
+# define RUNNING 1
+# define SHOTTING 2
+# define RELOADING 3
 typedef struct s_directions
 {
 	char				*north;
@@ -80,6 +85,17 @@ typedef struct s_ray{
 	 char	hit_line;
 }t_ray;
 
+typedef struct s_animation{
+	mlx_image_t		**standing;
+	mlx_image_t		**running;
+	mlx_image_t		**shotting;
+	mlx_image_t		**reloading;
+	mlx_image_t		*amo_img;
+	int				flag; // 0 for standing, 1 for running, 2 for shotting, 3 for RELOADING;
+	int				timer;
+	int				shott_num;
+}t_animation;
+
 typedef struct s_map
 {
 	t_directions		directions;
@@ -89,6 +105,7 @@ typedef struct s_map
 	mlx_t				*mlx;
 	t_win_img			win_img;
 	t_ray				ray;
+	t_animation			animation;
 	char				**map_content;
 	int map_max_size[2];
 	int	color_test;
@@ -160,5 +177,10 @@ void 					draw_background(mlx_image_t *img, double *height_width, double *start,
 void					caster(t_map *map);
 mlx_image_t 			*get_image(t_map *map, mlx_t *mlx, char *path);
 int						**get_2d_pixels(mlx_image_t *img);
+
+void 					animation(t_map *map);
+void					animation_init(t_map *map);
+void   					add_animation_img(t_map *map);
+void   					 draw_amo(t_map *map, int shott_num);
 
 #endif

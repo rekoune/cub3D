@@ -127,7 +127,7 @@ void caster(t_map *map)
     draw_img(map->win_img.win_img, WI_HEIGHT, WI_WIDTH, create_trgb(0,0,0,0));
     draw_img(map->mini_img.cover, MINI_HEIGHT, MINI_WIDTH, create_trgb(0,0,0,0));
     while (i <= (PLAYER_VIEW / 2))
-    {    
+    {
         raycaster(map, i, hitph, hitpv);
         i += RES;
     }
