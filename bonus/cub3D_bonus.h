@@ -13,7 +13,7 @@
 # define WI_WIDTH  1500.0
 # define MINI_HEIGHT  200
 # define MINI_WIDTH  400
-# define TAILE_SIZE 20
+# define TAILE_SIZE 32
 # define PLAYER_SIZE 4
 # define WALL_HEIGHT 32
 # define PLAYER_VIEW 60.0
@@ -27,6 +27,7 @@
 # define RUNNING 1
 # define SHOTTING 2
 # define RELOADING 3
+
 typedef struct s_directions
 {
 	char				*north;
@@ -81,6 +82,8 @@ typedef struct s_player{
 typedef struct s_ray{
 	 double	hit_x;
 	 double	hit_y;
+	 double	hit_x_dor;
+	 double hit_y_dor;
 	 int	dir;
 	 char	hit_line;
 }t_ray;
