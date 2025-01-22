@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/22 13:06:11 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:42:07 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,35 @@ void victical_hit(double *hitp, int *der, t_player player, double angel)
         hitp[0] = player.cord[0] - fabs((player.cord[1] - hitp[1]) * tan(angel)) + 0.00000001;
 }
 
+double *get_best_p(t_map *map, double *hitph, double *hitpv)
+{
+    int i;
+
+    i = 0;
+    if(hitpv[2] != -1 && (hitph[2] == -1 || distance(&hitph[2], map->player.cord) > distance(&hitpv[2],map->player.cord)))
+        i = 1;
+    if(hitpv[0] != -1 && (hitph[0] == -1 || distance(hitph, map->player.cord) > distance(hitpv,map->player.cord)))
+    {
+        map->ray.hit_line = 'v';
+        if(!i)
+        {
+            hitpv[2] = hitph[2];
+            hitpv[3] = hitph[3];
+        } 
+        return (hitpv);  
+    }
+    else
+    {
+        map->ray.hit_line = 'h';
+        if(i)
+        {
+            hitph[2] = hitpv[2];
+            hitph[3] = hitpv[3];
+        } 
+        return (hitph);
+    }
+}
+
 double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
 {
     int der[2];
@@ -57,16 +86,17 @@ double  *hitpoint(t_map *map,double angel,double *hitph,double  *hitpv)
         hitph[0] += (TAILE_SIZE * der[0]);
         hitph[1]  += fabs(yx) * der[1];
     }
-    if(hitpv[0] != -1 && (hitph[0] == -1 || distance(hitph, map->player.cord) > distance(hitpv,map->player.cord)))
-    {
-        map->ray.hit_line = 'v';
-        return (hitpv);
-    }
-    else
-    {
-        map->ray.hit_line = 'h';
-        return (hitph);
-    }
+    return (get_best_p(map, hitph, hitpv));
+    // if(hitpv[0] != -1 && (hitph[0] == -1 || distance(hitph, map->player.cord) > distance(hitpv,map->player.cord)))
+    // {
+    //     map->ray.hit_line = 'v';
+    //     return (hitpv);
+    // }
+    // else
+    // {
+    //     map->ray.hit_line = 'h';
+    //     return (hitph);
+    // }
 }
 void raycaster(t_map *map,double angleshift, double *hitph, double *hitpv)
 {
@@ -77,6 +107,8 @@ void raycaster(t_map *map,double angleshift, double *hitph, double *hitpv)
     hitp = hitpoint(map , normalize_angel(map->player.angel + angleshift), hitph, hitpv);
     map->ray.hit_x = hitp[1];
     map->ray.hit_y = hitp[0];
+    if(hitp[2] != -1)
+        printf("y = %f x = %f\n", hitp[2], hitp[3]);
     map->ray.hit_x_dor = hitp[3];
     map->ray.hit_y_dor = hitp[2];
     player[0] = map->mini_img.player->instances->y + (PLAYER_SIZE / 2);
