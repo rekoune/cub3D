@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:08:39 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/21 14:19:43 by haouky           ###   ########.fr       */
+/*   Updated: 2025/01/22 09:53:02 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@
 # define PLAYER_SIZE 4
 # define WALL_HEIGHT 25
 # define PLAYER_VIEW 60.0
-# define REC_WITH 1
-# define RES ((PLAYER_VIEW / WI_WIDTH) * REC_WITH)
-// # define RES REC_WITH
+# define REC_WITH 1.0
 # define M_S 4
 # define DG 2
 # define M_SEN 0.05
