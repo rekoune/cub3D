@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/22 13:36:15 by haouky           ###   ########.fr       */
+/*   Updated: 2025/01/23 10:47:11 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void raycaster(t_map *map,double angleshift, double *hitph, double *hitpv)
     map->ray.hit_y = hitp[0];
     if(hitp[2] != -1)
         printf("y = %f x = %f\n", hitp[2], hitp[3]);
+    else
+        printf("no door==================\n");
     player[0] = map->mini_img.player->instances->y + (PLAYER_SIZE / 2);
     player[1] = map->mini_img.player->instances->x + (PLAYER_SIZE / 2);
     xy[0] = player[0] + (hitp[0] - map->player.cord[0]);
@@ -123,6 +125,10 @@ void caster(t_map *map)
     double hitpv[4];
     double i;
     
+    hitph[2] = -1;
+    hitpv[2] = -1;
+    hitph[3] = -1;
+    hitpv[3] = -1;
     i = (PLAYER_VIEW / 2) * -1;
     draw_img(map->win_img.win_img, WI_HEIGHT, WI_WIDTH, create_trgb(0,0,0,0));
     draw_img(map->mini_img.cover, MINI_HEIGHT, MINI_WIDTH, create_trgb(0,0,0,0));
