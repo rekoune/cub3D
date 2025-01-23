@@ -62,14 +62,17 @@ typedef struct s_win_img
 {
 	mlx_image_t			*win_img;
 	mlx_image_t			*background;
+	mlx_image_t			*door_cover;
 	mlx_image_t			*north;
 	mlx_image_t			*south;
 	mlx_image_t			*west;
 	mlx_image_t			*east;
+	mlx_image_t			*door;
 	int					**px_north;
 	int					**px_south;
 	int					**px_west;
 	int					**px_east;
+	int					**px_door;
 }t_win_img;
 
 typedef struct s_player{
@@ -82,11 +85,15 @@ typedef struct s_player{
 typedef struct s_ray{
 	 double	hit_x;
 	 double	hit_y;
-	 double	hit_x_dor;
-	 double hit_y_dor;
 	 int	dir;
 	 char	hit_line;
 }t_ray;
+
+typedef struct s_door{
+	double	hit_cord[2];
+	double	door_height;
+	char	hit_line;
+}t_door;
 
 typedef struct s_animation{
 	mlx_image_t		**standing;
@@ -108,6 +115,7 @@ typedef struct s_map
 	mlx_t				*mlx;
 	t_win_img			win_img;
 	t_ray				ray;
+	t_door				door;
 	t_animation			animation;
 	char				**map_content;
 	int map_max_size[2];
