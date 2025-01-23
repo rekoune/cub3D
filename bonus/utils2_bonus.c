@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:13:37 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/21 14:06:39 by haouky           ###   ########.fr       */
+/*   Updated: 2025/01/23 10:41:31 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,5 @@ int valid_point(double *hitp, char **map, int *size)
         hitp[2] = hitp[0];
         hitp[3] = hitp[1];
     }
-    else
-        hitp[2] = -1;
     return (1);
 }
