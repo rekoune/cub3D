@@ -151,6 +151,7 @@ void initial_images(t_map *map)
 	map->mini_img.player = mlx_new_image(map->mlx, PLAYER_SIZE, PLAYER_SIZE);
 	map->mini_img.cover = mlx_new_image(map->mlx, MINI_WIDTH, MINI_HEIGHT);
 	map->win_img.win_img = mlx_new_image(map->mlx, WI_WIDTH, WI_HEIGHT);
+	map->win_img.door_cover = mlx_new_image(map->mlx, WI_WIDTH, WI_HEIGHT);
 	map->mini_img.buttom = mlx_new_image(map->mlx, MINI_WIDTH + TAILE_SIZE, TAILE_SIZE);
 	map->mini_img.right = mlx_new_image(map->mlx, TAILE_SIZE, MINI_HEIGHT + TAILE_SIZE);
 	map->win_img.background = mlx_new_image(map->mlx, WI_WIDTH, WI_HEIGHT);
@@ -158,10 +159,13 @@ void initial_images(t_map *map)
 	map->win_img.east = get_image(map, map->mlx, map->directions.east);	
 	map->win_img.west = get_image(map, map->mlx, map->directions.west);	
 	map->win_img.south = get_image(map, map->mlx, map->directions.south);
+	map->win_img.door = get_image(map, map->mlx, "textures/door.png");
 	map->win_img.px_north = get_2d_pixels(map->win_img.north);	
+	//you should free this
 	map->win_img.px_east = get_2d_pixels(map->win_img.east);	
 	map->win_img.px_south = get_2d_pixels(map->win_img.south);	
 	map->win_img.px_west = get_2d_pixels(map->win_img.west);
+	map->win_img.px_door = get_2d_pixels(map->win_img.door);
 	map->animation.shott_num = 8;
 	map->animation.flag = 0;
 	map->animation.timer = 0;	
@@ -206,6 +210,7 @@ void	draw_mini_map(mlx_t *mlx, t_map *map)
 	mlx_image_to_window(mlx, map->mini_img.buttom, 0, MINI_HEIGHT);
 	mlx_image_to_window(mlx, map->mini_img.right, MINI_WIDTH, 0);
 	mlx_image_to_window(mlx, map->win_img.win_img, 0, 0);
+	mlx_image_to_window(mlx, map->win_img.door_cover, 0, 0);
 	add_animation_img(map);
 	mlx_put_string(map->mlx, "AMO :", WI_WIDTH - 120, 10);
 	map->animation.amo_img = mlx_put_string(map->mlx, "8", WI_WIDTH - 50, 10);

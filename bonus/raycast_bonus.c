@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/23 11:19:16 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:56:33 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ double *get_best_p(t_map *map, double *hitph, double *hitpv)
     i = 0;
     if(hitpv[2] != -1 && (hitph[2] == -1 || distance(&hitph[2], map->player.cord) > distance(&hitpv[2],map->player.cord)))
         i = 1;
+    if (hitph[2] != -1)
+        map->door.hit_line = 'h';
+    if (i == 1)
+        map->door.hit_line = 'v';
     if(hitpv[0] != -1 && (hitph[0] == -1 || distance(hitph, map->player.cord) > distance(hitpv,map->player.cord)))
     {
         map->ray.hit_line = 'v';
@@ -107,18 +111,18 @@ void raycaster(t_map *map,double angleshift, double *hitph, double *hitpv)
     hitp = hitpoint(map , normalize_angel(map->player.angel + angleshift), hitph, hitpv);
     map->ray.hit_x = hitp[1];
     map->ray.hit_y = hitp[0];
-    map->ray.hit_x_dor = hitp[3];
-    map->ray.hit_y_dor = hitp[2];
-    if(hitp[2] != -1)
-        printf("y = %f x = %f\n", hitp[2], hitp[3]);
-    else
-        printf("no door==================\n");
+    map->door.hit_cord[1] = hitp[3];
+    map->door.hit_cord[0] = hitp[2];
+    // if(hitp[2] != -1)
+    //     printf("y = %f x = %f\n", hitp[2], hitp[3]);
+    // else
+    //     printf("no door==================\n");
     player[0] = map->mini_img.player->instances->y + (PLAYER_SIZE / 2);
     player[1] = map->mini_img.player->instances->x + (PLAYER_SIZE / 2);
     xy[0] = player[0] + (hitp[0] - map->player.cord[0]);
     xy[1] = player[1] + (hitp[1] - map->player.cord[1]);
     draw_line(map->mini_img.cover,player, xy,create_trgb(255,0,0,255));
-    draw_3D(map, distance(map->player.cord, hitp), map->color_test,angleshift);
+    draw_3D(map, distance(map->player.cord, hitp), map->color_test, angleshift);
 }
 
 void caster(t_map *map)
@@ -127,15 +131,16 @@ void caster(t_map *map)
     double hitpv[4];
     double i;
     
-    hitph[2] = -1;
-    hitpv[2] = -1;
-    hitph[3] = -1;
-    hitpv[3] = -1;
     i = (PLAYER_VIEW / 2) * -1;
     draw_img(map->win_img.win_img, WI_HEIGHT, WI_WIDTH, create_trgb(0,0,0,0));
+    draw_img(map->win_img.door_cover, WI_HEIGHT, WI_WIDTH, create_trgb(0,0,0,0));
     draw_img(map->mini_img.cover, MINI_HEIGHT, MINI_WIDTH, create_trgb(0,0,0,0));
     while (i <= (PLAYER_VIEW / 2))
     {
+        hitph[2] = -1;
+        hitpv[2] = -1;
+        // hitph[3] = -1;
+        // hitpv[3] = -1;
         raycaster(map, i, hitph, hitpv);
         i += RES;
     }
