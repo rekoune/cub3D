@@ -183,7 +183,17 @@ int						**get_2d_pixels(mlx_image_t *img);
 
 void 					animation(t_map *map);
 void					animation_init(t_map *map);
+void   					draw_amo(t_map *map, int shott_num);
+
+void					move_player(void *arg);
+int 					check_wall(t_map *map , double *op, int sig);
+void					animation_frames(t_map *map);
+char					*get_digit(long nb);
+
+//animation img ctl
 void   					add_animation_img(t_map *map);
-void   					 draw_amo(t_map *map, int shott_num);
+mlx_image_t 			**get_textures(t_map *map, char *path, int  size);
+void    				disable_all_images(t_map *map);
+
 
 #endif
