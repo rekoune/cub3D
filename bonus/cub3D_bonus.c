@@ -97,6 +97,10 @@ int	main(int ac, char **av)
 	// mlx_set_mouse_pos(map->mlx, (WI_WIDTH / 2), (WI_HEIGHT / 2));
 	// mlx_set_cursor_mode(map->mlx, MLX_MOUSE_DISABLED);
 	// caster(map);
+	map->door.scop = 0;
+	map->door.timer_flag = false;
+	map->door.close_door = false;
+	map->door.timer = 0;
 	mlx_loop_hook(map->mlx, &move_player, map);
 	mlx_loop(map->mlx);
 	// printf("her\n");

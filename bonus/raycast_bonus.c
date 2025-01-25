@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/23 12:56:33 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/01/23 15:09:36 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ double *get_best_p(t_map *map, double *hitph, double *hitpv)
     i = 0;
     if(hitpv[2] != -1 && (hitph[2] == -1 || distance(&hitph[2], map->player.cord) > distance(&hitpv[2],map->player.cord)))
         i = 1;
-    if (hitph[2] != -1)
-        map->door.hit_line = 'h';
+    map->door.hit_line = 'h';
     if (i == 1)
         map->door.hit_line = 'v';
     if(hitpv[0] != -1 && (hitph[0] == -1 || distance(hitph, map->player.cord) > distance(hitpv,map->player.cord)))
@@ -113,6 +112,8 @@ void raycaster(t_map *map,double angleshift, double *hitph, double *hitpv)
     map->ray.hit_y = hitp[0];
     map->door.hit_cord[1] = hitp[3];
     map->door.hit_cord[0] = hitp[2];
+    if (distance(map->player.cord, map->door.hit_cord) > distance(map->player.cord, hitp))
+         map->door.hit_cord[0] = -1;
     // if(hitp[2] != -1)
     //     printf("y = %f x = %f\n", hitp[2], hitp[3]);
     // else
