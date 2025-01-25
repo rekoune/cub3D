@@ -93,6 +93,10 @@ typedef struct s_door{
 	double	hit_cord[2];
 	double	door_height;
 	char	hit_line;
+	int		timer;
+	int		scop;
+	bool	timer_flag;
+	bool	close_door;
 }t_door;
 
 typedef struct s_animation{

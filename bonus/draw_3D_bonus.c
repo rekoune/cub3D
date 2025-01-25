@@ -100,7 +100,7 @@ mlx_image_t *get_dir_img(t_map *map, int ***img_pixels, double ray_angle)
 	return (NULL);
 }
 
-void door_texturing(t_map *map, double *top_buttom, double wall_height)
+void door_texturing(t_map *map, double *top_buttom, double wall_height, double dist_to_door)
 {
 	int	image_x;
 	int	image_y;
@@ -110,23 +110,27 @@ void door_texturing(t_map *map, double *top_buttom, double wall_height)
 
 	i = (wall_height - WI_HEIGHT) / 2;
 	if (i < 0)
-		i = 0;                                                                                                                              
+		i = 0;                                                                                                                           
 	img = map->win_img.door;
-	printf(">>> %c\n", map->door.hit_line);
 	image_x = get_x_image(map->door.hit_cord[1], map->door.hit_cord[0], map->door.hit_line) * img->width;
 	img_pixels = map->win_img.px_door;
+	
 	while(i < wall_height)
 	{
 		if (top_buttom[0] > WI_HEIGHT){
 			break;
 		}
 		image_y = i / wall_height * img->height;
-		if (top_buttom[0] >= 0 && (top_buttom[0] > MINI_HEIGHT || top_buttom[1] > MINI_WIDTH)){
-			mlx_put_pixel(map->win_img.door_cover, top_buttom[1], top_buttom[0], img_pixels[image_y][image_x]);
+		if (image_y > map->door.scop)
+			if (top_buttom[0] >= 0 && (top_buttom[0] > MINI_HEIGHT || top_buttom[1] > MINI_WIDTH)){
+					mlx_put_pixel(map->win_img.door_cover, top_buttom[1], top_buttom[0], img_pixels[image_y][image_x]);
+		// if (dist_to_door <= 100)
+		// 	mlx_put_pixel(map->win_img.door_cover, top_buttom[1], top_buttom[0], 0);
 		}
 		i++;
 		top_buttom[0]++;
 	}
+	(void)dist_to_door;
 }
 
 void texturing(t_map *map, double *top_buttom, double wall_height, double ray_angle)
@@ -180,9 +184,25 @@ void	draw_3D(t_map *map, double dis_to_wall, int color, double ray_angle)
 	{
 		dis_to_wall = distance(map->player.cord, map->door.hit_cord);
 		dis_to_wall *= cos(ray_angle * (M_PI / 180));
+		
+		if (dis_to_wall <= 80)
+			map->door.timer_flag = true;
+		if (map->door.timer_flag)
+			map->door.timer++;
+		if (map->door.timer == 100)
+		{
+			map->door.scop += map->win_img.door->height / 400;
+			map->door.timer = 0;
+		}
+		if (map->door.scop > (int)map->win_img.door->height && dis_to_wall  >= 80 * 2)
+		{
+			// printf("dist to door = %f\n", dis_to_wall);
+			map->door.scop = 0;
+			map->door.timer_flag = false;
+		}
 		map->door.door_height = ((WALL_HEIGHT / dis_to_wall) * dest);
 		start[0] = (WI_HEIGHT /  2) - (map->door.door_height / 2);
-		door_texturing(map, start, map->door.door_height);
+		door_texturing(map, start, map->door.door_height, dis_to_wall);
 	}
 	i += REC_WITH;
 	(void) color;
