@@ -98,6 +98,7 @@ int	main(int ac, char **av)
 	// mlx_set_cursor_mode(map->mlx, MLX_MOUSE_DISABLED);
 	// caster(map);
 	map->door.scop = 0;
+	map->door.scop_size = 0.5;
 	map->door.timer_flag = false;
 	map->door.close_door = false;
 	map->door.timer = 0;

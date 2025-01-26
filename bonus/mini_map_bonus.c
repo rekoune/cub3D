@@ -159,7 +159,7 @@ void initial_images(t_map *map)
 	map->win_img.east = get_image(map, map->mlx, map->directions.east);	
 	map->win_img.west = get_image(map, map->mlx, map->directions.west);	
 	map->win_img.south = get_image(map, map->mlx, map->directions.south);
-	map->win_img.door = get_image(map, map->mlx, "textures/door.png");
+	map->win_img.door = get_image(map, map->mlx, "textures/door2.png");
 	map->win_img.px_north = get_2d_pixels(map->win_img.north);	
 	//you should free this
 	map->win_img.px_east = get_2d_pixels(map->win_img.east);	
