@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:28:32 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/30 13:08:58 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:52:55 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void	is_last_line(int map_fd)
 	while (line)
 	{
 		if (!is_empty(line))
-		{
-			free(line);
 			exit(ft_write("Error: Empty line in the map content\n", 1));
-		}
 		line = get_next_line(map_fd);
 	}
 }
