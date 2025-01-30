@@ -15,6 +15,7 @@
 # define MINI_WIDTH  400
 # define TAILE_SIZE 32
 # define PLAYER_SIZE 4
+# define ESPC 12 
 # define WALL_HEIGHT 32
 # define PLAYER_VIEW 60.0
 # define REC_WITH 1

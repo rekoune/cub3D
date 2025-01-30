@@ -3,7 +3,6 @@
 void	leaks(void)
 {
 	system("leaks -q cub3D_bonus");
-	system("leaks -q cub3D_bonus");
 }
 
 void	draw_line(mlx_image_t *img, double *start, double *end, int color)
@@ -46,10 +45,15 @@ double	distance(double *start, double *end)
 
 int check_wall(t_map *map , double *op, int sig)
 {
-	if(map->map_content[(int)(map->player.cord[0] - (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1'
+	if((map->map_content[(int)(map->player.cord[0] - (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1'
 		|| map->map_content[(int)(map->player.cord[0] + (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1'
 		|| map->map_content[(int)(map->player.cord[0] - (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] - (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1'
 		|| map->map_content[(int)(map->player.cord[0] + (PLAYER_SIZE / 2) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] - (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE ] == '1')
+		||((map->map_content[(int)(map->player.cord[0] - (ESPC) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (ESPC ) + (op[0] * sig)) / TAILE_SIZE ] == 'D'
+		|| map->map_content[(int)(map->player.cord[0] + (ESPC) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] + (ESPC ) + (op[0] * sig)) / TAILE_SIZE ] == 'D'
+		|| map->map_content[(int)(map->player.cord[0] - (ESPC) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] - (ESPC ) + (op[0] * sig)) / TAILE_SIZE ] == 'D'
+		|| map->map_content[(int)(map->player.cord[0] + (ESPC) + (op[1] * sig)) / TAILE_SIZE ][(int)(map->player.cord[1] - (ESPC ) + (op[0] * sig)) / TAILE_SIZE ] == 'D') && 
+		map->door.scop < map->win_img.door->height))
 		return (0);
 	return (1);
 }
