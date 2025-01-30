@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/29 13:40:12 by arekoune          #+#    #+#             */
+/*   Updated: 2025/01/30 11:45:53 by arekoune         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -208,6 +220,12 @@ char					*get_digit(long nb);
 void   					add_animation_img(t_map *map);
 mlx_image_t 			**get_textures(t_map *map, char *path, int  size);
 void    				disable_all_images(t_map *map);
+void					door_status(t_map *map, double dest, double ray_angle, double *start);
+double 					get_x_image(double hit_x, double hit_y, char flag);
+void   	 				mv_img(mlx_image_t *img,int y , int x);
+void					find_palayer_cord(t_player *player, char **map);
+void					move_img_x(t_map *map);
+void					move_img_y(t_map *map);
 
 
 #endif

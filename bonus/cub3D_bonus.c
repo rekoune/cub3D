@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/29 13:40:04 by arekoune          #+#    #+#             */
+/*   Updated: 2025/01/30 12:33:23 by arekoune         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D_bonus.h"
 
 void	leaks(void)
 {
-	system("leaks -q cub3D_bonus");
 	system("leaks -q cub3D_bonus");
 }
 
@@ -89,6 +100,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (printf("ERROR : Invalid arguments\n"), 1);
 	map = checking_map(av[1]);
+	map->win_img.door = NULL;
 	map->mlx = mlx_init(WI_WIDTH, WI_HEIGHT, "cub3D", false);
 	draw_mini_map(map->mlx, map);
 	map->player.cord[1] = map->player.cord[1] * TAILE_SIZE + (TAILE_SIZE / 2) + (PLAYER_SIZE / 2);
@@ -98,7 +110,7 @@ int	main(int ac, char **av)
 	// mlx_set_cursor_mode(map->mlx, MLX_MOUSE_DISABLED);
 	// caster(map);
 	map->door.scop = 0;
-	map->door.scop_size = 0.3;
+	map->door.scop_size = 0.1;
 	map->door.timer_flag = false;
 	map->door.close_door = false;
 	map->door.open_door = true;
