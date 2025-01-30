@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:29:34 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/30 13:09:46 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:56:55 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_map	*get_map_info(int map_fd, t_map_lst	**map_lst)
 	line = get_next_line(map_fd);
 	while (line)
 	{
-		if (!is_empty(line))
+		if (!is_empty(line, false))
 			flag = set_map_elements(map, line, map_lst);
 		else if (flag == 1)
 			is_last_line(map_fd);
