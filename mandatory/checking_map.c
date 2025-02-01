@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:29:34 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/21 12:03:35 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/01 11:36:44 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_map	*get_map_info(int map_fd, t_map_lst	**map_lst)
 		if (!is_empty(line))
 			flag = set_map_elements(map, line, map_lst);
 		else if (flag == 1)
-			is_last_line(map_fd);
+			exit(ft_write("Error: Empty line in the map content\n", 1));
 		line = get_next_line(map_fd);
 	}
 	return (map);

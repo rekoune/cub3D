@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:28:32 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/21 11:59:25 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/01 11:37:21 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,6 @@ bool	is_last(t_map *map)
 		&& map->directions.south)
 		return (true);
 	return (false);
-}
-
-void	is_last_line(int map_fd)
-{
-	char	*line;
-
-	line = get_next_line(map_fd);
-	while (line)
-	{
-		if (!is_empty(line))
-		{
-			free(line);
-			exit(ft_write("Error: Empty line in the map content\n", 1));
-		}
-		line = get_next_line(map_fd);
-	}
 }
 
 enum e_type	get_identifier(char *identifier)
