@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:08:39 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/01 11:37:29 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:41:29 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 # define WI_HEIGHT 1000
 # define WI_WIDTH 1500.0
-# define TAILE_SIZE 20
+# define TAILE_SIZE 32
 # define PLAYER_SIZE 4
-# define WALL_HEIGHT 25
+# define WALL_HEIGHT 32
 # define PLAYER_VIEW 60.0
 # define REC_WITH 1.0
 # define M_S 4

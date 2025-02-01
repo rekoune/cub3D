@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 12:07:10 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/22 17:42:01 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:11:40 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char **av)
 {
 	t_map	*map;
 
-	// atexit(leaks);
+	atexit(leaks);
 	if (ac != 2)
 		return (printf("ERROR : Invalid arguments\n"), 1);
 	map = checking_map(av[1]);
