@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/01 11:03:51 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/01 14:08:06 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	raycaster(t_map *map, double angleshift, double *hitph, double *hitpv)
 	player[1] = map->mini_img.player->instances->x + (PLAYER_SIZE / 2);
 	xy[0] = player[0] + (hitp[0] - map->player.cord[0]);
 	xy[1] = player[1] + (hitp[1] - map->player.cord[1]);
-	draw_line(map->mini_img.cover, player, xy, create_trgb(255, 0, 0, 255));
+	// draw_line(map->mini_img.cover, player, xy, create_trgb(255, 0, 0, 255));
 	draw_3D(map, distance(map->player.cord, hitp), map->color_test, angleshift);
 }
 
