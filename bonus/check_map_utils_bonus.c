@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_utils.c                                  :+:      :+:    :+:   */
+/*   check_map_utils_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:28:32 by arekoune          #+#    #+#             */
-/*   Updated: 2024/11/03 08:26:04 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:52:55 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,6 @@ bool	is_empty(char *line)
 	return (false);
 }
 
-bool	is_last(t_map *map)
-{
-	if (map->colors.ceiling[0] != -1 && map->colors.floor[0] != -1
-		&& map->directions.east && map->directions.north && map->directions.west
-		&& map->directions.south)
-		return (true);
-	return (false);
-}
-
 void	is_last_line(int map_fd)
 {
 	char	*line;
@@ -61,10 +52,7 @@ void	is_last_line(int map_fd)
 	while (line)
 	{
 		if (!is_empty(line))
-		{
-			free(line);
 			exit(ft_write("Error: Empty line in the map content\n", 1));
-		}
 		line = get_next_line(map_fd);
 	}
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/29 13:40:12 by arekoune          #+#    #+#             */
+/*   Updated: 2025/01/30 14:51:23 by arekoune         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -187,7 +199,6 @@ void					draw_mini_map(mlx_t *mlx, t_map *map);
 void					move_imgs_inst(mlx_image_t *img, char dir, int	px_num);
 int						create_trgb(int r, int g, int b, int a);
 double					distance(double *start, double *end);
-void					draw_rectangle(mlx_image_t *img, double *start, double height ,int color);
 void					draw_3D(t_map *map, double dis_to_wall, int color, double p);
 void 					draw_img(mlx_image_t *img, int height, int width, int	color);
 void 					draw_background(mlx_image_t *img, double *height_width, double *start, int	color);
@@ -209,6 +220,12 @@ char					*get_digit(long nb);
 void   					add_animation_img(t_map *map);
 mlx_image_t 			**get_textures(t_map *map, char *path, int  size);
 void    				disable_all_images(t_map *map);
+void					door_status(t_map *map, double dest, double ray_angle, double *start);
+double 					get_x_image(double hit_x, double hit_y, char flag);
+void   	 				mv_img(mlx_image_t *img,int y , int x);
+void					find_palayer_cord(t_player *player, char **map);
+void					move_img_x(t_map *map);
+void					move_img_y(t_map *map);
 
 
 #endif
