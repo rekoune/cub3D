@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:08:39 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/22 09:53:02 by haouky           ###   ########.fr       */
+/*   Updated: 2025/01/30 12:08:54 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 # define WI_HEIGHT 1000
 # define WI_WIDTH 1500.0
-# define TAILE_SIZE 20
+# define TAILE_SIZE 32
 # define PLAYER_SIZE 4
-# define WALL_HEIGHT 25
+# define WALL_HEIGHT 32
 # define PLAYER_VIEW 60.0
 # define REC_WITH 1.0
 # define M_S 4
