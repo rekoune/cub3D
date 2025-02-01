@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:28:32 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/30 14:52:55 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:42:29 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,7 @@ bool	is_empty(char *line)
 	return (false);
 }
 
-void	is_last_line(int map_fd)
-{
-	char	*line;
-
-	line = get_next_line(map_fd);
-	while (line)
-	{
-		if (!is_empty(line))
-			exit(ft_write("Error: Empty line in the map content\n", 1));
-		line = get_next_line(map_fd);
-	}
-}
-enum e_type	get_identifier(char *identifier)
+enum e_type get_identifier(char *identifier)
 {
 	if (str_comp(identifier, "NO"))
 		return (free(identifier), NO);
