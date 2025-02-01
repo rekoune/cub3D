@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking_map_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:29:34 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/30 13:56:55 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 10:40:00 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	get_colors(t_map *map, char *info, enum e_type type)
 {
 	int		i;
 	char	**rgb;
-	
+
 	rgb = ft_split(info, ',');
 	free(info);
 	if (str_count(rgb) != 3)
@@ -33,8 +33,8 @@ void	get_colors(t_map *map, char *info, enum e_type type)
 
 bool	is_info(char *line, t_map *map)
 {
-	enum e_type type;
-	char *info;
+	enum e_type	type;
+	char		*info;
 
 	type = get_info_type(line, &info);
 	if (type == NO && map->directions.north == NULL)
@@ -45,8 +45,8 @@ bool	is_info(char *line, t_map *map)
 		map->directions.west = info;
 	else if (type == EA && map->directions.east == NULL)
 		map->directions.east = info;
-	else if ((type == F && map->colors.floor[0] == -1)
-			|| (type == C && map->colors.ceiling[0] == -1))
+	else if ((type == F && map->colors.floor[0] == -1) || (type == C
+				&& map->colors.ceiling[0] == -1))
 		get_colors(map, info, type);
 	else
 	{
@@ -65,14 +65,13 @@ int	set_map_elements(t_map *map, char *line, t_map_lst **map_lst)
 	map->win_img.px_south = NULL;
 	map->win_img.px_east = NULL;
 	map->win_img.px_west = NULL;
-	while(line[i] && line[i] == ' ')
+	while (line[i] && line[i] == ' ')
 		i++;
 	if (is_info(line, map))
 		free(line);
 	else if (line[i] == '1' && is_last(map))
 	{
-		add_back(map_lst, new_node(str_dup(line, 0, str_len(line,
-							'\n'))));
+		add_back(map_lst, new_node(str_dup(line, 0, str_len(line, '\n'))));
 		free(line);
 		return (1);
 	}
@@ -84,7 +83,7 @@ int	set_map_elements(t_map *map, char *line, t_map_lst **map_lst)
 	return (0);
 }
 
-t_map	*get_map_info(int map_fd, t_map_lst	**map_lst)
+t_map	*get_map_info(int map_fd, t_map_lst **map_lst)
 {
 	char	*line;
 	t_map	*map;
@@ -101,7 +100,7 @@ t_map	*get_map_info(int map_fd, t_map_lst	**map_lst)
 	line = get_next_line(map_fd);
 	while (line)
 	{
-		if (!is_empty(line, false))
+		if (!is_empty(line))
 			flag = set_map_elements(map, line, map_lst);
 		else if (flag == 1)
 			is_last_line(map_fd);
@@ -115,7 +114,7 @@ t_map	*checking_map(char *map_file)
 	int			map_fd;
 	t_map		*map;
 	t_map_lst	*map_lst;
-	char 	player;
+	char		player;
 
 	map_fd = check_map_file(map_file);
 	map_lst = NULL;
@@ -123,13 +122,13 @@ t_map	*checking_map(char *map_file)
 	map->map_content = getarray(map_lst);
 	player = valid_element(map->map_content);
 	map_validation(map->map_content, map_size(map_lst), player);
-	if(player == 'N')
+	if (player == 'N')
 		map->player.angel = 270;
-	else if(player == 'S')
+	else if (player == 'S')
 		map->player.angel = 90;
-	if(player == 'E')
+	if (player == 'E')
 		map->player.angel = 0;
-	if(player == 'W')
+	if (player == 'W')
 		map->player.angel = 180;
 	free_list(map_lst);
 	close(map_fd);

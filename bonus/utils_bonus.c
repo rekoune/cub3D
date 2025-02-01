@@ -103,7 +103,7 @@ long	ft_atoi(char *str)
 	nb = 0;
 	while (str[i] == ' ')
 		i++;
-	if(str[i] == '\0')
+	if (str[i] == '\0')
 		exit(ft_write("Error: Invalid Color argument\n", 1));
 	while (str[i])
 	{
@@ -111,11 +111,11 @@ long	ft_atoi(char *str)
 			exit(ft_write("Error: Invalid Color argument\n", 1));
 		nb = nb * 10;
 		nb = nb + (str[i++] - 48);
-		if(str[i] == ' ')
-		{	
-			while(str[i] == ' ')
+		if (str[i] == ' ')
+		{
+			while (str[i] == ' ')
 				i++;
-			if(str[i] != '\0')
+			if (str[i] != '\0')
 				exit(ft_write("Error: Invalid Color argument\n", 1));
 		}
 	}
