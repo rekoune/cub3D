@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:12 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 11:50:02 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/01 13:36:09 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,12 +203,10 @@ void					draw_mini_map(mlx_t *mlx, t_map *map);
 void					move_imgs_inst(mlx_image_t *img, char dir, int px_num);
 int						create_trgb(int r, int g, int b, int a);
 double					distance(double *start, double *end);
-void					draw_3D(t_map *map, double dis_to_wall, int color,
+void					draw_3d(t_map *map, double dis_to_wall, int color,
 							double p);
 void					draw_img(mlx_image_t *img, int height, int width,
 							int color);
-void					draw_background(mlx_image_t *img, double *height_width,
-							double *start, int color);
 //raycast
 void					caster(t_map *map);
 mlx_image_t				*get_image(t_map *map, mlx_t *mlx, char *path);

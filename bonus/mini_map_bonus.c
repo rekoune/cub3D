@@ -6,25 +6,36 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:33 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/30 14:50:45 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:35:46 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-void	draw_background(mlx_image_t *img, double *height_width, double *start,
-		int color)
+void	draw_background(t_map *map)
 {
-	while (start[0] < height_width[0])
+	int	floor_color;
+	int	ceil_color;
+	int	i;
+	int	j;
+
+	ceil_color = create_trgb(map->colors.ceiling[0], map->colors.ceiling[1],
+			map->colors.ceiling[2], 255);
+	floor_color = create_trgb(map->colors.floor[0], map->colors.floor[1],
+			map->colors.floor[2], 255);
+	j = 0;
+	while (j < (int)map->win_img.background->height)
 	{
-		start[1] = 0;
-		while (start[1] < height_width[1])
+		i = 0;
+		if (j >= WI_HEIGHT / 2)
+			ceil_color = floor_color;
+		while (i < (int)map->win_img.background->width)
 		{
-			if (start[0] > MINI_HEIGHT || start[1] > MINI_WIDTH)
-				mlx_put_pixel(img, start[1], start[0], color);
-			start[1]++;
+			if (j > MINI_HEIGHT || i > MINI_WIDTH)
+				mlx_put_pixel(map->win_img.background, i, j, ceil_color);
+			i++;
 		}
-		start[0]++;
+		j++;
 	}
 }
 
@@ -33,29 +44,28 @@ void	draw_elements(mlx_t *mlx, t_map *map)
 	int	i;
 	int	j;
 
-	j = 0;
-	while (map->map_content[j])
+	j = -1;
+	while (map->map_content[++j])
 	{
 		i = 0;
 		while (map->map_content[j][i])
 		{
 			if (map->map_content[j][i] == '1')
 				mlx_image_to_window(mlx, map->mini_img.wall, i * TAILE_SIZE, j
-						* TAILE_SIZE);
+					* TAILE_SIZE);
 			else if (map->map_content[j][i] == 'D')
 				mlx_image_to_window(mlx, map->mini_img.door, (i * TAILE_SIZE)
-						+ 2, (j * TAILE_SIZE) + 2);
+					+ 2, (j * TAILE_SIZE) + 2);
 			else if (map->map_content[j][i] != '1'
 					&& map->map_content[j][i] != ' ')
 				mlx_image_to_window(mlx, map->mini_img.flor, i * TAILE_SIZE, j
-						* TAILE_SIZE);
+					* TAILE_SIZE);
 			i++;
 		}
-		j++;
 	}
 	mlx_image_to_window(mlx, map->mini_img.player, map->player.cord[1]
-			* TAILE_SIZE + (TAILE_SIZE / 2), map->player.cord[0] * TAILE_SIZE
-			+ (TAILE_SIZE / 2));
+		* TAILE_SIZE + (TAILE_SIZE / 2), map->player.cord[0] * TAILE_SIZE
+		+ (TAILE_SIZE / 2));
 }
 
 void	initial_images(t_map *map)
@@ -83,49 +93,32 @@ void	initial_images(t_map *map)
 	map->win_img.px_south = get_2d_pixels(map->win_img.south);
 	map->win_img.px_west = get_2d_pixels(map->win_img.west);
 	map->win_img.px_door = get_2d_pixels(map->win_img.door);
-	map->animation.shott_num = 8;
-	map->animation.flag = 0;
-	map->animation.timer = 0;
-	map->animation.amo_img = NULL;
 }
 
 void	drawing_images(t_map *map)
 {
-	double	start[2];
-	double	height[2];
-
-	start[0] = 0;
-	start[1] = 0;
-	height[0] = WI_HEIGHT / 2;
-	height[1] = WI_WIDTH;
-	draw_background(map->win_img.background, height, start,
-			create_trgb(map->colors.ceiling[0], map->colors.ceiling[1],
-				map->colors.ceiling[2], 255));
-	start[1] = WI_HEIGHT / 2;
-	height[0] = WI_HEIGHT;
-	draw_background(map->win_img.background, height, start,
-			create_trgb(map->colors.floor[0], map->colors.floor[1],
-				map->colors.floor[2], 255));
+	draw_background(map);
 	draw_img(map->mini_img.flor, TAILE_SIZE, TAILE_SIZE, create_trgb(255, 255,
-				255, 255));
+			255, 255));
 	draw_img(map->mini_img.door, TAILE_SIZE - 4, TAILE_SIZE - 4,
-			create_trgb(139, 69, 19, 255));
+		create_trgb(139, 69, 19, 255));
 	draw_img(map->mini_img.wall, TAILE_SIZE, TAILE_SIZE, create_trgb(0, 0, 0,
-				255));
+			255));
 	draw_img(map->mini_img.player, PLAYER_SIZE, PLAYER_SIZE, create_trgb(0, 0,
-				255, 255));
+			255, 255));
 	draw_img(map->mini_img.buttom, TAILE_SIZE, MINI_WIDTH + TAILE_SIZE,
-			create_trgb(map->colors.ceiling[0], map->colors.ceiling[1],
-				map->colors.ceiling[2], 255));
+		create_trgb(map->colors.ceiling[0], map->colors.ceiling[1],
+			map->colors.ceiling[2], 255));
 	draw_img(map->mini_img.right, MINI_HEIGHT, TAILE_SIZE,
-			create_trgb(map->colors.ceiling[0], map->colors.ceiling[1],
-				map->colors.ceiling[2], 255));
+		create_trgb(map->colors.ceiling[0], map->colors.ceiling[1],
+			map->colors.ceiling[2], 255));
 }
 
 void	draw_mini_map(mlx_t *mlx, t_map *map)
 {
 	map->animation = (t_animation){.reloading = NULL, .running = NULL,
-		.shotting = NULL, .standing = NULL};
+		.shotting = NULL, .standing = NULL, .shott_num = 8, 
+		.flag = 10, .timer = 0, .amo_img = NULL};
 	initial_images(map);
 	animation_init(map);
 	drawing_images(map);

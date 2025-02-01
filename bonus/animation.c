@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:39:52 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/30 12:45:36 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:13:01 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ void	animation_init(t_map *map)
 			"bonus/animation_textures/standing/", 17);
 }
 
-void	animate_it(t_map *map, mlx_image_t **images, int timer, int num_frames,
+void	animate_it(t_map *map, mlx_image_t **images, int num_frames,
 		int frame_time)
 {
 	(void)num_frames;
-	if (timer % frame_time == 0)
+	if (map->animation.timer % frame_time == 0)
 	{
 		disable_all_images(map);
-		if (timer == frame_time * num_frames)
+		if (map->animation.timer == frame_time * num_frames)
 			images[0]->enabled = true;
 		else
-			images[timer / frame_time]->enabled = true;
+			images[map->animation.timer / frame_time]->enabled = true;
 	}
 }
 
@@ -74,7 +74,7 @@ void	draw_amo(t_map *map, int shott_num)
 	str = get_digit(shott_num);
 	if (map->animation.amo_img != NULL)
 		draw_img(map->animation.amo_img, map->animation.amo_img->height,
-				map->animation.amo_img->width, 0);
+			map->animation.amo_img->width, 0);
 	map->animation.amo_img = mlx_put_string(map->mlx, str, WI_WIDTH - 50, 10);
 	free(str);
 }
@@ -93,17 +93,13 @@ void	animation(t_map *map)
 		map->animation.timer = 0;
 	}
 	if (map->animation.flag == STANDING)
-		animate_it(map, map->animation.standing, map->animation.timer,
-				num_frames = 17, frame_time);
+		animate_it(map, map->animation.standing, num_frames = 17, frame_time);
 	else if (map->animation.flag == RUNNING)
-		animate_it(map, map->animation.running, map->animation.timer,
-				num_frames = 5, 4);
+		animate_it(map, map->animation.running, num_frames = 5, 4);
 	else if (map->animation.flag == SHOTTING)
-		animate_it(map, map->animation.shotting, map->animation.timer,
-				num_frames = 9, frame_time);
+		animate_it(map, map->animation.shotting, num_frames = 9, frame_time);
 	else if (map->animation.flag == RELOADING)
-		animate_it(map, map->animation.reloading, map->animation.timer,
-				num_frames = 24, frame_time);
+		animate_it(map, map->animation.reloading, num_frames = 24, frame_time);
 	if (map->animation.timer == num_frames * frame_time)
 		map->animation.timer = -1;
 	map->animation.timer++;

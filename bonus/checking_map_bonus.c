@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:29:34 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 11:41:41 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:14:57 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ bool	is_info(char *line, t_map *map)
 	else if (type == EA && map->directions.east == NULL)
 		map->directions.east = info;
 	else if ((type == F && map->colors.floor[0] == -1) || (type == C
-				&& map->colors.ceiling[0] == -1))
+			&& map->colors.ceiling[0] == -1))
 		get_colors(map, info, type);
 	else
 	{

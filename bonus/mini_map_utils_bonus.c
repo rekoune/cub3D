@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_map_utils_bonus.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/01 13:37:34 by arekoune          #+#    #+#             */
+/*   Updated: 2025/02/01 13:38:00 by arekoune         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D_bonus.h"
 
 void	move_imgs_inst(mlx_image_t *img, char dir, int px_num)
@@ -29,22 +41,22 @@ void	move_img_x(t_map *map)
 	if (map->mini_img.player->instances->x > MINI_WIDTH / 2)
 	{
 		move_imgs_inst(map->mini_img.flor, 'l',
-				map->mini_img.player->instances->x - (MINI_WIDTH / 2));
+			map->mini_img.player->instances->x - (MINI_WIDTH / 2));
 		move_imgs_inst(map->mini_img.wall, 'l',
-				map->mini_img.player->instances->x - (MINI_WIDTH / 2));
+			map->mini_img.player->instances->x - (MINI_WIDTH / 2));
 		move_imgs_inst(map->mini_img.door, 'l',
-				map->mini_img.player->instances->x - (MINI_WIDTH / 2));
+			map->mini_img.player->instances->x - (MINI_WIDTH / 2));
 		map->mini_img.player->instances->x -= map->mini_img.player->instances->x
 			- (MINI_WIDTH / 2);
 	}
 	else
 	{
 		move_imgs_inst(map->mini_img.flor, 'r', (MINI_WIDTH / 2)
-				- map->mini_img.player->instances->x);
+			- map->mini_img.player->instances->x);
 		move_imgs_inst(map->mini_img.wall, 'r', (MINI_WIDTH / 2)
-				- map->mini_img.player->instances->x);
+			- map->mini_img.player->instances->x);
 		move_imgs_inst(map->mini_img.door, 'r', (MINI_WIDTH / 2)
-				- map->mini_img.player->instances->x);
+			- map->mini_img.player->instances->x);
 		map->mini_img.player->instances->x += (MINI_WIDTH / 2)
 			- map->mini_img.player->instances->x;
 	}
@@ -55,22 +67,22 @@ void	move_img_y(t_map *map)
 	if (map->mini_img.player->instances->y > MINI_HEIGHT / 2)
 	{
 		move_imgs_inst(map->mini_img.flor, 'u',
-				map->mini_img.player->instances->y - (MINI_HEIGHT / 2));
+			map->mini_img.player->instances->y - (MINI_HEIGHT / 2));
 		move_imgs_inst(map->mini_img.wall, 'u',
-				map->mini_img.player->instances->y - (MINI_HEIGHT / 2));
+			map->mini_img.player->instances->y - (MINI_HEIGHT / 2));
 		move_imgs_inst(map->mini_img.door, 'u',
-				map->mini_img.player->instances->y - (MINI_HEIGHT / 2));
+			map->mini_img.player->instances->y - (MINI_HEIGHT / 2));
 		map->mini_img.player->instances->y -= map->mini_img.player->instances->y
 			- (MINI_HEIGHT / 2);
 	}
 	else
 	{
 		move_imgs_inst(map->mini_img.flor, 'd', (MINI_HEIGHT / 2)
-				- map->mini_img.player->instances->y);
+			- map->mini_img.player->instances->y);
 		move_imgs_inst(map->mini_img.wall, 'd', (MINI_HEIGHT / 2)
-				- map->mini_img.player->instances->y);
+			- map->mini_img.player->instances->y);
 		move_imgs_inst(map->mini_img.door, 'd', (MINI_HEIGHT / 2)
-				- map->mini_img.player->instances->y);
+			- map->mini_img.player->instances->y);
 		map->mini_img.player->instances->y += (MINI_HEIGHT / 2)
 			- map->mini_img.player->instances->y;
 	}

@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:39:40 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/30 11:39:47 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:47:48 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double	get_x_image(double hit_x, double hit_y, char flag)
 	return (image_x);
 }
 
-void	door_texturing(t_map *map, double *top_buttom, double wall_height)
+void	door_texturing(t_map *map, double *top_buttom, double door_height)
 {
 	int			image_x;
 	int			image_y;
@@ -33,24 +33,22 @@ void	door_texturing(t_map *map, double *top_buttom, double wall_height)
 	mlx_image_t	*img;
 	int			i;
 
-	i = (wall_height - WI_HEIGHT) / 2;
+	i = (door_height - WI_HEIGHT) / 2;
 	if (i < 0)
 		i = 0;
 	img = map->win_img.door;
 	image_x = get_x_image(map->door.hit_cord[1], map->door.hit_cord[0],
 			map->door.hit_line) * img->width;
 	img_pixels = map->win_img.px_door;
-	while (i < (wall_height - (map->door.scop * map->door.door_height) / 100))
+	while (i < (door_height - (map->door.scop * map->door.door_height) / 100))
 	{
 		if (top_buttom[0] > WI_HEIGHT)
 			break ;
-		image_y = i / wall_height * img->height;
+		image_y = i / door_height * img->height;
 		if (top_buttom[0] >= 0 && (top_buttom[0] > MINI_HEIGHT
 				|| top_buttom[1] > MINI_WIDTH) && map->door.hit_cord[0] != -1)
-		{
 			mlx_put_pixel(map->win_img.door_cover, top_buttom[1], top_buttom[0],
-					img_pixels[image_y][image_x]);
-		}
+				img_pixels[image_y][image_x]);
 		i++;
 		top_buttom[0]++;
 	}
@@ -89,8 +87,8 @@ void	door_status(t_map *map, double dest, double ray_angle, double *start)
 		map->door.open_door = false;
 	}
 	check_door_timer(map);
-	start[0] = ((WI_HEIGHT / 2) - (map->door.door_height / 2)) +
-		(map->door.scop * map->door.door_height) / 100;
+	start[0] = ((WI_HEIGHT / 2) - (map->door.door_height / 2))
+		+ (map->door.scop * map->door.door_height) / 100;
 	if (start[0] < 0)
 		start[0] = 0;
 	door_texturing(map, start, map->door.door_height);
@@ -98,8 +96,8 @@ void	door_status(t_map *map, double dest, double ray_angle, double *start)
 
 void	draw_img(mlx_image_t *img, int height, int width, int color)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	j = 0;
 	while (j < height)
