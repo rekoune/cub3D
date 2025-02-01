@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:28 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/29 13:40:29 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:54:18 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	add_back(t_map_lst **head, t_map_lst *new_node)
 
 int	ft_lstsize(t_map_lst *lst)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (lst)
@@ -47,5 +47,25 @@ int	ft_lstsize(t_map_lst *lst)
 		lst = lst->next;
 		i++;
 	}
+	return (i);
+}
+
+int	str_count(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+		i++;
+	return (i);
+}
+
+int	str_len(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i] && str[i] != c)
+		i++;
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:51 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/29 13:40:52 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 14:05:08 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,6 @@ bool	str_comp(char *s1, char *s2)
 	if (s1[i] != s2[i])
 		return (false);
 	return (true);
-}
-
-int	str_len(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i] && str[i] != c)
-		i++;
-	return (i);
 }
 
 int	ft_write(char *str, int rtrn)
@@ -80,18 +70,7 @@ char	*str_join(char *s1, char *s2)
 	while (s2 && s2[j])
 		str[i++] = s2[j++];
 	str[i] = '\0';
-	// free(s1);
 	return (str);
-}
-
-int	str_count(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
 }
 
 long	ft_atoi(char *str)
@@ -111,12 +90,11 @@ long	ft_atoi(char *str)
 			exit(ft_write("Error: Invalid Color argument\n", 1));
 		nb = nb * 10;
 		nb = nb + (str[i++] - 48);
-		if (str[i] == ' ')
+		while (str[i] == ' ')
 		{
-			while (str[i] == ' ')
-				i++;
-			if (str[i] != '\0')
+			if (str[i + 1] != '\0' && str[i + 1] != ' ')
 				exit(ft_write("Error: Invalid Color argument\n", 1));
+			i++;
 		}
 	}
 	if (nb > 255)

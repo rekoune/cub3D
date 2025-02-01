@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:28:32 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 11:42:29 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:14:25 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	is_empty(char *line)
 	return (false);
 }
 
-enum e_type get_identifier(char *identifier)
+enum e_type	get_identifier(char *identifier)
 {
 	if (str_comp(identifier, "NO"))
 		return (free(identifier), NO);

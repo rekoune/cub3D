@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:39:42 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/30 12:28:44 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:12:52 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ mlx_image_t	*get_image(t_map *map, mlx_t *mlx, char *path)
 	mlx_delete_texture(texture);
 	return (img);
 }
+
 int	**get_2d_pixels(mlx_image_t *img)
 {
 	int	**pixels_2d;
@@ -44,9 +45,7 @@ int	**get_2d_pixels(mlx_image_t *img)
 	i = 0;
 	count = 0;
 	if (!img)
-	{
 		return (NULL);
-	}
 	pixels_2d = malloc(sizeof(int *) * img->height);
 	while (i < (int)img->height)
 	{
@@ -72,19 +71,19 @@ mlx_image_t	*get_dir_img(t_map *map, int ***img_pixels, double ray_angle)
 		return (map->win_img.north);
 	}
 	else if (map->ray.hit_line == 'h' && sin((ray_angle + map->player.angel)
-				* (M_PI / 180)) > 0)
+			* (M_PI / 180)) > 0)
 	{
 		*img_pixels = map->win_img.px_south;
 		return (map->win_img.south);
 	}
 	else if (map->ray.hit_line == 'v' && cos((ray_angle + map->player.angel)
-				* (M_PI / 180)) > 0)
+			* (M_PI / 180)) > 0)
 	{
 		*img_pixels = map->win_img.px_east;
 		return (map->win_img.east);
 	}
 	else if (map->ray.hit_line == 'v' && cos((ray_angle + map->player.angel)
-				* (M_PI / 180)) < 0)
+			* (M_PI / 180)) < 0)
 	{
 		*img_pixels = map->win_img.px_west;
 		return (map->win_img.west);
@@ -105,28 +104,24 @@ void	texturing(t_map *map, double *top_buttom, double wall_height,
 	if (i < 0)
 		i = 0;
 	img = get_dir_img(map, &img_pixels, ray_angle);
-	if (img)
+	image_x = get_x_image(map->ray.hit_x, map->ray.hit_y, map->ray.hit_line)
+		* img->width;
+	while (i < wall_height)
 	{
-		image_x = get_x_image(map->ray.hit_x, map->ray.hit_y, map->ray.hit_line)
-			* img->width;
-		while (i < wall_height)
-		{
-			if (top_buttom[0] > WI_HEIGHT)
-				break ;
-			image_y = i / wall_height * img->height;
-			if (top_buttom[0] >= 0 && (top_buttom[0] > MINI_HEIGHT
-					|| top_buttom[1] > MINI_WIDTH))
-			{
-				mlx_put_pixel(map->win_img.win_img, top_buttom[1],
-						top_buttom[0], img_pixels[image_y][image_x]);
-			}
-			i++;
-			top_buttom[0]++;
-		}
+		if (top_buttom[0] > WI_HEIGHT)
+			break ;
+		image_y = i / wall_height * img->height;
+		if (top_buttom[0] >= 0 && (top_buttom[0] > MINI_HEIGHT
+				|| top_buttom[1] > MINI_WIDTH) && 
+			(image_y <= (int)img->height && image_x <= (int)img->width))
+			mlx_put_pixel(map->win_img.win_img, top_buttom[1],
+				top_buttom[0], img_pixels[image_y][image_x]);
+		i++;
+		top_buttom[0]++;
 	}
 }
 
-void	draw_3D(t_map *map, double dis_to_wall, int color, double ray_angle)
+void	draw_3d(t_map *map, double dis_to_wall, int color, double ray_angle)
 {
 	double			wall_heigth;
 	double			dest;
