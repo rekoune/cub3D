@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_content_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 07:45:44 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/20 12:53:43 by haouky           ###   ########.fr       */
+/*   Updated: 2025/01/29 14:07:30 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,22 @@ void	map_validation(char **map, int size, char p)
 				|| map[i][j - 1] == ' ' || map[i][j + 1] == ' '))
 				exit(ft_write("Error: Map is not properly enclosed by walls\n",
 						1));
-			if(map[i][j] == 'D' && !(((map[i - 1][j] == '1' && map[i + 1][j] == '1') && (map[i][j - 1] != '1' && map[i][j + 1] != '1'))
-				|| ((map[i - 1][j] != '1' && map[i + 1][j] != '1') && (map[i][j - 1] == '1' && map[i][j + 1] == '1'))))
-				exit(ft_write("Error: Door is not properly placed\n",
-						1));
+			if(map[i][j] == 'D' && !(((map[i - 1][j] == '1' && map[i + 1][j] == '1') && 
+							(map[i][j - 1] != '1' && map[i][j + 1] != '1'))||
+							((map[i - 1][j] != '1' && map[i + 1][j] != '1') && 
+								(map[i][j - 1] == '1' && map[i][j + 1] == '1'))))
+				exit(ft_write("Error: Door is not properly placed\n",1));
 			j++;
 		}
 		i++;
 	}
+}
+
+bool	is_last(t_map *map)
+{
+	if (map->colors.ceiling[0] != -1 && map->colors.floor[0] != -1
+		&& map->directions.east && map->directions.north && map->directions.west
+		&& map->directions.south)
+		return (true);
+	return (false);
 }

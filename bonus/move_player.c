@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:38:17 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/23 10:39:53 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:55:00 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	player_movement(t_map *map)
 {
 	if(mlx_is_key_down(map->mlx, MLX_KEY_DOWN) || mlx_is_key_down(map->mlx, MLX_KEY_S))
 		move_p(map, -1,map->player.angel);
-	 if(mlx_is_key_down(map->mlx, MLX_KEY_UP) || mlx_is_key_down(map->mlx, MLX_KEY_W))
+	 if((mlx_is_key_down(map->mlx, MLX_KEY_UP) || mlx_is_key_down(map->mlx, MLX_KEY_W)))
 	{
 		if (map->animation.timer == 0 || map->animation.flag == STANDING)
 			map->animation.flag = RUNNING;
