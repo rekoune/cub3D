@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_content_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 07:45:44 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/29 14:07:30 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:43:30 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,34 +43,6 @@ int	map_size(t_map_lst *map)
 	return (i);
 }
 
-char	valid_element(char **map)
-{
-	char	p;
-	int		i;
-	int		j;
-
-	i = 0;
-	p = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if ((map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E'
-					|| map[i][j] == 'S') && !p)
-				p = map[i][j];
-			else if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' '
-					&& map[i][j] != 'D')
-				exit(ft_write("Error: Invalid element\n", 1));
-			j++;
-		}
-		i++;
-	}
-	if (!p)
-		exit(ft_write("Error: Invalid element\n", 1));
-	return (p);
-}
-
 void	map_validation(char **map, int size, char p)
 {
 	int	i;
@@ -82,13 +54,12 @@ void	map_validation(char **map, int size, char p)
 		j = 0;
 		while (map[i][j])
 		{
-			if ((map[i][j] == '0' || map[i][j] == p || map[i][j] == 'D')
-				&& (i == 0 || i == size - 1 || j >= strr_len(map[i - 1])
-					|| j >= strr_len(map[i + 1]) || map[i - 1][j] == ' '
-					|| map[i + 1][j] == ' ' || map[i][j - 1] == ' ' || map[i][j
-					+ 1] == ' '))
+			if ((map[i][j] == '0' || map[i][j] == p || map[i][j] == 'D') &&
+			(i == 0 || i == size - 1 || j >= strr_len(map[i - 1]) || j >= 
+			strr_len(map[i + 1]) || map[i - 1][j] == ' ' || map[i + 1][j] == 
+			' ' || map[i][j - 1] == ' ' || map[i][j + 1] == ' '))
 				exit(ft_write("Error: Map is not properly enclosed by walls\n",
-								1));
+						1));
 			if (map[i][j] == 'D' && !(((map[i - 1][j] == '1' && map[i
 							+ 1][j] == '1') && (map[i][j - 1] != '1' && map[i][j
 							+ 1] != '1')) || ((map[i - 1][j] != '1' && map[i

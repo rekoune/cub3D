@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:13:37 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/25 10:09:00 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:33:51 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
+
+char	valid_element(char **map)
+{
+	char	p;
+	int		i;
+	int		j;
+
+	i = 0;
+	p = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if ((map[i][j] == 'N' || map[i][j] == 'W' || map[i][j] == 'E'
+					|| map[i][j] == 'S') && !p)
+				p = map[i][j];
+			else if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' '
+					&& map[i][j] != 'D')
+				exit(ft_write("Error: Invalid element\n", 1));
+			j++;
+		}
+		i++;
+	}
+	if (!p)
+		exit(ft_write("Error: Invalid element\n", 1));
+	return (p);
+}
 
 void	map_max_sz(char **map, int *size)
 {
