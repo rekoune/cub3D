@@ -1,6 +1,6 @@
 CC = cc
-FLAGS = -Wall -Werror -Wextra -O3
- SANITAZE = -g -fsanitize=address
+FLAGS = -Wall -Werror -Wextra #-O3
+SANITAZE = #-g -fsanitize=address
 
 SRC = mandatory/cub3D.c mandatory/utils3.c mandatory/move_p.c mandatory/utils2.c mandatory/raycast.c\
  mandatory/checking_map.c mandatory/utils.c mandatory/get_next_line.c mandatory/get_next_line_utils.c\
@@ -11,7 +11,7 @@ BOSRC = bonus/cub3D_bonus.c bonus/utils2_bonus.c bonus/raycast_bonus.c bonus/che
 bonus/utils_bonus.c bonus/get_next_line_bonus.c bonus/get_next_line_utils_bonus.c bonus/ft_split_bonus.c \
 bonus/linked_list_bonus.c bonus/check_map_utils_bonus.c bonus/cleaning_bonus.c bonus/check_map_content_bonus.c\
 bonus/mini_map_bonus.c bonus/draw_3D_bonus.c bonus/animation.c bonus/move_player.c bonus/animation_img_ctl.c\
-bonus/rendering_doors.c bonus/mini_map_utils_bonus.c
+bonus/rendering_doors.c bonus/mini_map_utils_bonus.c bonus/raycast_help.c
 
 OBJ = $(SRC:.c=.o)
 BOBJ = $(BOSRC:.c=.o)
