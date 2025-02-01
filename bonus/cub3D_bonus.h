@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:12 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 11:12:01 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/01 11:30:58 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,8 +223,10 @@ void					move_player(void *arg);
 int						check_wall(t_map *map, double *op, int sig);
 void					animation_frames(t_map *map);
 char					*get_digit(long nb);
-void	horizontal_hit(double *hitp, int *der, t_player player, double angel);
-void	victical_hit(double *hitp, int *der, t_player player, double angel);
+void					horizontal_hit(double *hitp,
+							int *der, t_player player, double angel);
+void					victical_hit(double *hitp,
+							int *der, t_player player, double angel);
 
 //animation img ctl
 void					add_animation_img(t_map *map);
