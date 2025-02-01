@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:12 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 11:30:58 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/01 11:50:02 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,6 @@ int						ft_lstsize(t_map_lst *lst);
 int						check_map_file(char *str);
 bool					is_empty(char *str);
 bool					is_last(t_map *map);
-void					is_last_line(int map_fd);
 enum e_type				get_info_type(char *line, char **info);
 
 //check_map_content.c

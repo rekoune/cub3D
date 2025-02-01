@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:08:39 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/30 12:08:54 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/01 11:41:29 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ int						ft_lstsize(t_map_lst *lst);
 int						check_map_file(char *str);
 bool					is_empty(char *str);
 bool					is_last(t_map *map);
-void					is_last_line(int map_fd);
 enum e_type				get_info_type(char *line, char **info);
 enum e_type				get_identifier(char *identifier);
 
