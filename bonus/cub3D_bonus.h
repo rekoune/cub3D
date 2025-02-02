@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:12 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 11:50:02 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/02 11:04:01 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_player
 	double				angel;
 	double				next_p_cord[2];
 	int					mouse;
+	int					mouseactive;
 }						t_player;
 
 typedef struct s_ray

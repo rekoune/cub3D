@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:04 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 12:08:02 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/02 11:03:34 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,7 @@ int	main(int ac, char **av)
 	map->player.cord[0] = map->player.cord[0] * TAILE_SIZE + (TAILE_SIZE / 2)
 		+ (PLAYER_SIZE / 2);
 	map_max_sz(map->map_content, map->map_max_size);
-	// mlx_set_mouse_pos(map->mlx, (WI_WIDTH / 2), (WI_HEIGHT / 2));
-	// mlx_set_cursor_mode(map->mlx, MLX_MOUSE_DISABLED);
-	// caster(map);
+	map->player.mouseactive = 1;
 	map->door.scop = 0;
 	map->door.scop_size = 0.1;
 	map->door.timer_flag = false;
