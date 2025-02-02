@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:12 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 13:36:09 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:54:36 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,12 @@ typedef struct s_animation
 	int					shott_num;
 }						t_animation;
 
+typedef struct s_control{
+	mlx_image_t			*img;
+	bool				enable;
+	int					timer;
+}	t_control;
+
 typedef struct s_map
 {
 	t_directions		directions;
@@ -140,6 +146,7 @@ typedef struct s_map
 	t_ray				ray;
 	t_door				door;
 	t_animation			animation;
+	t_control			control;
 	char				**map_content;
 	int					map_max_size[2];
 	int					color_test;
@@ -236,5 +243,6 @@ void					mv_img(mlx_image_t *img, int y, int x);
 void					find_palayer_cord(t_player *player, char **map);
 void					move_img_x(t_map *map);
 void					move_img_y(t_map *map);
+void					control_page(t_map *map);
 
 #endif

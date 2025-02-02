@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:38:17 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 11:48:22 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/02 14:55:21 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,20 @@ void	move_p(t_map *map, int sig, double angel)
 			round(map->player.next_p_cord[0]) * sig);
 		mv_img(map->mini_img.door, round(map->player.next_p_cord[1]) * sig,
 			round(map->player.next_p_cord[0]) * sig);
+	}
+}
+
+void	control_page(t_map *map)
+{
+	if (map->control.enable)
+	{
+		map->control.enable = false;
+		map->control.img->enabled = true;
+	}
+	else
+	{
+		map->control.enable = true;
+		map->control.img->enabled = false;
 	}
 }
 

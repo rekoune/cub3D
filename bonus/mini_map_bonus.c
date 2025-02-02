@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:33 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 13:35:46 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/02 13:50:19 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	initial_images(t_map *map)
 	map->win_img.west = get_image(map, map->mlx, map->directions.west);
 	map->win_img.south = get_image(map, map->mlx, map->directions.south);
 	map->win_img.door = get_image(map, map->mlx, "textures/door.png");
+	map->control.img = get_image(map, map->mlx, "textures/control_page.png");
 	map->win_img.px_north = get_2d_pixels(map->win_img.north);
 	map->win_img.px_east = get_2d_pixels(map->win_img.east);
 	map->win_img.px_south = get_2d_pixels(map->win_img.south);
@@ -119,6 +120,7 @@ void	draw_mini_map(mlx_t *mlx, t_map *map)
 	map->animation = (t_animation){.reloading = NULL, .running = NULL,
 		.shotting = NULL, .standing = NULL, .shott_num = 8, 
 		.flag = 10, .timer = 0, .amo_img = NULL};
+	map->control.enable = true;
 	initial_images(map);
 	animation_init(map);
 	drawing_images(map);
@@ -137,4 +139,5 @@ void	draw_mini_map(mlx_t *mlx, t_map *map)
 		move_img_x(map);
 	if (map->mini_img.player->instances->y != MINI_HEIGHT / 2)
 		move_img_y(map);
+	mlx_image_to_window(mlx, map->control.img, 0, 0);
 }

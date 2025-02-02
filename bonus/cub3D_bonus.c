@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:04 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 11:22:32 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/02 14:57:34 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,43 +63,11 @@ double	distance(double *start, double *end)
 	return (distance);
 }
 
-int	check_wall(t_map *map, double *op, int sig)
-{
-	printf("*%f*\n",map->door.scop);
-	if ((map->map_content[(int)(map->player.cord[0] - (PLAYER_SIZE / 2) + (op[1]
-					* sig)) / TAILE_SIZE][(int)(map->player.cord[1]
-				+ (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE] == '1'
-			|| map->map_content[(int)(map->player.cord[0] + (PLAYER_SIZE / 2)
-				+ (op[1] * sig)) / TAILE_SIZE][(int)(map->player.cord[1]
-				+ (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE] == '1'
-			|| map->map_content[(int)(map->player.cord[0] - (PLAYER_SIZE / 2)
-				+ (op[1] * sig)) / TAILE_SIZE][(int)(map->player.cord[1]
-				- (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE] == '1'
-			|| map->map_content[(int)(map->player.cord[0] + (PLAYER_SIZE / 2)
-				+ (op[1] * sig)) / TAILE_SIZE][(int)(map->player.cord[1]
-				- (PLAYER_SIZE / 2) + (op[0] * sig)) / TAILE_SIZE] == '1')
-		|| ((map->map_content[(int)(map->player.cord[0] - (ESPC) + (op[1]
-						* sig)) / TAILE_SIZE][(int)(map->player.cord[1] + (ESPC)
-					+ (op[0] * sig)) / TAILE_SIZE] == 'D'
-				|| map->map_content[(int)(map->player.cord[0] + (ESPC) + (op[1]
-						* sig)) / TAILE_SIZE][(int)(map->player.cord[1] + (ESPC)
-					+ (op[0] * sig)) / TAILE_SIZE] == 'D'
-				|| map->map_content[(int)(map->player.cord[0] - (ESPC) + (op[1]
-						* sig)) / TAILE_SIZE][(int)(map->player.cord[1] - (ESPC)
-					+ (op[0] * sig)) / TAILE_SIZE] == 'D'
-				|| map->map_content[(int)(map->player.cord[0] + (ESPC) + (op[1]
-						* sig)) / TAILE_SIZE][(int)(map->player.cord[1] - (ESPC)
-					+ (op[0] * sig)) / TAILE_SIZE] == 'D')
-			&& map->door.scop < 70 ))
-		return (0);
-	return (1);
-}
-
 void	animation_frames(t_map *map)
 {
-	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT_CONTROL) ||
-		mlx_is_key_down(map->mlx, MLX_KEY_LEFT_CONTROL) ||
-		mlx_is_mouse_down(map->mlx, MLX_MOUSE_BUTTON_LEFT))
+	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT_CONTROL) 
+		|| mlx_is_key_down(map->mlx, MLX_KEY_LEFT_CONTROL) 
+		|| mlx_is_mouse_down(map->mlx, MLX_MOUSE_BUTTON_LEFT))
 	{
 		if (map->animation.shott_num != 0 && (map->animation.flag == STANDING
 				|| map->animation.flag == RUNNING))
@@ -120,6 +88,17 @@ void	animation_frames(t_map *map)
 		map->animation.shott_num = 8;
 		draw_amo(map, map->animation.shott_num);
 	}
+}
+
+void show_control (mlx_key_data_t key,  void *param)
+{
+	t_map *map;
+
+	map = param;
+	if (key.key == MLX_KEY_TAB && key.action)
+		control_page(map);
+	
+	
 }
 
 int	main(int ac, char **av)
@@ -148,8 +127,8 @@ int	main(int ac, char **av)
 	map->door.open_door = true;
 	map->door.timer = 0;
 	mlx_loop_hook(map->mlx, &move_player, map);
+	mlx_key_hook(map->mlx, &show_control, map);
 	mlx_loop(map->mlx);
-	// printf("her\n");
 	mlx_set_mouse_pos(map->mlx, (WI_WIDTH / 2), (WI_HEIGHT / 2));
 	free_resources(map);
 }
