@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_help.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 10:56:23 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/01 10:57:45 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/03 11:58:52 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 void	horizontal_hit(double *hitp, int *der, t_player player, double angel)
 {

@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:13:37 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/01 13:51:50 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:06:43 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 char	valid_element(char **map)
 {

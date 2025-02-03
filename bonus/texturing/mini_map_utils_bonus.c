@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 13:37:34 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 13:38:00 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:01:07 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 void	move_imgs_inst(mlx_image_t *img, char dir, int px_num)
 {

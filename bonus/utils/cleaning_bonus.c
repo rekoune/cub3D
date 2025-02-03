@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:39:59 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/30 12:45:24 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:06:22 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 void	free_2d(char **str, char *str2)
 {

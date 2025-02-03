@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 12:07:52 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/02 10:38:15 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:05:06 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 int	get_a(t_map *map, double y, double x, char c)
 {
@@ -22,7 +22,6 @@ int	get_a(t_map *map, double y, double x, char c)
 
 int	check_wall(t_map *map, double *op, int sig)
 {
-	printf("*%f*\n", map->door.scop);
 	if ((get_a (map, (op[1] * sig) - (PLAYER_SIZE / 2), 
 				(op[0] * sig) + (PLAYER_SIZE / 2), '1') 
 			|| get_a(map, (op[1] * sig) + (PLAYER_SIZE / 2), 

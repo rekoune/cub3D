@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:28:32 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 12:14:25 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:53:28 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 int	check_map_file(char *str)
 {

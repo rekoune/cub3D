@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 12:07:10 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/30 12:11:40 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/03 12:22:09 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "include/cub3D.h"
 
 void	leaks(void)
 {
