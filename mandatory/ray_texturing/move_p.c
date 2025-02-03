@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 12:10:46 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 12:20:09 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:35:13 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,26 @@ void	move_player(void *arg)
 	t_map	*map;
 
 	map = arg;
+	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
+		exit(0);
 	if (mlx_is_key_down(map->mlx, 264) || mlx_is_key_down(map->mlx, MLX_KEY_S))
 		move_p(map, -1, map->player.angel);
-	else if (mlx_is_key_down(map->mlx, MLX_KEY_UP) 
+	if (mlx_is_key_down(map->mlx, MLX_KEY_UP) 
 		|| mlx_is_key_down(map->mlx, MLX_KEY_W))
 		move_p(map, 1, map->player.angel);
-	else if (mlx_is_key_down(map->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(map->mlx, MLX_KEY_D))
 		move_p(map, 1, normalize_angel(map->player.angel + 90));
-	else if (mlx_is_key_down(map->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(map->mlx, MLX_KEY_A))
 		move_p(map, 1, normalize_angel(map->player.angel - 90));
-	else if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(map->mlx, MLX_KEY_LEFT))
 	{
 		map->player.angel -= DG;
 		map->player.angel = normalize_angel(map->player.angel);
 	}
-	else if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT))
 	{
 		map->player.angel += DG;
 		map->player.angel = normalize_angel(map->player.angel);
 	}
-	else if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
-		exit(0);
 	caster(map);
 }
