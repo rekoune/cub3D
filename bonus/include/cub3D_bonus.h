@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   include/cub3D_bonus.h                                      :+:      :+:    :+:   */
+/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 13:40:12 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/03 11:49:02 by arekoune         ###   ########.fr       */
+/*   Created: 2025/02/03 12:49:27 by haouky            #+#    #+#             */
+/*   Updated: 2025/02/03 12:49:36 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_player
 	double				angel;
 	double				next_p_cord[2];
 	int					mouse;
+	int					mouse_x;
 	int					mouseactive;
 }						t_player;
 

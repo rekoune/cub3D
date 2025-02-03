@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 11:58:47 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:51:13 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ double	*hitpoint(t_map *map, double angel, double *hitph, double *hitpv)
 
 void	raycaster(t_map *map, double angleshift, double *hitph, double *hitpv)
 {
-	double	player[2];
-	double	xy[2];
 	double	*hitp;
 
 	hitp = hitpoint(map, normalize_angel(map->player.angel + angleshift), hitph,
@@ -93,11 +91,6 @@ void	raycaster(t_map *map, double angleshift, double *hitph, double *hitpv)
 	if (distance(map->player.cord,
 			map->door.hit_cord) > distance(map->player.cord, hitp))
 		map->door.hit_cord[0] = -1;
-	player[0] = map->mini_img.player->instances->y + (PLAYER_SIZE / 2);
-	player[1] = map->mini_img.player->instances->x + (PLAYER_SIZE / 2);
-	xy[0] = player[0] + (hitp[0] - map->player.cord[0]);
-	xy[1] = player[1] + (hitp[1] - map->player.cord[1]);
-	// draw_line(map->mini_img.cover, player, xy, create_trgb(255, 0, 0, 255));
 	draw_3d(map, distance(map->player.cord, hitp), map->color_test, angleshift);
 }
 
