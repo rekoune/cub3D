@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:38:17 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/03 12:05:02 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:52:03 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,22 @@ void	mv_img(mlx_image_t *img, int y, int x)
 
 void	mouse_mv(t_map *map)
 {
-	int	x;
 	int	y;
 
-	if(map->player.mouseactive == 1)
+	if (map->player.mouseactive > 1)
+	{
+		map->player.mouseactive = 1;
+		mlx_get_mouse_pos(map->mlx, &map->player.mouse_x, &y);
+		map->player.mouse = map->player.mouse_x;
+	}
+	if (map->player.mouseactive == 1)
 	{
 		mlx_set_cursor_mode(map->mlx, MLX_MOUSE_DISABLED);
-		mlx_get_mouse_pos(map->mlx, &x, &y);
-		map->player.angel += (x - map->player.mouse) * DG * M_SEN;
+		mlx_get_mouse_pos(map->mlx, &map->player.mouse_x, &y);
+		map->player.angel += (map->player.mouse_x - map->player.mouse) 
+			* DG * M_SEN;
 		map->player.angel = normalize_angel(map->player.angel);
-		map->player.mouse = x;
+		map->player.mouse = map->player.mouse_x;
 	}
 	else
 		mlx_set_cursor_mode(map->mlx, MLX_MOUSE_NORMAL);
@@ -64,20 +70,6 @@ void	move_p(t_map *map, int sig, double angel)
 			round(map->player.next_p_cord[0]) * sig);
 		mv_img(map->mini_img.door, round(map->player.next_p_cord[1]) * sig,
 			round(map->player.next_p_cord[0]) * sig);
-	}
-}
-
-void	control_page(t_map *map)
-{
-	if (map->control.enable)
-	{
-		map->control.enable = false;
-		map->control.img->enabled = true;
-	}
-	else
-	{
-		map->control.enable = true;
-		map->control.img->enabled = false;
 	}
 }
 

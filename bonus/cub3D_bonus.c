@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:04 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/03 12:08:40 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:56:15 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,6 @@
 void	leaks(void)
 {
 	system("leaks -q cub3D_bonus");
-}
-
-void	draw_line(mlx_image_t *img, double *start, double *end, int color)
-{
-	int		dy;
-	int		dx;
-	int		steps;
-	float	x_inc;
-	float	y_inc;
-	int		i;
-	float	y;
-	float	x;
-
-	dy = end[0] - start[0];
-	dx = end[1] - start[1];
-	steps = 0;
-	x_inc = 0;
-	y_inc = 0;
-	i = 0;
-	y = start[0];
-	x = start[1];
-	if (abs(dx) > abs(dy))
-		steps = abs(dx);
-	else
-		steps = abs(dy);
-	x_inc = (float)dx / (float)steps;
-	y_inc = (float)dy / (float)steps;
-	while (i < steps && y >= 0 && y < MINI_HEIGHT && x >= 0 && x < MINI_WIDTH)
-	{
-		mlx_put_pixel(img, round(x), round(y), color);
-		x += x_inc;
-		y += y_inc;
-		i++;
-	}
 }
 
 double	distance(double *start, double *end)
@@ -90,16 +56,19 @@ void	animation_frames(t_map *map)
 	}
 }
 
-void show_control (mlx_key_data_t key,  void *param)
+void	show_control(mlx_key_data_t key, void *param)
 {
-	t_map *map;
+	t_map	*map;
 
 	map = param;
 	if (key.key == MLX_KEY_TAB && key.action)
 		control_page(map);
-	else if	(key.key == MLX_KEY_M && key.action)
+	else if (key.key == MLX_KEY_M && key.action)
+	{
 		map->player.mouseactive *= -1;
-	
+		mlx_get_mouse_pos(map->mlx, &map->player.mouse_x, &map->player.mouse);
+		map->player.mouse = map->player.mouse_x;
+	}
 }
 
 int	main(int ac, char **av)
@@ -118,7 +87,7 @@ int	main(int ac, char **av)
 	map->player.cord[0] = map->player.cord[0] * TAILE_SIZE + (TAILE_SIZE / 2)
 		+ (PLAYER_SIZE / 2);
 	map_max_sz(map->map_content, map->map_max_size);
-	map->player.mouseactive = 1;
+	map->player.mouseactive = 2;
 	map->door.scop = 0;
 	map->door.scop_size = 0.1;
 	map->door.timer_flag = false;

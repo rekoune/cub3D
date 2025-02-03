@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 12:07:52 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 12:05:06 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:52:12 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,18 @@ int	check_wall(t_map *map, double *op, int sig)
 			&& (map->door.scop < 90 && !get_a(map, 0, 0, 'D'))))
 		return (0);
 	return (1);
+}
+
+void	control_page(t_map *map)
+{
+	if (map->control.enable)
+	{
+		map->control.enable = false;
+		map->control.img->enabled = true;
+	}
+	else
+	{
+		map->control.enable = true;
+		map->control.img->enabled = false;
+	}
 }
