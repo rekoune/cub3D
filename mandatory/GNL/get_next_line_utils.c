@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 10:33:48 by arekoune          #+#    #+#             */
-/*   Updated: 2024/08/31 10:42:58 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:33:59 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../include/cub3D.h"
 
 int	check_line(char *str)
 {

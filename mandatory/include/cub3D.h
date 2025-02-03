@@ -6,15 +6,15 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:08:39 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 12:18:31 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:24:58 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../MLX42/include/MLX42/MLX42.h"
-# include "../inlcude/get_next_line.h"
+# include "../../MLX42/include/MLX42/MLX42.h"
+# include "get_next_line.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
