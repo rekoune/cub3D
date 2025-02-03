@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:18 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/29 13:40:19 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:06:32 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 static int	cw(char const *s, char c)
 {

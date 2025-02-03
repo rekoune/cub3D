@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:39:49 by arekoune          #+#    #+#             */
-/*   Updated: 2025/01/29 13:39:50 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:56:28 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 mlx_image_t	**get_textures(t_map *map, char *path, int size)
 {

@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:39:40 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 13:47:48 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:01:09 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 double	get_x_image(double hit_x, double hit_y, char flag)
 {

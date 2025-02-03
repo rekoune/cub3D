@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 12:05:28 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/21 12:05:29 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/03 12:20:09 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
 void	free_2d(char **str, char *str2)
 {

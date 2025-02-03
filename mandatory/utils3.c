@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 12:21:39 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/21 14:19:19 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/03 12:20:09 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
 mlx_image_t	*get_image(t_map *map, mlx_t *mlx, char *path)
 {

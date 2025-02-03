@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/01 14:13:30 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:58:47 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 int	nearest_p(t_map *map, double *hitph, double *hitpv)
 {

@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:40:10 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/01 14:04:54 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:20:09 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
 int	str_len(char *str, char c)
 {

@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:29:34 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 11:36:44 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:20:09 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
 void	get_colors(t_map *map, char *info, enum e_type type)
 {

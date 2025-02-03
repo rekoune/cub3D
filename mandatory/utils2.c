@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:13:37 by haouky            #+#    #+#             */
-/*   Updated: 2025/01/21 14:06:39 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/03 12:20:09 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
 void	map_max_sz(char **map, int *size)
 {

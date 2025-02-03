@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:38:17 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/02 14:55:21 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:05:02 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 void	mv_img(mlx_image_t *img, int y, int x)
 {
@@ -35,11 +35,16 @@ void	mouse_mv(t_map *map)
 	int	x;
 	int	y;
 
-	mlx_get_mouse_pos(map->mlx, &x, &y);
-	map->player.angel += (x - map->player.mouse) * DG * M_SEN;
-	map->player.angel = normalize_angel(map->player.angel);
-	map->player.mouse = x;
-	// mlx_set_mouse_pos(map->mlx, (WI_WIDTH / 2), (WI_HEIGHT / 2));
+	if(map->player.mouseactive == 1)
+	{
+		mlx_set_cursor_mode(map->mlx, MLX_MOUSE_DISABLED);
+		mlx_get_mouse_pos(map->mlx, &x, &y);
+		map->player.angel += (x - map->player.mouse) * DG * M_SEN;
+		map->player.angel = normalize_angel(map->player.angel);
+		map->player.mouse = x;
+	}
+	else
+		mlx_set_cursor_mode(map->mlx, MLX_MOUSE_NORMAL);
 }
 
 void	move_p(t_map *map, int sig, double angel)
@@ -109,7 +114,7 @@ void	move_player(void *arg)
 	t_map	*map;
 
 	map = arg;
-	//mouse_mv(map);
+	mouse_mv(map);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
 		exit(0);
 	if (map->animation.timer == 0)

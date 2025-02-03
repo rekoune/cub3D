@@ -7,11 +7,11 @@ SRC = mandatory/cub3D.c mandatory/utils3.c mandatory/move_p.c mandatory/utils2.c
   mandatory/ft_split.c mandatory/linked_list.c mandatory/check_map_utils.c mandatory/cleaning.c \
   mandatory/check_map_content.c mandatory/mini_map.c mandatory/draw_3d.c
 
-BOSRC = bonus/cub3D_bonus.c bonus/utils2_bonus.c bonus/raycast_bonus.c bonus/checking_map_bonus.c \
-bonus/utils_bonus.c bonus/get_next_line_bonus.c bonus/get_next_line_utils_bonus.c bonus/ft_split_bonus.c \
-bonus/linked_list_bonus.c bonus/check_map_utils_bonus.c bonus/cleaning_bonus.c bonus/check_map_content_bonus.c\
-bonus/mini_map_bonus.c bonus/draw_3d_bonus.c bonus/animation.c bonus/move_player.c bonus/animation_img_ctl.c\
-bonus/rendering_doors.c bonus/mini_map_utils_bonus.c bonus/raycast_help.c bonus/player_movement_bonus.c
+BOSRC = bonus/cub3D_bonus.c bonus/utils/utils2_bonus.c bonus/raycasting/raycast_bonus.c bonus/map_parcing/checking_map_bonus.c \
+bonus/utils/utils_bonus.c bonus/GNL/get_next_line_bonus.c bonus/GNL/get_next_line_utils_bonus.c bonus/utils/ft_split_bonus.c \
+bonus/utils/linked_list_bonus.c bonus/map_parcing/check_map_utils_bonus.c bonus/utils/cleaning_bonus.c bonus/map_parcing/check_map_content_bonus.c\
+bonus/texturing/mini_map_bonus.c bonus/texturing/draw_3d_bonus.c bonus/animation/animation.c bonus/movements/move_player.c bonus/animation/animation_img_ctl.c\
+bonus/texturing/rendering_doors.c bonus/texturing/mini_map_utils_bonus.c bonus/raycasting/raycast_help.c bonus/movements/player_movement_bonus.c
 
 OBJ = $(SRC:.c=.o)
 BOBJ = $(BOSRC:.c=.o)

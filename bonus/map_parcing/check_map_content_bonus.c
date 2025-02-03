@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_content_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 07:45:44 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/01 11:43:30 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/03 11:53:36 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 char	**getarray(t_map_lst *lst)
 {

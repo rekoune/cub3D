@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:39:52 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 12:13:01 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:11:57 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 char	*get_digit(long nb)
 {
@@ -44,13 +44,13 @@ char	*get_digit(long nb)
 void	animation_init(t_map *map)
 {
 	map->animation.shotting = get_textures(map,
-			"bonus/animation_textures/shotting/", 9);
+			"bonus/animation/animation_textures/shotting/", 9);
 	map->animation.reloading = get_textures(map,
-			"bonus/animation_textures/reloading/", 24);
+			"bonus/animation/animation_textures/reloading/", 24);
 	map->animation.running = get_textures(map,
-			"bonus/animation_textures/running/", 5);
+			"bonus/animation/animation_textures/running/", 5);
 	map->animation.standing = get_textures(map,
-			"bonus/animation_textures/standing/", 17);
+			"bonus/animation/animation_textures/standing/", 17);
 }
 
 void	animate_it(t_map *map, mlx_image_t **images, int num_frames,

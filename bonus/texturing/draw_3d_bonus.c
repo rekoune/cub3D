@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_3D_bonus.c                                    :+:      :+:    :+:   */
+/*   draw_3d_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:39:42 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 13:12:52 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:00:54 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 mlx_image_t	*get_image(t_map *map, mlx_t *mlx, char *path)
 {

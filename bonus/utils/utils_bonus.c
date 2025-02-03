@@ -6,11 +6,11 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:51 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/01 14:05:08 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:06:40 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D_bonus.h"
+#include "../include/cub3D_bonus.h"
 
 bool	str_comp(char *s1, char *s2)
 {
