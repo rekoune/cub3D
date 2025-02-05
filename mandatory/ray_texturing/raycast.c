@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 12:20:09 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:44:18 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	raycaster(t_map *map, double angleshift, double *hitph, double *hitpv)
 			hitpv);
 	map->ray.hit_x = hitp[1];
 	map->ray.hit_y = hitp[0];
-	draw_3d(map, distance(map->player.cord, hitp), map->color_test, angleshift);
+	draw_3d(map, distance(map->player.cord, hitp), angleshift);
 }
 
 void	caster(t_map *map)

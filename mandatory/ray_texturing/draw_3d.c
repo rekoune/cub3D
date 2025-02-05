@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 12:20:08 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 12:20:09 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:44:01 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	texturing(t_map *map, double *top_buttom,
 	}
 }
 
-void	draw_3d(t_map *map, double dis_to_wall, int color, double p)
+void	draw_3d(t_map *map, double dis_to_wall, double p)
 {
 	double			wall_heigth;
 	double			dest;
@@ -128,5 +128,4 @@ void	draw_3d(t_map *map, double dis_to_wall, int color, double p)
 	start[1] = i;
 	i += REC_WITH;
 	texturing(map, start, wall_heigth, p);
-	(void) color;
 }

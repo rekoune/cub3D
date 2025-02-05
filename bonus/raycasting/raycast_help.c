@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 10:56:23 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 11:58:52 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:20:39 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,16 @@ void	victical_hit(double *hitp, int *der, t_player player, double angel)
 	else
 		hitp[0] = player.cord[0] - fabs((player.cord[1] - hitp[1]) * tan(angel))
 			+ 0.00000001;
+}
+
+double	distance(double *start, double *end)
+{
+	double	distance;
+	double	dx;
+	double	dy;
+
+	dy = end[0] - start[0];
+	dx = end[1] - start[1];
+	distance = sqrt(pow(dx, 2) + pow(dy, 2));
+	return (distance);
 }

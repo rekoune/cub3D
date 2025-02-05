@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:38:17 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/03 12:52:03 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/05 11:17:57 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,19 +106,22 @@ void	move_player(void *arg)
 	t_map	*map;
 
 	map = arg;
-	mouse_mv(map);
-	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
-		exit(0);
-	if (map->animation.timer == 0)
+	if (map->control.enable)
 	{
-		if (map->animation.flag == SHOTTING)
+		mouse_mv(map);
+		if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
+			exit(ft_write("Game Over !!\n", 0));
+		if (map->animation.timer == 0)
 		{
-			map->animation.shott_num--;
-			draw_amo(map, map->animation.shott_num);
+			if (map->animation.flag == SHOTTING)
+			{
+				map->animation.shott_num--;
+				draw_amo(map, map->animation.shott_num);
+			}
+			map->animation.flag = STANDING;
 		}
-		map->animation.flag = STANDING;
+		player_movement(map);
 	}
-	player_movement(map);
 	animation_frames(map);
 	animation(map);
 	caster(map);

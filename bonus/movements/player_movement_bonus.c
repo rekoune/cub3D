@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 12:07:52 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 12:52:12 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/05 11:17:39 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,53 @@ void	control_page(t_map *map)
 	}
 	else
 	{
+		mlx_get_mouse_pos(map->mlx, &map->player.mouse_x, &map->player.mouse);
+		map->player.mouse = map->player.mouse_x;
 		map->control.enable = true;
 		map->control.img->enabled = false;
+	}
+}
+
+void	show_control(mlx_key_data_t key, void *param)
+{
+	t_map	*map;
+
+	map = param;
+	if (key.key == MLX_KEY_TAB && key.action)
+		control_page(map);
+	else if (key.key == MLX_KEY_ESCAPE && key.action)
+		exit(ft_write("Game Over !!\n", 0));
+	else if (key.key == MLX_KEY_M && key.action)
+	{
+		map->player.mouseactive *= -1;
+		mlx_get_mouse_pos(map->mlx, &map->player.mouse_x, &map->player.mouse);
+		map->player.mouse = map->player.mouse_x;
+	}
+}
+
+void	animation_frames(t_map *map)
+{
+	if (mlx_is_key_down(map->mlx, MLX_KEY_RIGHT_CONTROL) 
+		|| mlx_is_key_down(map->mlx, MLX_KEY_LEFT_CONTROL) 
+		|| mlx_is_mouse_down(map->mlx, MLX_MOUSE_BUTTON_LEFT))
+	{
+		if (map->animation.shott_num != 0 && (map->animation.flag == STANDING
+				|| map->animation.flag == RUNNING))
+		{
+			map->animation.flag = SHOTTING;
+			draw_amo(map, map->animation.shott_num);
+		}
+	}
+	if (mlx_is_key_down(map->mlx, MLX_KEY_R))
+	{
+		map->animation.flag = RELOADING;
+		map->animation.shott_num = 8;
+		draw_amo(map, map->animation.shott_num);
+	}
+	if (map->animation.shott_num == 0)
+	{
+		map->animation.flag = RELOADING;
+		map->animation.shott_num = 8;
+		draw_amo(map, map->animation.shott_num);
 	}
 }

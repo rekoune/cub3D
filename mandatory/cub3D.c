@@ -6,34 +6,16 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 12:07:10 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 12:23:43 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:39:03 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3D.h"
 
-void	leaks(void)
-{
-	system("leaks -q cub3D");
-}
-
-double	distance(double *start, double *end)
-{
-	double	distance;
-	double	dx;
-	double	dy;
-
-	dy = end[0] - start[0];
-	dx = end[1] - start[1];
-	distance = sqrt(pow(dx, 2) + pow(dy, 2));
-	return (distance);
-}
-
 int	main(int ac, char **av)
 {
 	t_map	*map;
 
-	atexit(leaks);
 	if (ac != 2)
 		return (printf("ERROR : Invalid arguments\n"), 1);
 	map = checking_map(av[1]);

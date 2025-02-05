@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:33 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/03 12:01:03 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:13:05 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	draw_mini_map(mlx_t *mlx, t_map *map)
 	map->animation = (t_animation){.reloading = NULL, .running = NULL,
 		.shotting = NULL, .standing = NULL, .shott_num = 8, 
 		.flag = 10, .timer = 0, .amo_img = NULL};
-	map->control.enable = true;
+	map->control.enable = false;
 	initial_images(map);
 	animation_init(map);
 	drawing_images(map);
