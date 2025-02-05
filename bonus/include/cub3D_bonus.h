@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:49:27 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 12:49:36 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/05 11:00:35 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,6 @@ typedef struct s_map
 	t_control			control;
 	char				**map_content;
 	int					map_max_size[2];
-	int					color_test;
 }						t_map;
 
 enum					e_type
@@ -164,10 +163,7 @@ enum					e_type
 	C,
 };
 
-//checking_map.c
 t_map					*checking_map(char *map_file);
-
-//utils.c
 bool					str_comp(char *s1, char *s2);
 int						str_len(char *str, char c);
 int						ft_write(char *str, int rtrn);
@@ -178,8 +174,6 @@ long					ft_atoi(char *str);
 void					free_2d(char **str, char *str2);
 void					free_resources(t_map *map);
 void					free_list(t_map_lst *map);
-
-//utils2.c
 void					map_max_sz(char **map, int *size);
 void					draw_line(mlx_image_t *img, double *start, double *end,
 							int color);
@@ -187,36 +181,25 @@ double					distance(double *start, double *end);
 double					normalize_angel(double angel);
 void					set_derction(double angel, int *der);
 int						valid_point(double *hitp, char **map, int *size);
-//ft_split.c
 char					**ft_split(char *s, char c);
-
-//linked_list.c
 void					add_back(t_map_lst **head, t_map_lst *new_node);
 t_map_lst				*new_node(char *str);
 int						ft_lstsize(t_map_lst *lst);
-
-//check_map_utils.c
 int						check_map_file(char *str);
 bool					is_empty(char *str);
 bool					is_last(t_map *map);
 enum e_type				get_info_type(char *line, char **info);
-
-//check_map_content.c
 void					map_validation(char **map, int size, char p);
 char					**getarray(t_map_lst *lst);
 int						map_size(t_map_lst *map);
 char					valid_element(char **map);
-
-//mini_map.c
 void					draw_mini_map(mlx_t *mlx, t_map *map);
 void					move_imgs_inst(mlx_image_t *img, char dir, int px_num);
 int						create_trgb(int r, int g, int b, int a);
 double					distance(double *start, double *end);
-void					draw_3d(t_map *map, double dis_to_wall, int color,
-							double p);
+void					draw_3d(t_map *map, double dis_to_wall, double p);
 void					draw_img(mlx_image_t *img, int height, int width,
 							int color);
-//raycast
 void					caster(t_map *map);
 mlx_image_t				*get_image(t_map *map, mlx_t *mlx, char *path);
 int						**get_2d_pixels(mlx_image_t *img);
@@ -224,7 +207,6 @@ int						**get_2d_pixels(mlx_image_t *img);
 void					animation(t_map *map);
 void					animation_init(t_map *map);
 void					draw_amo(t_map *map, int shott_num);
-
 void					move_player(void *arg);
 int						check_wall(t_map *map, double *op, int sig);
 void					animation_frames(t_map *map);
@@ -233,8 +215,6 @@ void					horizontal_hit(double *hitp,
 							int *der, t_player player, double angel);
 void					victical_hit(double *hitp,
 							int *der, t_player player, double angel);
-
-//animation img ctl
 void					add_animation_img(t_map *map);
 mlx_image_t				**get_textures(t_map *map, char *path, int size);
 void					disable_all_images(t_map *map);
@@ -246,5 +226,6 @@ void					find_palayer_cord(t_player *player, char **map);
 void					move_img_x(t_map *map);
 void					move_img_y(t_map *map);
 void					control_page(t_map *map);
+void					show_control(mlx_key_data_t key, void *param);
 
 #endif

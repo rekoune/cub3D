@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 12:10:46 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 12:35:13 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:18:53 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	move_player(void *arg)
 
 	map = arg;
 	if (mlx_is_key_down(map->mlx, MLX_KEY_ESCAPE))
-		exit(0);
+		exit(ft_write("Game Over !!\n", 0));
 	if (mlx_is_key_down(map->mlx, 264) || mlx_is_key_down(map->mlx, MLX_KEY_S))
 		move_p(map, -1, map->player.angel);
 	if (mlx_is_key_down(map->mlx, MLX_KEY_UP) 
@@ -71,4 +71,16 @@ void	move_player(void *arg)
 		map->player.angel = normalize_angel(map->player.angel);
 	}
 	caster(map);
+}
+
+double	distance(double *start, double *end)
+{
+	double	distance;
+	double	dx;
+	double	dy;
+
+	dy = end[0] - start[0];
+	dx = end[1] - start[1];
+	distance = sqrt(pow(dx, 2) + pow(dy, 2));
+	return (distance);
 }

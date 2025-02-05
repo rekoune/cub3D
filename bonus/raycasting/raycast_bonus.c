@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:34:05 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 12:51:13 by haouky           ###   ########.fr       */
+/*   Updated: 2025/02/05 10:59:58 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	raycaster(t_map *map, double angleshift, double *hitph, double *hitpv)
 	if (distance(map->player.cord,
 			map->door.hit_cord) > distance(map->player.cord, hitp))
 		map->door.hit_cord[0] = -1;
-	draw_3d(map, distance(map->player.cord, hitp), map->color_test, angleshift);
+	draw_3d(map, distance(map->player.cord, hitp), angleshift);
 }
 
 void	caster(t_map *map)

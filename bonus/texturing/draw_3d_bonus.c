@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:39:42 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/03 12:00:54 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:00:19 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	texturing(t_map *map, double *top_buttom, double wall_height,
 	}
 }
 
-void	draw_3d(t_map *map, double dis_to_wall, int color, double ray_angle)
+void	draw_3d(t_map *map, double dis_to_wall, double ray_angle)
 {
 	double			wall_heigth;
 	double			dest;
@@ -140,5 +140,4 @@ void	draw_3d(t_map *map, double dis_to_wall, int color, double ray_angle)
 	texturing(map, start, wall_heigth, ray_angle);
 	door_status(map, dest, ray_angle, start);
 	i += REC_WITH;
-	(void)color;
 }
