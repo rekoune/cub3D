@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:08:39 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/05 10:44:39 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:15:55 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ void					free_resources(t_map *map);
 void					free_list(t_map_lst *map);
 double					*get_point(double *hitph, double *hitpv, t_map *map);
 void					map_max_sz(char **map, int *size);
-void					draw_line(mlx_image_t *img, double *start, double *end,
-							int color);
 double					distance(double *start, double *end);
 double					normalize_angel(double angel);
 void					set_derction(double angel, int *der);
@@ -135,12 +133,10 @@ void					map_validation(char **map, int size, char p);
 char					**getarray(t_map_lst *lst);
 int						map_size(t_map_lst *map);
 char					valid_element(char **map);
-void					draw_mini_map(mlx_t *mlx, t_map *map);
+void					draw_game_elements(mlx_t *mlx, t_map *map);
 void					move_imgs_inst(mlx_image_t *img, char dir, int px_num);
 int						create_trgb(int r, int g, int b, int a);
 double					distance(double *start, double *end);
-void					draw_rectangle(mlx_image_t *img, double *start,
-							double height, int color);
 void					draw_3d(t_map *map, double dis_to_wall, double p);
 void					draw_img(mlx_image_t *img, int height, int width,
 							int color);

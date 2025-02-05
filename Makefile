@@ -5,7 +5,7 @@ SANITAZE = #-g -fsanitize=address
 SRC = mandatory/cub3D.c mandatory/utils/utils3.c mandatory/ray_texturing/move_p.c mandatory/utils/utils2.c mandatory/ray_texturing/raycast.c\
  mandatory/map_parcing/checking_map.c mandatory/utils/utils.c mandatory/GNL/get_next_line.c mandatory/GNL/get_next_line_utils.c\
   mandatory/utils/ft_split.c mandatory/utils/linked_list.c mandatory/map_parcing/check_map_utils.c mandatory/utils/cleaning.c \
-  mandatory/map_parcing/check_map_content.c mandatory/ray_texturing/mini_map.c mandatory/ray_texturing/draw_3d.c
+  mandatory/map_parcing/check_map_content.c mandatory/ray_texturing/initial_game_elements.c mandatory/ray_texturing/draw_3d.c
 
 BOSRC = bonus/cub3D_bonus.c bonus/utils/utils2_bonus.c bonus/raycasting/raycast_bonus.c bonus/map_parcing/checking_map_bonus.c \
 bonus/utils/utils_bonus.c bonus/GNL/get_next_line_bonus.c bonus/GNL/get_next_line_utils_bonus.c bonus/utils/ft_split_bonus.c \

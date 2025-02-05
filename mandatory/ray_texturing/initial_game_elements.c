@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:00:35 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 12:20:09 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:12:45 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	drawing_images(t_map *map)
 			map->colors.floor[2], 255));
 }
 
-void	draw_mini_map(mlx_t *mlx, t_map *map)
+void	draw_game_elements(mlx_t *mlx, t_map *map)
 {
 	initial_images(map);
 	drawing_images(map);
