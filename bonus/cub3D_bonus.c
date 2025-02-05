@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:40:04 by arekoune          #+#    #+#             */
-/*   Updated: 2025/02/03 14:20:48 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:09:56 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 		return (printf("ERROR : Invalid arguments\n"), 1);
 	map = checking_map(av[1]);
 	map->win_img.door = NULL;
-	map->mlx = mlx_init(WI_WIDTH, WI_HEIGHT, "cub3D", false);
+	map->mlx = mlx_init(WI_WIDTH, WI_HEIGHT, "cub3D_bonus", false);
 	draw_mini_map(map->mlx, map);
 	map->player.cord[1] = map->player.cord[1] * TAILE_SIZE + (TAILE_SIZE / 2)
 		+ (PLAYER_SIZE / 2);
