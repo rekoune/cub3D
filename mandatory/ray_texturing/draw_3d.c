@@ -6,7 +6,7 @@
 /*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 12:20:08 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/05 10:44:01 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:15:02 by arekoune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,6 @@ int	**get_2d_pixels(mlx_image_t *img)
 	}
 	return (pixels_2d);
 }
-
-double	get_x_image(t_ray ray)
-{
-	double	image_x;
-
-	if (ray.hit_line == 'v')
-	{
-		image_x = (ray.hit_y / TAILE_SIZE) - floor(ray.hit_y / TAILE_SIZE);
-		return (image_x);
-	}
-	image_x = (ray.hit_x / TAILE_SIZE) - floor(ray.hit_x / TAILE_SIZE);
-	return (image_x);
-}
-
 mlx_image_t	*get_dir_img(t_map *map, int ***img_pixels, double ray_angle)
 {
 	if (map->ray.hit_line == 'h' && sin((ray_angle + 
@@ -83,6 +69,20 @@ mlx_image_t	*get_dir_img(t_map *map, int ***img_pixels, double ray_angle)
 	return (NULL);
 }
 
+double	get_x_image(t_ray ray)
+{
+	double	image_x;
+
+	if (ray.hit_line == 'v')
+	{
+		image_x = (ray.hit_y / TAILE_SIZE) - floor(ray.hit_y / TAILE_SIZE);
+		return (image_x);
+	}
+	image_x = (ray.hit_x / TAILE_SIZE) - floor(ray.hit_x / TAILE_SIZE);
+	return (image_x);
+}
+
+
 void	texturing(t_map *map, double *top_buttom, 
 			double wall_height, double ray_angle)
 {
@@ -90,9 +90,9 @@ void	texturing(t_map *map, double *top_buttom,
 	int			image_y;
 	int			**img_pixels;
 	mlx_image_t	*img;
-	int			i;
+	int			i = 0;
 
-	i = (wall_height - WI_HEIGHT) / 2;
+	 
 	if (i < 0)
 		i = 0;
 	img = get_dir_img(map, &img_pixels, ray_angle);
