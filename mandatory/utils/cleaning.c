@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arekoune <arekoune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haouky <haouky@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 12:05:28 by haouky            #+#    #+#             */
-/*   Updated: 2025/02/03 12:20:09 by arekoune         ###   ########.fr       */
+/*   Updated: 2025/02/08 10:17:45 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	free_resources(t_map *map)
 	free(map->directions.west);
 	free(map->directions.north);
 	free(map->directions.south);
-	free(map);
 	if (map->win_img.px_east)
 		free_2d_int(map->win_img.px_east, map->win_img.east->height);
 	if (map->win_img.px_north)
@@ -62,4 +61,5 @@ void	free_resources(t_map *map)
 		free_2d_int(map->win_img.px_west, map->win_img.west->height);
 	if (map->win_img.px_south)
 		free_2d_int(map->win_img.px_south, map->win_img.south->height);
+	free(map);
 }
